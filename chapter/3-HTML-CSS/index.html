@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Classic Slides with impress.js | Simple example impress.js slide sCreating | by Henrik Ingo @henrikingo</title>
+    <meta name="description" content="Simple example impress.js slide show" />
+    <meta name="author" content="Henrik Ingo" />
+    <link rel="stylesheet" href="./css/github.css">
+    <link rel="stylesheet" href="./css/mermaid.forest.css">
+    <link href="./css/impress-common.css" rel="stylesheet" />
+    <link href="./css/classic-slides.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body class="impress-not-supported">
+    <div id="impress" data-transition-duration="1000" data-width="1920" data-height="1080" data-max-scale="3" data-min-scale="0" data-perspective="1000">
+        <div class="step slide title" data-x="-2200" data-y="-3000">
+            <h1>Chapter 3</h1>
+            <br>
+            <br>
+            <ul>
+                <li>How The Website Works</li>
+                <li>Website 3 Mots important things</li>
+                <li>HyperText Markup Language</li>
+                <li>HTML5 Page Structure & Semantic Tags </li>
+                <li>Some Commonly Used HTML Tags</li>
+                <li>Inline .vs Block Level Elements</li>
+                <li>Basic CSS Styling</li>
+                <li>Positioning</li>
+                <li>Alignment (Flexbox & CSS Grid)</li>
+                <li>Response Design / Media Queries</li>
+            </ul>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h1 class="html-title-content">How The Website Works</h1>
+           <img class='img w1000' src="./images/how-work-website.gif" alt="">
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <img class='img w1000' src="./images/client-server.svg" alt="">
+        </div>
+
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h1 class="html-title-content">3 Mots important things</h1>
+            <p>
+                HTML is a markup language and CSS is a styling language. 
+                JavaScript, however, is a programming language. Hence, they are all web 
+                languages, but they perform different jobs
+            </p>
+           <img class='img w1000' src="./images/mots-important-things.png" alt="">
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h1 class="html-title-content">
+                <span>HTML</span>
+                <img src="./images/html-5.png" alt="">
+            </h1>
+            <ul>
+                <li>HyperText Markup Language</li>
+                <li> <strong>NOT</strong> a programing language</li>
+                <li>HTML is the standard markup language for creating Web pages</li>
+                <li>HTML describes the structure of a Web page</li>
+                <li>HTML elements tell the browser how to display the content</li>
+                <li>Everything Should Be Made as Simple as Possible, But Not Simpler</li>
+            </ul>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h1>
+                <span>What We Need To Start</span>
+            </h1>
+            </br>
+            <div class="what-we-need">
+                <div>
+                    <h5>A Web Browser (Pick One)</h5>
+                    <ul>
+                        <li>Google Chrome</li>
+                        <li>Mozilla Firefox</li>
+                        <li>Safari</li>
+                        <li>Edge</li>
+                        <li>Lynx</li>
+                    </ul>
+                </div>
+              
+                <div>
+                    <h5>A Text Editor (Pick One)</h5>
+                    <ul>
+                        <li>Sublime Text</li>
+                        <li>Atom.io</li>
+                        <li>Visual Studio Code</li>
+                        <li>Brackets</li>
+                        <li>Notepad++</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h1 class="html-title-content">Creating a HTML file</h1>
+            <ol>
+                <li>Files must end with the <strong>.html</strong></li>
+                <li>Runs in a web browser (Chrome, Firefox, ets)</li>
+                <li>
+                    <strong>index.html</strong> is the root / home page of a website
+
+                    <!-- <ul>
+                        <li>
+                           <h6>https://www.w3schools.com/</h6> 
+                           <span>index.html</span>
+                        </li>
+
+                        <li></li>
+                    </ul> -->
+                </li>
+            </ol>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h1 class="html-title-content">HTML Page Structure</h1>
+            <img 
+                class='img w800'
+                src="./images/html-page-structure.png" 
+                alt=""
+            >
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h1 class="html-title-content">Doctype</h1>
+            <p>
+                The declaration is not an HTML tag. It is an 
+                "information" to the browser about what document type to expect.
+            </p>
+           
+            <div class="doctype-info-content">
+                <ul class="doctype-content">
+                    <li>
+                        <span>HTML4</span>
+                        <img src="./images/doctype-4.png" alt="">
+                    </li>
+                    <li>
+                        <span>HTML5</span>
+                        <img src="./images/doctype-5.png" alt="">
+                    </li>
+                    <li>
+                        <span>XHTML</span>
+                        <img src="./images/doctype-xhtml.png" alt="">
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h1 class="html-title-content">
+                HTML Syntax
+            </h1>
+            <div class="html-syntax">
+                <ul>
+                    <li>Elements names surrounded by angle brackets</li>
+                    <li>Normally come in pairs (start tan and end tag)</li>
+                    <li>End tag is the same but with a forward</li>
+                    <li>Some tags close themselves (Remnant of XHTML)</li>
+                </ul>
+    
+                <div>
+                    <img src="./images/tag-syntax.png" alt="">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h1 class="html-title-content">Tag Attributes</h1>
+            <div class="tag-attributes">
+                <ul>
+                    <li>All tags can have attributes</li> 
+                    <li>Provide information about an element</li>
+                    <li>Placed within the start tag</li>
+                    <li>Key / Value pairs (class="container")</li>
+                 </ul>
+     
+                 <div>
+                     <img src="./images/html-tag-full-syntax.png" alt="">
+     
+                 </div>
+            </div>
+        </div>
+
+        <div class="step slide html-element-list-content" data-rel-x="2200" data-rel-y="0">
+            <h1 class="html-title-content">Some Commonly Used HTML Tags</h1>
+            
+            <div class="html-element-list-content">
+                <ul>
+                    <li>html</li>
+                    <li>head</li>
+                    <li>title</li>
+                    <li>meta</li>
+                    <li>h1...h6</li>
+                    <li>p</li>
+                    <li>a</li>
+                </ul>
+
+                <ul>
+                    <li>div</li>
+                    <li>img</li>
+                    <li>ul</li>
+                    <li>ol</li>
+                    <li>li</li>
+                    <li>table</li>
+                    <li>tr</li>
+                </ul>
+
+                <ul>
+                    <li>th</li>
+                    <li>td</li>
+                    <li>input</li>
+                    <li>button</li>
+                    <li>tr</li>
+                    <li>br</li>
+                    <li>iframe</li>
+                </ul>
+
+                <ul>
+                    <li>header</li>
+                    <li>nav</li>
+                    <li>aside</li>
+                    <li>section</li>
+                    <li>div</li>
+                    <li>link</li>
+                    <li>pre</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h1>Inline .vs Block Level Elements</h1>
+            <ul>
+                <li>
+                    <strong>Inline Elements</strong>
+                    <ul>
+                        <li>Do not start on a new line</li>
+                        <li>Take only the necessary width</li>
+                    </ul>
+               </li>
+
+               <li>
+                    <strong>Block Elements</strong>
+                    <ul>
+                        <li>Start on a new line</li>
+                        <li>Take full width available</li>
+                    </ul>
+               </li>
+            </ul>
+            <hr>
+            <ul>
+                <li><strong>Block Tag</strong>: div, h1 - h6, p, form, header, ...</li>
+                <li><strong>Inline Tag</strong>: span, img, a, input, ...</li>
+            </ul>
+        </div>
+        
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h1 class="html-title-content">HTML4 vs HTML5 Page Structure</h1>
+            <img 
+                class='img w800'
+                src="./images/html4-html5.jpg" 
+                alt=""
+            >
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h1 class="html-title-content">HTML 5 Semantic Tags</h1>
+            <div class="html-semantic-tags">
+                <ol>
+                    <li>header</li> 
+                    <li>footer</li>
+                    <li>aside</li>
+                    <li>main</li>
+                    <li>article</li>
+                    <li>nav</li>
+                    <li>section</li>
+                    <li>details</li>
+                 </ol>
+     
+                 <div>
+                    <p class="w40">A Semantic element clearly descibes its meaning to both the browser and the developer</p>
+                     <img class="img w1000" src="./images/html-5-semantictags.gif" alt="">
+                 </div>
+            </div>
+        </div>
+
+        <div class="step slide">
+            <iframe
+                width="100%"  
+                height="100%" 
+                src="https://html-code.davsargsyan.repl.co/" frameborder="0">
+
+            </iframe>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h1 class="html-title-content">
+                <span>CSS</span>
+                <img src="./images/css-3.png" alt="">
+            </h1>
+            
+            <ul>
+                <li>Cascading Stylesheets</li>
+                <li><strong>NOT</strong> a programing language</li>
+                <li>Stylesheet/Styling language</li>
+                <li>CSS is the language we use to style an HTML document.</li>
+                <li>Can be extended with Sass/Less</li>
+            </ul>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h1 class="html-title-content">Method For Adding CSS</h1>
+            
+            <ul>
+                <li>
+                    <strong>Inline CSS:</strong>
+                    Directly in the html element (NO!)
+                </li>
+                <li>
+                    <strong>Internal CSS: </strong> 
+                    Using style tags within a single document
+                </li>
+                <li>
+                    <strong>External CSS: </strong>
+                    Linking an external.css file
+                </li>
+            </ul>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h1 class="html-title-content">CSS Selectors</h1>
+            
+            <img class='img w1000' src="./images/css-selectors.png" alt="">
+        </div>
+        
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h1 class="html-title-content">Colors In CSS</h1>
+            
+            <ul>
+                <li>Color Names</li>
+                <li>Hexadecimal</li>
+                <li>RGB</li>
+            </ul>
+            <!-- http://web.simmons.edu/~grovesd/comm244/notes/week3/css-colors -->
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h1 class="html-title-content">Box Model</h1>
+            <img class='img w800' src="./images/boxmodel-image.png" alt="">
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h1 class="html-title-content">
+                Margin & Padding Shorthand
+            </h1>
+            
+            <img class='img w700' src="./images/margin.png" alt="">
+        </div>
+
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h1 class="html-title-content">CSS Backgrounds</h1>
+            <p>In these chapters, you will learn about the following CSS background properties:</p>
+            <ul>
+                <li>background-color</li>
+                <li>background-repeat</li>
+                <li>background-image</li>
+                <li>background-attachment</li>
+                <li>background-size</li>
+                <li>background-position</li>
+                <li>background-origin</li>
+                <li>background-clip</li>
+                <!-- <li>background <strong>(shorthand property)</strong></li> -->
+            </ul>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h1 class="html-title-content">Positioning in CSS</h1>
+            <p>
+                The position property specifies the type of positioning method used for an element.
+            </p>
+            <ul>
+                <li>static</li>
+                <li>relative</li>
+                <li>fixed</li>
+                <li>absolute</li>
+                <li>sticky</li>
+                <li>inherit</li>
+            </ul>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h1 class="html-title-content">CSS Display</h1>
+            <p>Some Commonly Used CSS Display</p>
+            <ul>
+                <li>inline</li>
+                <li>block</li>
+                <li>inline-block</li>
+                <li><strong>flex</strong></li>
+                <li><strong>grid</strong></li>
+            </ul>
+        </div>
+
+        <div class="step slide">
+            <iframe
+                width="100%"  
+                height="100%" 
+                src="https://mywebsite.davsargsyan.repl.co/" frameborder="0">
+
+            </iframe>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h1 class="html-title-content">CSS Grid Terminology</h1>
+            <ul>
+                <li>Grid <strong>container</strong></li>
+                <li>Grid <strong>item</strong></li>
+                <li>Grid <strong>inline</strong></li>
+                <li>Grid <strong>cell</strong></li>
+                <li>Grid <strong>track</strong></li>
+                <li>Grid <strong>area</strong></li>
+                <li>Grid <strong>gap</strong></li>
+            </ul>
+        </div>
+
+
+               
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h1 class="html-title-content">Creates a grid Container</h1>
+            <img 
+                class="img w1000"
+                src="./images/grid-container.jpg" alt=""
+            >
+        </div>   
+        
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h2 class="html-title-content">grid-template-columns</h2>
+            <h2 class="html-title-content">grid-template-rows</h2>
+            <p>
+                Draws gird lins. Takes list of length
+                values (em, px, %, fr, etx.) denoting the distance between each line
+            </p>
+        </div>   
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h1 class="html-title-content">Grid Template Columns</h1>
+            <img 
+                class="img w1000"
+                src="./images/grid-columns.jpg" alt=""
+            >
+        </div>   
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h1 class="html-title-content">Grid template rows</h1>
+            <img 
+                class="img w1000"
+                src="./images/grid-template-rows.jpg" alt=""
+            >
+        </div>   
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h1 class="html-title-content">Grid template areas</h1>
+            <img 
+                class="img w1000"
+                src="./images/grid-template-areas.jpg" alt=""
+            >
+        </div> 
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h1 class="html-title-content">grid-area: [area name]</h1>
+            <p>
+                Specifies what grid area the element is placed within
+            </p>
+        </div> 
+
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h1 class="html-title-content">grid area name</h1>
+            <img 
+                class="img w1000"
+                src="./images/grid-area-name.jpg" alt=""
+            >
+        </div> 
+
+
+        <div id="overview" class="step" data-x="4500" data-y="1500" data-scale="10" style="pointer-events: none;">
+        </div>
+    </div>
+    <div id="impress-toolbar"></div>
+
+    <script type="text/javascript" src="./js/highlight.pack.js"></script>
+    <script type="text/javascript" src="./js/mermaid.min.js"></script>
+    <script type="text/javascript" src="./js/markdown.js"></script>
+    <script type="text/javascript" src="./js/MathJax.js"></script>
+    <script type="text/javascript" src="./js/impress.js"></script>
+    <script>
+        impress().init();
+    </script>
+
+</body>
+
+</html>
+
+
+
+

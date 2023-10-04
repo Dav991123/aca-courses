@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Classic Slides with impress.js | Simple example impress.js slide show | by Henrik Ingo @henrikingo</title>
+    <meta name="description" content="Simple example impress.js slide show" />
+    <meta name="author" content="Henrik Ingo" />
+    <link rel="stylesheet" href="./css/github.css">
+    <link rel="stylesheet" href="./css/mermaid.forest.css">
+    <link href="./css/impress-common.css" rel="stylesheet" />
+    <link href="./css/classic-slides.css" rel="stylesheet" />
+</head>
+
+<body class="impress-not-supported">
+    <div id="impress" data-transition-duration="1000" data-width="1920" data-height="1080" data-max-scale="3" data-min-scale="0" data-perspective="1000">
+        <div class="step slide title" data-x="-2200" data-y="-3000">
+            <h1>Chapter 2</h1>
+            <br><br><br>
+            <ul>
+                <li>Operating System</li>
+                <li>World Wide Web</li>
+                <li>Internet How does the internet work</li>
+                <li>What is Domain Name. DNS and how it works</li>
+                <li>What is IP , port</li>
+                <li>Web Server, Hosting</li>
+                <li>HTTP, HTTPS</li>
+                <li>Web Socket</li>
+                <li>Git, GitHub</li>
+            </ul>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h1>Operating System</h1>
+            </br>
+            </br>
+            <p>
+                An Operating System (OS) is an interface between a computer user and computer hardware. An operating system is a software which performs all the basic tasks like file management, memory management, process management, handling input and output, 
+                and controlling peripheral devices such as disk drives and printers.
+            </p>
+        </div>
+
+        <div class="step slide">
+            <h1>Top Operating Systems In Market</h1>
+            <ul>
+                <li>MS-Windows</li>
+                <li>Mac OS</li>
+                <li>Solaris</li>
+                <li>Free BSD</li>
+                <li>Chrome OS</li>
+                <li>CentOS</li>
+                <li>Debian</li>
+                <li>Ubuntu</li>
+                <li>kali linux</li>
+            </ul>
+        </div>
+
+        <div class="step slide">
+            <h1>World Wide Web</h1>
+            <br>
+            <img src="images/web.jpg" class='img w1000' />
+        </div>
+
+        <div class="step slide">
+            <h1>IP address</h1>
+            <br>
+            <ul>
+                <li>Every computer on the Internet, be it a web server, home computer or any other network device has a unique IP address allotted to it. This IP address is used to establish connections between the server and the client in order to initiate the transfer of data.</li>
+                <li>IP address example - 173.245.61.120</li>
+            </ul>
+        </div>
+
+        <div class="step slide">
+            <h1>DNS (Domain Name System) </h1>
+            <br>
+            <img src="images/dns1.png" class='img w1000' />
+        </div>
+
+        <div class="step slide">
+            <h1>DNS (Domain Name System)</h1>
+            <br>
+            <ul>
+                <li>A “Domain Name System” or “Domain Name Service” is a computer network protocol whose job is to map a user friendly domain name such as “google.com” to its corresponding IP address like “173.245.61.120″.</li>
+                <li>DNS servers that contain the complete database of domain names and their corresponding IP addresses. </li>
+            </ul>
+        </div>
+
+        <div class="step slide">
+            <h1>How DNS Server Works ?</h1>
+            <br>
+            <ul>
+                <li>Whenever you type a URL such as “http://www.google.com” on your browser’s address bar, your computer will send a request to the local name server to resolve the domain name into its corresponding IP address. This request is often referred to as a DNS query. The local name server will receive the query to find out whether it contains the matching name and IP address in its database. If found, the corresponding IP address (response) is returned. If not, the query is automatically passed on to another server that is in the next higher level of DNS hierarchy. </li>
+            </ul>
+        </div>
+
+        <div class="step slide">
+            <h1>Port</h1>
+            <br>
+            <ul>
+                <li>Port numbers are sometimes seen in web or other uniform resource locators (URLs). By default, HTTP uses port 80 and HTTPS uses port 443, but a URL like http://www.example.com:8080/path/ specifies that the web browser connects instead to port 8080 of the HTTP server.</li>
+                <br>
+            </ul>
+        </div>
+
+        <div class="step slide">
+            <h1>Web Server</h1>
+            <ul>
+                <li>Web server is computer software and underlying hardware that accepts requests via HTTP, the network protocol created to distribute web pages.</li>
+                <li>A web server is a computer that runs websites. It's a computer program that distributes web pages as they are requisitioned. The basic objective of the web server is to store, process and deliver web pages to the users.</li>
+                <li>Apache server is the most common web server available in the market.</li>
+                <li>Apache, NgInx, Apache Tomcat, Lighttpd, glassfish e.t.c </li>
+                <br>
+            </ul>
+        </div>
+
+        <div class="step slide">
+            <h1>Web Server </h1>
+            <img src="images/web-server.jpg" class='img w1000' />
+        </div>
+
+        <div class="step slide">
+            
+            <br><br>
+            <h1>What is HTTP ?  </h1>
+        </div>
+
+        <div class="step slide">
+            <h1>Protocol HTTPS</h1>
+            <ul>
+                <li>HTTPS (Hypertext Transfer Protocol Secure) is a secure version of the HTTP protocol that uses the SSL/TLS protocol for encryption and authentication. </li>
+                <li>HTTPS is specified by RFC 2818 (May 2000) and uses port 443</li>
+            </ul>
+        </div>
+
+        <div class="step slide">
+            <h2>HTTP/1.1 , HTTP/2, HTTP/3</h2>
+            <ul>
+                <li>HTTP/1.1 - Developed by Timothy Berners-Lee in 1989 as a communication standard for the World Wide Web, HTTP is a top-level application protocol that exchanges information between a client computer and a local or remote web server.</li>
+                <li>HTTP/2 began as the SPDY protocol, developed primarily at Google with the intention of reducing web page load latency by using techniques such as compression, multiplexing, and prioritization.
+                The HTTP/2 specification was published as RFC 7540 on May 14, 2015</li>
+                <li> HTTP/3 uses QUIC, a transport layer network protocol which uses user space congestion control over the User Datagram Protocol (UDP).
+                Google Chrome supports HTTP/3 by default since April 2020</li>
+            </ul>
+        </div>
+
+        <div class="step slide">
+            <h1>HTTP - Methods</h1>
+            <ul>
+                <li>GET - The GET method is used to retrieve information from the given server using a given URI. Requests using GET should only retrieve data and should have no other effect on the data.</li>
+                <li>POST - The  POST request is used to send data to the server, for example, customer information, file upload, etc. using HTML forms.</li>
+                <li>PUT - Replaces all current representations of the target resource with the uploaded content.</li>
+                <li>DELETE - Removes all current representations of the target resource given by a URI</li>
+            </ul>
+        </div>
+
+
+        <div class="step slide">
+            <h2>GET Method Example</h2>
+            <pre> 
+                HTTP/1.1 200 OK
+                Date: Mon, 27 Jul 2009 12:28:53 GMT
+                Server: Apache/2.2.14 (Win32)
+                Last-Modified:Wed,22 Jul 2009 19:15:56
+                ETag: "34aa387-d-1568eb00"
+                Vary: Authorization,Accept
+                Accept-Ranges: bytes
+                Content-Length: 88
+                Content-Type: text/html
+                Connection: Closed
+            </pre>
+        </div>
+
+        <div class="step slide">
+            <h1>HTTP Status Codes </h1>
+            <ul>
+                <li>1×× Informational</li>
+                <li>2×× Success</li>
+                <li>3×× Redirection</li>
+                <li>4×× Client Error</li>
+                <li>5×× Server Error</li>
+            </ul>
+        </div>
+
+        <div class="step slide">
+            <h1>JSON and XML</h1>
+            <ul>
+                <li>JSON is a language-independent data format. It was derived from JavaScript, but many modern programming languages include code to generate and parse JSON-format data. The official Internet media type for JSON is application/json. JSON filenames use the extension .json</li><br>
+                <li>The Extensible Markup Language (XML) is a simple text-based format for representing structured information: documents, data, configuration, books, transactions, invoices, and much more . media types application/xml and text/xml</li>
+            </ul>
+        </div>
+
+        <div class="step slide">
+            <h1>JSON and XML</h1>
+            <img src="images/xml-json.png" class='img w1000' />
+        </div>
+
+        <div class="step slide">
+            <h1>WebSocket </h1>
+            <img src="images/socket.png" class='img w800' />
+        </div>
+
+        <div class="step slide">
+            <h1>WebSocket </h1>
+            <ul>
+                <li>WebSocket is a communication protocol over a TCP connection designed to exchange messages between a browser and a web server in real time.</li>
+                <li>example: websocket.org/echo.html</li>
+            </ul>
+        </div>
+
+        <div class="step slide">
+            <h1>Terminal CMD(Command Prompt)</h1>
+            <img src="images/cmd.png" class='img w800' />
+        </div>
+
+        <div class="step slide">
+            <h1>Terminal commands</h1>
+            <ul>
+                <li>pwd - command displays the path of your current working directory:</li>
+                <li>cd - (change directory). change the current working directory</li>
+                <li>ls displays a list of the names of all files in the current working directory</li>
+                <li>cat - command prints the contents of one or more files</li>
+                <li>cp, mv - copy and move files</li>
+                <li>mkdir, rmdir - crate , delete and folders</li>
+                <li>touch, rm - crate, delete files</li>
+            </ul>
+        </div>
+
+        <div  class="step slide">
+            <h1>Version Control Systems</h1>
+            <ul>
+                <li>Git</li>
+                <li>Microsoft Team Foundation Server</li>
+                <li>Apache Subversion</li>
+                <li>AWS CodeCommit</li>
+                <li>Mercurial</li>
+                <li>CVS</li>
+            </ul>
+        </div>
+
+        <div class="step slide">
+            <h1>Git Commands</h1>
+            <ul>
+                <li>git config --global user.name "Fabio"</li>
+                <li>git init</li>
+                <li>git add filename_here , git add .</li>
+                <li>git status</li>
+                <li>git commit -m "your commit message here"</li>
+                <li>git pull, git push</li>
+                <li>git add remote https://github.com/repo_name</li>
+            </ul>
+        </div>
+
+        <div class="step slide">
+            <br><br><br><br>
+            <p>GitHub is a provider of Internet hosting for software development and version control using Git</p>
+            <ul>
+                <li>GitHub</li>
+                <li>GitLab</li>
+                <li>BitBucket</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>Summary</h3>
+            <ul>
+                <li>Operating System</li>
+                <li>World Wide Web</li>
+                <li>DNS, How DNS Server Works</li>
+                <li>Port</li>
+                <li>Web Server</li>
+                <li>JSON and XML</li>
+                <li>WebSocket</li>
+                <li>Terminal , Terminal commands</li>
+                <li>Version Control Systems Git, Git Commands </li>
+                <li>Provider of Internet hosting GitHub, GitLab, BitBucket</li>
+            </ul>
+        </div>
+
+        <div id="overview" class="step" data-x="4500" data-y="1500" data-scale="10" style="pointer-events: none;">
+        </div>
+    </div>
+    <div id="impress-toolbar"></div>
+
+    <script type="text/javascript" src="./js/highlight.pack.js"></script>
+    <script type="text/javascript" src="./js/mermaid.min.js"></script>
+    <script type="text/javascript" src="./js/markdown.js"></script>
+    <script type="text/javascript" src="./js/MathJax.js"></script>
+    <script type="text/javascript" src="./js/impress.js"></script>
+    <script>
+        impress().init();
+    </script>
+
+</body>
+
+</html>

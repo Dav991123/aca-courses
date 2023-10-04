@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Classic Slides with impress.js | Simple example impress.js slide sCreating | by Henrik Ingo @henrikingo</title>
+    <meta name="description" content="Simple example impress.js slide show" />
+    <meta name="author" content="Henrik Ingo" />
+    <link rel="stylesheet" href="./css/github.css">
+    <link rel="stylesheet" href="./css/mermaid.forest.css">
+    <link href="./css/impress-common.css" rel="stylesheet" />
+    <link href="./css/classic-slides.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body class="impress-not-supported">
+    <div id="impress" data-transition-duration="1000" data-width="1920" data-height="1080" data-max-scale="3" data-min-scale="0" data-perspective="1000">
+  
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <div>
+                <!-- https://ageek.dev/javascript-module-bundlers -->
+               <h2>JavaScript module bundlers</h2>
+               <p>
+                   Module bundlers are tools that process your modern JavaScript 
+                   applications, internally build dependency graphs which map every modules your projects 
+                   need and generate one or module bundles.
+                </p>
+                <ul>
+                    <li>Webpack</li>
+                    <li>Metro</li><!-- The JavaScript bundler for React Native -->
+                    <li>Rollup</li>
+                    <li>Parcel</li>
+                    <li>Browserify</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h1>What is Webpack</h1>
+            <p>
+                webpack is an open-source JavaScript module bundler. 
+                It is made primarily for JavaScript, but it can transform 
+                front-end assets such as HTML, CSS, and images if the corresponding 
+                loaders are included. webpack takes modules with dependencies and generates 
+                static assets representing those modules.
+            </p>
+
+            <ul>
+                <li>Module Bundler</li>
+                <li>Custom Files or NMP installed</li>
+                <li>Generates Static Assets</li>
+                <li>Extend with Plugins & Loader</li>
+            </ul>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <div class="full-width-img">
+                <img 
+                    class="full-width-img"
+                    src="https://webpack.github.io/assets/what-is-webpack.png" alt=""
+                >
+            </div>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h2>Why does Webpack exits</h2>
+            <img 
+                 class='img w1000'
+                src="https://cdn.hashnode.com/res/hashnode/image/upload/v1599234539688/5qLIgwl0R.png?auto=compress" alt=""
+            >
+        </div>
+
+
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h2>What problem is webpack solving?</h2>
+            <div>
+                <img class='img w1000' src="https://www.programmersought.com/images/545/bd8c90a376b77211396cfb6cf6e63f31.JPEG" alt="">
+            </div>
+        </div>
+      
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h2>Installing Webpack and Webpack.config.js</h2>
+            <ol>
+                <li>npm init -y</li>
+                <li>npm install webpack webpack-cli --save-dev</li>
+                <li>cerate <b>webpack.config.js</b> file</li>
+                <li>create module object <b>module.exports = {}</b></li>
+            </ol>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h2>Webpack Config</h2>
+            <ul>
+                <li>
+                    <u><b>Context</b></u>
+                    Context allows entry to take the root of the path that you have defined in context property. In this case its <b>__dirname</b>
+                </li>
+                <li>
+                   <u><b>Output</b></u>
+                    We define the path and the filename where the webpack will produce the output. In this case <b>./dist/bundle.js</b>
+                </li>
+                <li>
+                   <u><b>Rules</b></u>
+                    Then we add rules in the module object which ensures that whenever it finds a <b>*.js</b> file, it uses babel-loader to convert it to ES5. We do so as not all browsers support ES6.
+                </li>
+            </ul>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <div>
+                <h2>Entry</h2>
+                <p>
+                    Webpack uses the dependency graph to decide which modules need to be bundled. 
+                    This means Webpack starts from a single module and processes all its direct and 
+                    indirect dependencies to form the entire dependency graph and then bundle all 
+                    the necessary modules.
+                </p>
+            </div>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <div>
+                <h2>Plugins</h2>
+    
+               
+                <p>
+                    A webpack plugin is a JavaScript object that has an apply method. 
+                    This apply method is called by the webpack compiler, giving access to the entire compilation 
+                    lifecycle.
+                 </p>
+
+                <ul>
+                    <li>
+                        HTML webpack plugin: <b>npm install --save-dev html-webpack-plugin</b>
+                    </li>
+                    <li>
+                        copy Webpack plugin: <b>npm install copy-webpack-plugin --save-dev</b>
+                    </li>
+                    <li>
+                        clean webpack plugin: <b>npm install --save-dev clean-webpack-plugin </b> 
+                    </li>
+                    <li>
+                        mini CSS extract plugin: <b>npm install --save-dev mini-css-extract-plugin</b>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <div>
+                <h2>With Loaders</h2>
+                <p>
+                    Webpack enables use of loaders to preprocess files. 
+                    This allows you to bundle any static resource way beyond JavaScript. 
+                    You can easily write your own loaders using Node.js
+                </p>
+                <ul>
+                    <li>
+                        sass-loader <b>npm install sass-loader sass --save-dev</b>
+                    </li>
+                    <li>
+                        css-loader <b>npm install --save-dev css-loader</b>
+                    </li>
+                    <li>
+                        babel-loader <b>npm install --save-dev babel-loader @babel/core</b>
+                    </li>
+                    <li>
+                        babel.config <b>npm install @babel/preset-env --save-dev</b>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <div>
+                <h2>Running Webpack</h2>
+                <ul>
+                    <li>package.json</li>
+                </ul>
+  <pre>
+      "script": {
+         "start": "webpack"   
+       }
+  </pre>
+            </div>
+        </div>
+
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <div>
+                <h2>Production vs Dev Modes</h2>
+                <hr>
+                <p>npm run start</p>
+                <p>npm run build</p>
+            </div>
+
+
+<p>
+    mode: process.env.NODE_ENV === 'production' ? production : 'development'
+</p>
+<hr>
+<pre>
+"script": {
+  "start": "cross-env NODE_ENV=development webpack",
+  "build": "cross-env NODE_ENV=production webpack --mode production"
+ }
+</pre>
+
+        </div>
+
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <div>
+                <h2>Webpack Dev Server</h2>
+                <p>webpack is a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser, yet it is also capable of transforming, bundling</p>
+                <hr>
+<pre>
+"script": {
+   "start": "cross-env NODE_ENV=development webpack-dev-server --open"
+}
+</pre>
+
+            </div>
+        </div>
+        <div id="overview" class="step" data-x="4500" data-y="1500" data-scale="10" style="pointer-events: none;">
+        </div>
+    </div>
+    <div id="impress-toolbar"></div>
+
+    <script type="text/javascript" src="./js/highlight.pack.js"></script>
+    <script type="text/javascript" src="./js/mermaid.min.js"></script>
+    <script type="text/javascript" src="./js/markdown.js"></script>
+    <script type="text/javascript" src="./js/MathJax.js"></script>
+    <script type="text/javascript" src="./js/impress.js"></script>
+    <script>
+        impress().init();
+    </script>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Classic Slides with impress.js | Simple example impress.js slide show | by Henrik Ingo @henrikingo</title>
+    <meta name="description" content="Simple example impress.js slide show" />
+    <meta name="author" content="Henrik Ingo" />
+    <link rel="stylesheet" href="./css/github.css">
+    <link rel="stylesheet" href="./css/mermaid.forest.css">
+    <link href="./css/impress-common.css" rel="stylesheet" />
+    <link href="./css/classic-slides.css" rel="stylesheet" />
+</head>
+
+<body class="impress-not-supported">
+    <div id="impress" data-transition-duration="1000" data-width="1920" data-height="1080" data-max-scale="3" data-min-scale="0" data-perspective="1000">
+        <div class="step slide title" data-x="-2200" data-y="-3000">
+          <h1>Chapter 16 ESnext </h1>
+            <br><br><br>
+            <ul>
+                <li>ECMAScript 2016 (ES7) June 2016</li>
+                <li>ECMAScript 2017 (ES8) June 2017</li>
+                <li>ECMAScript 2018 (ES9) June 2018</li>
+                <li>ECMAScript 2019 (ES10) June 2019</li>
+                <li>ECMAScript 2020 (ES11) June 2020</li>
+            </ul>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h3>The ES2016 June 2016</h3>
+            <p><b>Array.prototype.includes()</b> This feature introduces a more readable syntax for checking if an array contains an element</p>
+            <p>With ES6 and lower, to check if an array contained an element you had to use indexOf, which checks the index in the array, and returns -1 if the element is not there. Since -1 is evaluated as a true value</p>
+        </div>
+
+        <div class="step slide">
+            <h3>Array.prototype.includes()</h3>
+            <pre>
+                <code>
+                    // below ECMAScript 2016
+                    if (![1,2].indexOf(3)) {
+                      console.log('Not found')
+                    }
+
+                    // ECMAScript 2016
+                    if (![1,2].includes(3)) {
+                      console.log('Not found')
+                    }
+                </code>
+            </pre>       
+        </div>
+
+        <div class="step slide">
+            <h3>Exponentiation Operator</h3>
+            <p>The exponentiation operator ** is the equivalent of Math.pow(), but brought into the language instead of being a library function.</p>
+            <p>The ** operator is standardized across many languages including Python, Ruby, MATLAB, Lua, Perl and many others.</p>
+            <pre>
+                <code>
+                    Math.pow(4, 2) === 4 ** 2
+                </code>
+            </pre>
+        </div>
+
+        <div class="step slide">
+            <h3>The ES2017 June 2017</h3>
+            <ul>
+                <li>String padding</li>
+                <li>Object.values()</li>
+                <li>Object.entries()</li>
+                <li>getOwnPropertyDescriptors()</li>
+                <li>Async functions</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>String padding</h3>
+            <p>The purpose of string padding is to add characters to a string, so it reaches a specific length. ES2017 introduces two String methods: padStart() and padEnd().</p>
+            <pre>
+                <code>
+                padStart()  
+                ‘test’.padStart(4)  ‘test’
+                ‘test’.padStart(5)  ‘ test’
+                ‘test’.padStart(8)  ‘    test’
+                ‘test’.padStart(8, ‘abcd’)  ‘abcdtest’
+                padEnd()    
+                ‘test’.padEnd(4)    ‘test’
+                ‘test’.padEnd(5)    ‘test ‘
+                ‘test’.padEnd(8)    ‘test    ‘
+                ‘test’.padEnd(8, ‘abcd’)    ‘testabcd’
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Object.values()</h3>
+            <p>This method returns an array containing all the object own property values.</p>
+            <p>Object.values() also works with arrays:</p>
+            <pre>
+                <code>
+                    const person = { name: 'Fred', age: 87 }
+                    Object.values(person) // ['Fred', 87]
+
+                    const people = ['Fred', 'Tony']
+                    Object.values(people) // ['Fred', 'Tony']
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Object.entries()</h3>
+            <p>This method returns an array containing all the object own properties, as an array of [key, value] pairs.</p>
+            <p>Object.entries() also works with arrays:</p>
+            <pre>
+                <code>
+                    const person = { name: 'Fred', age: 87 }
+                    Object.entries(person) // [['name', 'Fred'], ['age', 87]]
+
+                    const people = ['Fred', 'Tony']
+                    Object.entries(people) // [['0', 'Fred'], ['1', 'Tony']]
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>getOwnPropertyDescriptors()</h3>
+            <p>This method returns all own (non-inherited) properties descriptors of an object.</p>
+            <ul>
+                <li>value: the value of the property</li>
+                <li>writable: true the property can be changed</li>
+                <li>get: a getter function for the property, called when the property is read</li>
+                <li>set: a setter function for the property, called when the property is set to a value</li>
+                <li>configurable: if false, the property cannot be removed nor any attribute can be changed, except its value </li>
+                <li>enumerable: true if the property is enumerable</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>Async functions</h3>
+            <p>Async functions are a combination of promises and generators to reduce the boilerplate around promises, and the “don’t break the chain” limitation of chaining promises.</p>
+            <p>When Promises were introduced in ES6, they were meant to solve a problem with asynchronous code, and they did, but over the 2 years that separated ES6 and ES2017, it was clear that promises could not be the final solution. Promises were introduced to solve the famous callback hell problem, but they introduced complexity on their own, and syntax complexity. </p>
+            <p>They were good primitives around which a better syntax could be exposed to the developers: enter async functions.</p>
+        </div>
+        <div class="step slide">
+            <h3>Async functions</h3>
+            <pre>
+                <code>
+                    function doSomethingAsync() {
+                        return new Promise((resolve) => {
+                            setTimeout(() => resolve('I did something'), 3000)
+                        })
+                    }
+
+                    async function doSomething() {
+                        console.log(await doSomethingAsync())
+                    }
+
+                    console.log('Before')
+                    doSomething()
+                    console.log('After')
+                </code>
+            </pre>
+        </div>
+        <div  class="step slide">
+            <h3>Multiple async functions in series</h3>
+            <pre>
+                <code>
+                    function promiseToDoSomething() {
+                        return new Promise((resolve)=>{
+                            setTimeout(() => resolve('I did something'), 10000)
+                        })
+                    }
+                    async function watchOverSomeoneDoingSomething() {
+                        const something = await promiseToDoSomething()
+                        return something + ' and I watched'
+                    }
+                    async function watchOverSomeoneWatchingSomeoneDoingSomething() {
+                        const something = await watchOverSomeoneDoingSomething()
+                        return something + ' and I watched as well'
+                    }
+                    watchOverSomeoneWatchingSomeoneDoingSomething().then(res => console.log(res))
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Shared Memory and Atomics</h3>
+            <p>WebWorkers are used to create multithreaded programs in the browser.</p>
+            <p>They offer a messaging protocol via events. Since ES2017, you can create a shared memory array between web workers and their creator, using a SharedArrayBuffer</p>
+            <p>Since it’s unknown how much time writing to a shared memory portion takes to propagate, Atomics are a way to enforce that when reading a value, any kind of writing operation is completed.</p>
+        </div>
+        <div class="step slide">
+            <h3>The ES2018</h3>
+            <ul>
+                <li>Rest/Spread Properties</li>
+                <li>Asynchronous iteration</li>
+                <li>Promise.prototype.finally()</li>
+                <li>Regular Expression improvements</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>Rest/Spread Properties</h3>
+            <p>ES6 introduced the concept of a rest element when working with array destructuring:</p>
+            <pre>
+                <code>
+            // ES2015
+            const numbers = [1, 2, 3, 4, 5]
+            [first, second, ...others] = numbers
+            const numbers = [1, 2, 3, 4, 5]
+            const sum = (a, b, c, d, e) => a + b + c + d + e
+            const sumOfNumbers = sum(...numbers)
+            // ES2018
+            const { first, second, ...others } = { first: 1, second: 2, third: 3, fourth: 4, fifth: 5 }
+            first // 1
+            second // 2
+            others // { third: 3, fourth: 4, fifth: 5 }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Asynchronous iteration</h3>
+            <p>The new construct for-await-of allows you to use an async iterable object as the loop iteration</p>
+            <pre>
+                <code>
+                    for await (const line of readLines(filePath)) {
+                      console.log(line)
+                    }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Promise.prototype.finally()</h3>
+            <p>When a promise is fulfilled, successfully it calls the then() methods, one after another.</p>
+            <p>If something fails during this, the then() methods are jumped and the catch() method is executed.</p>
+            <p>finally() allow you to run some code regardless of the successful or not successful execution of the promise:  </p>
+            <pre>
+                <code>
+                    fetch('file.json')
+                      .then(data => data.json())
+                      .catch(error => console.error(error))
+                      .finally(() => console.log('finished'))
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>The ES2019</h3>
+            <ul>
+                <li>Array.prototype.{flat,flatMap}</li>
+                <li>Optional catch binding</li>
+                <li>Object.fromEntries()</li>
+                <li>String.prototype.{trimStart,trimEnd}</li>
+                <li>Symbol.prototype.description</li>
+                <li>JSON improvements</li>
+                <li>Well-formed JSON.stringify()</li>
+                <li>Function.prototype.toString()</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>Array.prototype.flat</h3>
+            <p>flat() is a new array instance method that can create a one-dimensional array from a multidimensional array.</p>
+            <p>By default it only “flats” up to one level, but you can add a parameter to set the number of levels you want to flat the array to. Set it to Infinity to have unlimited levels:</p>
+            <pre>
+                <code>
+                    ['Dog', ['Sheep', 'Wolf']].flat() //[ 'Dog', 'Sheep', 'Wolf' ]
+                    ['Dog', ['Sheep', ['Wolf']]].flat(2) // [ 'Dog', 'Sheep', 'Wolf' ]
+                    ['Dog', ['Sheep', ['Wolf']]].flat(Infinity) // [ 'Dog', 'Sheep', 'Wolf' ]
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Array.prototype.flatMap</h3>
+            <p>flatMap() is a new Array instance method that combines flat() with map(). It’s useful when calling a function that returns an array in the map() callback, but you want your resulted array to be flat:</p>
+            <pre>
+                <code>
+['My dog', 'is awesome'].map((words) => words.split(' ')) //[ [ 'My', 'dog' ], [ 'is', 'awesome' ] ]
+['My dog', 'is awesome'].flatMap((words) => words.split(' ')) // [ 'My', 'dog', 'is', 'awesome' ]
+
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Optional catch binding</h3>
+            <p>Sometimes we dont need to have a parameter binded to the catch block of a try/catch.</p>
+            <p>Even if we never had to use e to analyze the error. We can now simply omit it:</p>
+            <pre>
+                <code>
+                try {
+                  //...
+                } catch (e) {
+                  //handle error
+                }
+                // ES25019
+                try {
+                  //...
+                } catch {
+                  //handle error
+                }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Object.fromEntries()</h3>
+            <p>ES2019 introduces a new Object.fromEntries() method, which can create a new object from such array of properties:</p>
+            <pre>
+                <code>
+                const person = { name: 'Fred', age: 87 }
+                const entries = Object.entries(person)
+                const newPerson = Object.fromEntries(entries) // { name: 'Fred', age: 87 }
+
+                person !== newPerson //true
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>String.prototype.{trimStart,trimEnd}</h3>
+            <p>This feature has been part of v8/Chrome for almost a year now, and it’s going to be standardized in ES2019</p>
+            <p>trimStart() Return a new string with removed white space from the start of the original string</p>
+            <p>trimEnd() Return a new string with removed white space from the end of the original string</p>
+        </div>
+        <div class="step slide">
+            <h3>String.prototype.{trimStart,trimEnd}</h3>
+            <pre>
+                <code>
+                    //trimStart
+                    'Testing'.trimStart() //'Testing'
+                    ' Testing'.trimStart() //'Testing'
+                    ' Testing '.trimStart() //'Testing '
+                    'Testing '.trimStart() //'Testing '
+
+                    // trimEnd
+                    'Testing'.trimEnd() //'Testing'
+                    ' Testing'.trimEnd() //' Testing'
+                    ' Testing '.trimEnd() //' Testing'
+                    'Testing '.trimEnd() //'Testing'
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Symbol.prototype.description</h3>
+            <p>You can now retrieve the description of a Symbol by accessing its description property instead of having to use the toString() method:</p>
+            <pre>
+                <code>
+                    const testSymbol = Symbol('Test')
+                    testSymbol.description // 'Test'
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Function.prototype.toString()</h3>
+            <p>ES2019 introduced a change to the return value to avoid stripping comments and other characters like whitespace, exactly representing the function as it was defined</p>
+            <pre>
+                <code>
+                    function /* this is bar */ bar() {}
+                    // The behavior was this:
+                    bar.toString() //'function bar() {}
+                    // ES2019
+                    bar.toString() // 'function /* this is bar */ bar () {}'
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>The ES2020</h3>
+            <ul>
+                <li>BigInt</li>
+                <li>Dynamic import</li>
+                <li>Nullish Coalescing</li>
+                <li>Optional Chaining</li>
+                <li>globalThis</li>
+                <li>Module Namespace Exports</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>BigInt</h3>
+            <p>BigInt, one of the most anticipated features in JavaScript, is finally here. It actually allows developers to have much greater integer representation in their JS code for data processing for data handling.</p>
+            <p>However, you need to have an n appended at the very end of the number, as you can see above. This n denotes that this is a BigInt and should be treated differently by the JavaScript engine (by the v8 engine or whatever engine it is using).</p>
+        </div>
+        <div class="step slide">
+            <h3>BigInt</h3>
+            <img src="images/bigint.png" class='img w800' />
+        </div>
+        <div class="step slide">
+            <h3>Dynamic import</h3>
+            <p>Dynamic imports in JavaScript give you the option to import JS files dynamically as modules in your application natively.</p>
+            <pre>
+                <code>
+                    if(myCondition) {
+                        const module = await import('./app.js');
+                        module.addNumber(3,4,5);
+                    }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Nullish Coalescing</h3>
+            <p>However, a lot of times you might want to check if a variable is nullish – that is if it is either undefined or null, like when it's okay for a variable to have an empty string, or even a false value.In that case, you'll use the new nullish coalescing operator, ??</p>
+            <img src="images/null.png" class='img w500' />
+        </div>
+        <div class="step slide">
+            <h3>Optional Chaining</h3>
+            <p>Optional chaining syntax allows you to access deeply nested object properties without worrying if the property exists or not. If it exists, great! If not, undefined will be returned.</p>
+            <br>
+            <img src="images/opt.png" class='img w1000' />
+        </div>
+        <div class="step slide">
+            <h3>globalThis</h3>
+            <p>This is because it is window for browsers, global for Node, and self for web workers. If there are more runtimes, the global object will be different for them as well.</p>
+            <p>ES2020 brings us globalThis which always refers to the global object</p>
+            <pre>
+                <code>
+                    globalThis.setTimeout === windwo.setTimeout // true
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>What is jQuery?</h3>
+            <p>jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal and manipulation, event handling, animation, and Ajax much simpler with an easy-to-use API that works across a multitude of browsers. With a combination of versatility and extensibility, jQuery has changed the way that millions of people write JavaScript.</p>
+            <ul>
+                <li>HTML/DOM manipulation</li>
+                <li>CSS manipulation</li>
+                <li>HTML event methods</li>
+                <li>Effects and animations</li>
+                <li>AJAX</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>Adding jQuery</h3>
+            <p>The jQuery library is a single JavaScript file, and you reference it with the HTML < script> tag (notice that the < script> tag should be inside the < head> section):</p>
+            <pre>
+                <code>
+            < head>
+                < script src="jquery-3.5.1.min.js">< /script>
+            < /head>
+            // google cdn 
+            < head>
+              < script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">< /script>
+            < /head>
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>jQuery example</h3>
+            <pre>
+                <code>
+                    $( "button.continue" ).html( "Next Step..." )
+
+                    const hiddenBox = $( "#banner-message" );
+                    $( "#button-container button" ).on( "click", function( event ) {
+                      hiddenBox.show();
+                    });
+                    $.ajax({
+                      url: "/api/getWeather",
+                      data: {
+                        zipcode: 97201
+                      },
+                      success: function( result ) {
+                        $( "#weather-temp" ).html( "< strong>" + result + "< /strong> degrees" );
+                      }
+                    });
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>jQuery Selectors</h3>
+            <pre>
+                <code>
+                    $("p") // select all < p> elements on a page
+                    $(document).ready(function(){
+                      $("button").click(function(){
+                        $("p").hide();
+                      });
+                    });
+                    $("#test") // like document.getElementById
+                    $(".test") // .class Selector
+                    $("button").click(function(){
+                      $(".test").hide();
+                    });
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>jQuery Selectors</h3>
+            <img src="images/jquery_selector.png" class='img w800' />
+        </div>
+        <div class="step slide">
+            <h3>jQuery Event Methods</h3>
+            <pre>
+                <code>
+                    $("p").click();
+                    $("p").click(function(){
+                      // action goes here!!
+                    });
+                    $("#hide").click(function(){
+                      $("p").hide();
+                    });
+                    $("#show").click(function(){
+                      $("p").show();
+                      $("p").hide(1000);
+                      $("p").hide("slow", function(){
+                        alert("The paragraph is now hidden");
+                      });
+                    });
+                    $("#p1").css("color", "red").slideUp(2000).slideDown(2000);
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>jQuery Selectors</h3>
+            <pre>
+                <code>
+                    $("#btn1").click(function(){
+                      alert("Text: " + $("#test").text());
+                    });
+                    $("#btn2").click(function(){
+                      alert("HTML: " + $("#test").html());
+                      alert("Value: " + $("#test").val());
+                       $("#test3").val("Dolly Duck"); // set value
+                    });
+                    $("p").append("Some appended text.");
+                    $("p").prepend("Some prepended text.");
+                    $("#div1").remove();
+                    $("#div1").empty(); // removes the child elements of the selected element(s).
+                    $("button").click(function(){
+                      $("h1, h2, p").addClass("blue");
+                      $("div").addClass("important");
+                    });
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>jQuery Selectors</h3>
+            <pre>
+                <code>
+                    $("p").css("background-color", "yellow");
+                    $("p").css({"background-color": "yellow", "font-size": "200%"});
+                    $("button").click(function(){
+                      $("#div1").width();
+                      $("#div1").height();
+                      $("#div1").innerHeight()
+                      $("#div1").innerWidth() 
+                    });
+                    $("span").parent();
+                    $("span").parents();
+                    $("span").parents("ul");
+                    $("span").parentsUntil("div");
+                    $("div").children();
+                    $("div").children("p.first")
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>jQuery Selectors</h3>
+            <pre>
+                <code>
+            $("h2").siblings();
+            $("h2").siblings("p");
+            $("h2").next();
+            $("h2").nextAll();
+            $("h2").nextUntil("h6");
+            $("div").first();
+            $("div").last();
+            // The eq() method returns an element with a specific index number of the selected elements.
+            $("p").eq(1)
+            $("p").filter(".intro");
+            $("p").not(".intro");
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>jQuery Ajax</h3>
+            <pre>
+                <code>
+                    $("button").click(function(){
+                      $.get("demo_test.asp", function(data, status){
+                        alert("Data: " + data + "\nStatus: " + status);
+                      });
+                    });
+                    $("button").click(function(){
+                      $.post("demo_test_post.asp",
+                      {name: "Donald Duck",city: "Duckburg"},
+                      function(data, status){
+                        alert("Data: " + data + "\nStatus: " + status);
+                      });
+                    });
+                    $("#div1").load("demo_test.txt");
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>JavaScript Frameworks and libraries</h3>
+            <ul>
+                <li>React (Facebook May 29, 2013)</li>
+                <li>Angular2+ (google September 14, 2016)</li>
+                <li>Angularjs (google October 20, 2010)</li>
+                <li>Vue.js (AlliExpres February 2014)</li>
+                <li>Ember.js</li>
+                <li>Meteor ( Full-Stack )</li>
+                <li>Polymer</li>
+                <li>Aurelia</li>
+                <li>Backbone.js</li>
+                <li>knockoutjs</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>JavaScript Frameworks</h3>
+            <br>
+            <img src="images/framework.png" class='img w1000' />
+        </div>
+
+
+
+        <div id="overview" class="step" data-x="4500" data-y="1500" data-scale="10" style="pointer-events: none;">
+        </div>
+    </div>
+    <div id="impress-toolbar"></div>
+
+    <script type="text/javascript" src="./js/highlight.pack.js"></script>
+    <script type="text/javascript" src="./js/mermaid.min.js"></script>
+    <script type="text/javascript" src="./js/markdown.js"></script>
+    <script type="text/javascript" src="./js/MathJax.js"></script>
+    <script type="text/javascript" src="./js/impress.js"></script>
+    <script>
+        impress().init();
+    </script>
+
+</body>
+
+</html>

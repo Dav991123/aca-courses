@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Classic Slides with impress.js | Simple example impress.js slide show | by Henrik Ingo @henrikingo</title>
+    <meta name="description" content="Simple example impress.js slide show" />
+    <meta name="author" content="Henrik Ingo" />
+    <link rel="stylesheet" href="./css/github.css">
+    <link rel="stylesheet" href="./css/mermaid.forest.css">
+    <link href="./css/impress-common.css" rel="stylesheet" />
+    <link href="./css/classic-slides.css" rel="stylesheet" />
+</head>
+
+<body class="impress-not-supported">
+    <div id="impress" data-transition-duration="1000" data-width="1920" data-height="1080" data-max-scale="3" data-min-scale="0" data-perspective="1000">
+        <div class="step slide title" data-x="-2200" data-y="-3000">
+            <h1>Chapter 18 Typescript</h1>
+            <br><br><br>
+            <ul>
+                <li>What is TypeScript used for?</li>
+                <li>Is TypeScript frontend or backend?</li>
+                <li>Is TypeScript easy?</li>
+                <li>Should I learn JavaScript or TypeScript?</li>
+            </ul>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h1>Typescript</h1>
+            <p>TypeScript lets you write JavaScript the way you really want to. TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. TypeScript is pure object oriented with classes, interfaces and statically typed like C# or Java. The popular JavaScript framework Angular 2.0 is written in TypeScript. Mastering TypeScript can help programmers to write object-oriented programs and have them compiled to JavaScript, both on server side and client side.</p>
+        </div>
+
+        <div class="step slide">
+            <h1>Typescript </h1>
+            <p>JavaScript was introduced as a language for the client side. The development of Node.js has marked JavaScript as an emerging server-side technology too. However, as JavaScript code grows, it tends to get messier, making it difficult to maintain and reuse the code. Moreover, its failure to embrace the features of Object Orientation, strong type checking and compile-time error checks prevents JavaScript from succeeding at the enterprise level as a full-fledged server-side technology. TypeScript was presented to bridge this gap.</p>
+
+        </div>
+
+        <div class="step slide">
+            <h1>What is TypeScript?</h1>
+            <p>TypeScript is a strongly typed, object oriented, compiled language. It was designed by Anders Hejlsberg (designer of C#) at Microsoft. TypeScript is both a language and a set of tools. TypeScript is a typed superset of JavaScript compiled to JavaScript. In other words, TypeScript is JavaScript plus some additional features.</p>
+            <img src="https://www.tutorialspoint.com/typescript/images/typescript_figure.jpg" class='img w300' />
+        </div>
+
+        <div class="step slide">
+            <h1>Features of TypeScript</h1>
+            <p><b>TypeScript is just JavaScript.</b> TypeScript starts with JavaScript and ends with JavaScript. Typescript adopts the basic building blocks of your program from JavaScript. Hence, you only need to know JavaScript to use TypeScript. All TypeScript code is converted into its JavaScript equivalent for the purpose of execution.</p>
+            <p><b>TypeScript supports other JS libraries.</b> Compiled TypeScript can be consumed from any JavaScript code. TypeScript-generated JavaScript can reuse all of the existing JavaScript frameworks, tools, and libraries.</p>
+            <p><b>JavaScript is TypeScript.</b> This means that any valid .js file can be renamed to .ts and compiled with other TypeScript files.</p>
+        </div>
+        <div class="step slide">
+            <h3>Why Use TypeScript?</h3>
+            <p>TypeScript is superior to its other counterparts like CoffeeScript and Dart programming languages in a way that TypeScript is extended JavaScript. In contrast, languages like Dart, CoffeeScript are new languages in themselves and require language-specific execution environment.</p>
+            <ul>
+                <li><b>Compilation</b> − JavaScript is an interpreted language. Hence, it needs to be run to test that it is valid. It means you write all the codes just to find no output, in case there is an error. Hence, you have to spend hours trying to find bugs in the code. The TypeScript transpiler provides the error-checking feature. TypeScript will compile the code and generate compilation errors, if it finds some sort of syntax errors. This helps to highlight errors before the script is run.</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>Why Use TypeScript?</h3>
+            <ul>
+                <li><b>Strong Static Typing</b> − JavaScript is not strongly typed. TypeScript comes with an optional static typing and type inference system through the TLS (TypeScript Language Service). The type of a variable, declared with no type, may be inferred by the TLS based on its value.</li>
+                <li><b>TypeScript supports type definitions</b> for existing JavaScript libraries. TypeScript Definition file (with .d.ts extension) provides definition for external JavaScript libraries. Hence, TypeScript code can contain these libraries</li>
+                <li><b>TypeScript supports Object Oriented Programming</b> concepts like classes, interfaces, inheritance, etc.</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>Components of TypeScript</h3>
+            <p>At its heart, TypeScript has the following three components</p>
+            <ul>
+                <li>Language − It comprises of the syntax, keywords, and type annotations.</li>
+                <li>The TypeScript Compiler − The TypeScript compiler (tsc) converts the instructions written in TypeScript to its JavaScript equivalent.</li>
+                <li>The TypeScript Language Service − The "Language Service" exposes an additional layer around the core compiler pipeline that are editor-like applications. The language service supports the common set of a typical editor operations like statement completions, signature help, code formatting and outlining, colorization, etc.</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>Declaration Files</h3>
+            <p>When a TypeScript script gets compiled, there is an option to generate a declaration file (with the extension .d.ts) that functions as an interface to the components in the compiled JavaScript. The concept of declaration files is analogous to the concept of header files found in C/C++. The declaration files (files with .d.ts extension) provide intellisense for types, function calls, and variable support for JavaScript libraries like jQuery, MooTools, etc.</p>
+        </div>
+        <div class="step slide">
+            <h3>TypeScript</h3>
+            <pre>
+                <code>
+                    // typescript code
+                    var message:string = "Hello World" 
+                    console.log(message)
+
+                    tsc Test.ts // The file is compiled to Test.js
+                    node Test.js
+                    //Generated by typescript
+                    var message = "Hello World";
+                    console.log(message);
+
+                    //  Multiple files can be compiled at once
+                    tsc file1.ts, file2.ts, file3.ts
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>TypeScript and Object Orientation</h3>
+            <pre>
+                <code>
+                    class Greeting { 
+                       greet():void { 
+                          console.log("Hello World!!!") 
+                       } 
+                    } 
+                    var obj = new Greeting();
+                    var Greeting = (function () { //Generated by typescript
+                       function Greeting() {
+                       }
+                       Greeting.prototype.greet = function () {
+                          console.log("Hello World!!!");
+                       };
+                        return Greeting;
+                    }());
+                    var obj = new Greeting();
+                    obj.greet()
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>TypeScript - Types</h3>
+            <p>The following table illustrates all the built-in types in TypeScript </p>
+            <ul>
+                <li>number</li>
+                <li>string</li>
+                <li>boolean</li>
+                <li>void</li>
+                <li>null</li>
+                <li>undefined</li>
+                <li>Symbol</li>
+                <li>Any</li>
+                <li>Tuple</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>TypeScript - Functions</h3>
+            <p>A function declaration tells the compiler about a function's name, return type, and parameters. A function definition provides the actual body of the function.</p>
+            <pre>
+                <code>
+                    function disp_details(id:number,name:string,mail_id?:string) { 
+                       console.log("ID:", id); 
+                       console.log("Name",name); 
+                       
+                       if(mail_id!=undefined)  
+                       console.log("Email Id",mail_id); 
+                    }
+                    disp_details(123,"John");
+                    disp_details(111,"mary","mary@xyz.com");
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>TypeScript - Arrays</h3>
+            <p>TypeScript introduces the concept of arrays to tackle the same. An array is a homogenous collection of values. To simplify, an array is a collection of values of the same data type. It is a user defined type.</p>
+            <pre>
+                <code>
+                    var alphas:string[]; 
+                    alphas = ["1","2","3","4"] 
+                    console.log(alphas[0]); 
+                    console.log(alphas[1]);
+                    var names:string[] = new Array("Mary","Tom","Jack","Jill") 
+                    //Generated by typescript
+                    var alphas;
+                    alphas = ["1", "2", "3", "4"];
+                    console.log(alphas[0]);
+                    console.log(alphas[1]);
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>TypeScript - Union</h3>
+            <p>Union types are a powerful way to express a value that can be one of the several types. Two or more data types are combined using the pipe symbol (|) to denote a Union Type.</p>
+            <pre>
+                <code>
+                let val:string|number 
+                val = 12 
+                console.log("numeric value of val "+val) 
+                val = "This is a string" 
+                console.log("string value of val "+val)
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>TypeScript - Interfaces</h3>
+            <p>An interface is a syntactical contract that an entity should conform to. In other words, an interface defines the syntax that any entity must adhere to.</p>
+            <p>Interfaces define properties, methods, and events, which are the members of the interface. Interfaces contain only the declaration of the members. It is the responsibility of the deriving class to define the members. It often helps in providing a standard structure that the deriving classes would follow.</p>
+        </div>
+        <div class="step slide">
+            <h3>TypeScript - Interfaces</h3>
+            <pre>
+                <code>
+                    interface interface_name { }
+                    interface IPerson { 
+                       firstName:string, 
+                       lastName:string, 
+                       sayHi: ()=>string 
+                    } 
+                    var customer:IPerson = { 
+                       firstName:"Tom",
+                       lastName:"Hanks", 
+                       sayHi: ():string =>{return "Hi there"} 
+                    } 
+                    var employee:IPerson = { 
+                       firstName:"Jim",
+                       lastName:"Blakes", 
+                       sayHi: ():string =>{return "Hello!!!"} 
+                    }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Union Type and Interface</h3>
+            <pre>
+                <code>
+                    interface RunOptions { 
+                       program:string; 
+                       commandline:string[]|string|(()=>string); 
+                    } 
+                    //commandline as string 
+                    var options:RunOptions = {program:"test1",commandline:"Hello"}; 
+                    console.log(options.commandline)
+                    interface namelist { 
+                       [index:number]:string 
+                    } 
+                    var list2:namelist = ["John",1,"Bran"] //Error. 1 is not type string  
+                    interface ages { 
+                       [index:string]:number 
+                    } 
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3> Multiple Interface Inheritance</h3>
+            <pre>
+                <code>
+                    interface IParent1 { 
+                       v1:number 
+                    } 
+
+                    interface IParent2 { 
+                       v2:number 
+                    } 
+
+                    interface Child extends IParent1, IParent2 { } 
+                    var Iobj:Child = { v1:12, v2:23} 
+                    console.log("value 1: "+this.v1+" value 2: "+this.v2)
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>TypeScript - Classes</h3>
+            <p>TypeScript is object oriented JavaScript. TypeScript supports object-oriented programming features like classes, interfaces, etc. A class in terms of OOP is a blueprint for creating objects. A class encapsulates data for the object. Typescript gives built in support for this concept called class. JavaScript ES5 or earlier didn’t support classes. Typescript gets this feature from ES6</p>
+            <pre>
+                <code>
+                    class Person {}
+                    //Generated by typescript
+                    var Person = (function () {
+                       function Person() {
+                       }
+                       return Person;
+                    }())
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>TypeScript - Classes</h3>
+            <pre>
+                <code>
+                class Shape { 
+                   Area:number 
+                   constructor(a:number) { 
+                      this.Area = a 
+                   } 
+                } 
+                class Circle extends Shape { 
+                   disp():void { 
+                      console.log("Area of the circle:  "+this.Area) 
+                   } 
+                }
+                var obj = new Circle(223); 
+                obj.disp()
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>The static Keyword</h3>
+            <p>The static keyword can be applied to the data members of a class. A static variable retains its values till the program finishes execution. Static members are referenced by the class name.</p>
+            <pre>
+                <code>
+                class StaticMem {  
+                   static num:number; 
+                   
+                   static disp():void { 
+                      console.log("The value of num is"+ StaticMem.num) 
+                   } 
+                } 
+                StaticMem.num = 12     // initialize the static variable 
+                StaticMem.disp()      // invoke the static method
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Access Specifier & Description</h3>
+            <ul>
+                <li><b>public</b> A public data member has universal accessibility. Data members in a class are public by default.</li>
+                <li><b>private</b> Private data members are accessible only within the class that defines these members. If an external class member tries to access a private member, the compiler throws an error.</li>
+                <li><b>protected</b> A protected data member is accessible by the members within the same class as that of the former and also by the members of the child classes.</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>Access Specifier & Description</h3>
+            <pre>
+                <code>
+                    class Encapsulate { 
+                       str:string = "hello" 
+                       private str2:string = "world" 
+                    }
+                     
+                    var obj = new Encapsulate() 
+                    console.log(obj.str)     //accessible 
+                    console.log(obj.str2)   //compilation Error as str2 is private
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Classes and Interfaces</h3>
+            <pre>
+                <code>
+                    interface ILoan { 
+                       interest:number 
+                    } 
+                    class AgriLoan implements ILoan { 
+                       interest:number 
+                       rebate:number 
+                       constructor(interest:number,rebate:number) { 
+                          this.interest = interest 
+                          this.rebate = rebate 
+                       } 
+                    } 
+                    const obj = new AgriLoan(10,1) 
+                    console.log("Interest is : "+obj.interest+" Rebate is : "+obj.rebate )
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>typing</h3>
+            <pre>
+                <code>
+                interface IPoint { 
+                   x:number 
+                   y:number 
+                } 
+                function addPoints(p1:IPoint,p2:IPoint):IPoint { 
+                   const x = p1.x + p2.x 
+                   const y = p1.y + p2.y 
+                   return {x:x,y:y} 
+                } 
+                //Valid 
+                const newPoint = addPoints({x:3,y:4},{x:5,y:1})  
+                //Error 
+                const newPoint2 = addPoints({x:1},{x:4,y:3})
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Tuple Type</h3>
+            <pre>
+                <code>
+                let x: [string, number]; // Tuple type
+                x = ['hello', 10]; // OK
+                x = [10, 'hello']; // Error   
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Enum Type</h3>
+            <pre>
+                <code>
+                    enum Color {Red, Green, Blue};
+                    let c: Color = Color.Green;
+                    enum Color {Red = 1, Green, Blue};
+                    let c: Color = Color.Green;
+
+                    enum Color {Red = 1, Green, Blue};
+                    let colorName: string = Color[2];
+                    alert(colorName);
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Any</h3>
+            <pre>
+                <code>
+                let notSure: any = 4;
+                notSure = "maybe a string instead";
+                notSure = false; // ok
+                notSure = null; // ok 
+
+                let list: any[] = [1, true, "free"];
+                list[1] = 100;
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Class</h3>
+            <pre>
+                <code>
+                    class Animal {
+                        name: string;
+                        constructor(theName: string) { this.name = theName; }
+                        move(distanceInMeters: number = 0) {
+                            console.log(`${this.name} moved ${distanceInMeters}m.`);
+                        }
+                    }
+                    class Snake extends Animal {
+                        constructor(name: string) { super(name); }
+                        move(distanceInMeters = 5) {
+                            console.log("Slithering...");
+                            super.move(distanceInMeters);
+                        }
+                    }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>public and private</h3>
+            <pre>
+                <code>
+                class Animal1 {
+                    public name: string;
+                    public constructor(theName: string) { this.name = theName; }
+                    public move(distanceInMeters: number) {
+                        console.log(`${this.name} moved ${distanceInMeters}m.`);
+                    }
+                }
+                class Animal {
+                    private name: string;
+                    constructor(theName: string) { this.name = theName; }
+                }
+                 
+                new Animal("Cat").name; // 'name' is private;
+                </code>
+            </pre>            
+        </div>
+        <div class="step slide">
+            <h3>protected</h3>
+            <pre>
+                <code>
+                class Person {
+                    protected name: string;
+                    constructor(name: string) { this.name = name; }
+                }
+                class Employee extends Person {
+                    private department: string;
+                    constructor(name: string, department: string) {
+                        super(name);
+                        this.department = department;
+                    }
+                    public getElevatorPitch() {
+                        return `Hello, my name is ${this.name} and I work in ${this.department}.`;
+                    }
+                }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>readonly keyword</h3>
+            <p>You can make properties read-only with the readonly keyword. Read-only properties must be initialized when they are declared or in the constructor</p>
+            <pre>
+                <code>
+                class Octopus {
+                    readonly name: string;
+                    readonly numberOfLegs: number = 8;
+                    constructor (theName: string) {
+                        this.name = theName;
+                    }
+                }
+                let dad = new Octopus("Man with the 8 strong legs");
+                dad.name = "Man with the 3-piece suit"; // ERROR! name is readonly.
+
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>getter and setter</h3>
+            <pre>
+                <code>
+                let passcode = "secret passcode";
+                class Employee {
+                    private _fullName: string;
+                    get fullName(): string {return this._fullName;}
+                    set fullName(newName: string) {
+                        if (passcode && passcode == "secret passcode") {
+                            this._fullName = newName;
+                        } else {
+                            console.log("Error: Unauthorized update of employee!");
+                        }
+                    }
+                }
+                let employee = new Employee();
+                employee.fullName = "Bob Smith";
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Abstract class</h3>
+            <p>Abstract classes are base classes from which others inherit. They cannot be directly instantiated. Unlike an interface, an abstract class can contain implementation details for its members. The abstract keyword is used to define abstract classes as well as abstract methods within such classes.</p>
+            <pre>
+                <code>
+                abstract class Animal {
+                    abstract makeSound(): void;
+                    move(): void {
+                        console.log("roaming the earth...");
+                    }
+                }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Abstract class</h3>
+            <pre>
+                <code>
+                abstract class Department {
+                    constructor(public name: string) {}
+                    printName(): void {console.log("Department name: " + this.name); }
+                    abstract printMeeting(): void;
+                }
+                class AccountingDepartment extends Department {
+                    constructor() {
+                        super("Accounting and Auditing");
+                    }
+                    printMeeting(): void {
+                        console.log("The Accounting Department meets each Monday at 10am.");
+                    }
+                    generateReports(): void {
+                        console.log("Generating accounting reports...");
+                    }
+                }
+                </code>
+            </pre>
+        </div>
+
+        <div id="overview" class="step" data-x="4500" data-y="1500" data-scale="10" style="pointer-events: none;">
+        </div>
+    </div>
+    <div id="impress-toolbar"></div>
+
+    <script type="text/javascript" src="./js/highlight.pack.js"></script>
+    <script type="text/javascript" src="./js/mermaid.min.js"></script>
+    <script type="text/javascript" src="./js/markdown.js"></script>
+    <script type="text/javascript" src="./js/MathJax.js"></script>
+    <script type="text/javascript" src="./js/impress.js"></script>
+    <script>
+        impress().init();
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,1305 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Classic Slides with impress.js | Simple example impress.js slide show | by Henrik Ingo @henrikingo</title>
+    <meta name="description" content="Simple example impress.js slide show" />
+    <meta name="author" content="Henrik Ingo" />
+    <link rel="stylesheet" href="./css/github.css">
+    <link rel="stylesheet" href="./css/mermaid.forest.css">
+    <link href="./css/impress-common.css" rel="stylesheet" />
+    <link href="./css/classic-slides.css" rel="stylesheet" />
+</head>
+
+<body class="impress-not-supported">
+    <div id="impress" data-transition-duration="1000" data-width="1920" data-height="1080" data-max-scale="3" data-min-scale="0" data-perspective="1000">
+        <div class="step slide title" data-x="-2200" data-y="-3000">
+            <h1>Chapter 15 ECMAScript 2015 (ES6)</h1>
+            <br><br><br>
+            <ul>
+                <li>History of ECMAScript</li>
+                <li>Variable Declarations</li>
+                <li>Iterators and Generators</li>
+                <li>Classes in ES6</li>
+                <li>Rest and Spread Operators</li>
+                <li>Arrow Functions</li>
+                <li>for...of</li>
+            </ul>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h3>ES6 The Specification</h3>
+            <p>For many years ECMAScript 6 (ES6) had been in the works but on June 17, 2015, the 109th Ecma General Assembly approved the 6th Edition of ECMA-262 standards, making official a major upgrade to what we know and love as JavaScript.</p>
+            <p>The evolution of JavaScript, more specifically ECMAScript, is primarily community driven and TC39 is the official committee in charge of it. TC39 is primarily constituted by members that represent various stakeholders like the major browser companies and other invited members.</p>
+        </div>
+
+        <div class="step slide">
+            <h3>History of ECMAScript and JavaScript </h3>
+            <p>JavaScript was originally developed by <b>Brendan Eich</b> as a scripting language for the
+            web for use in the Netscape browsers.</p>
+            <p>The name itself was chosen for marketing reasons due to the rising popularity of Java around the time, even though it had nothing to do with Java. In an attempt to standardize the language and the specification, it was submitted to ECMA International.</p>
+        </div>
+
+        <div class="step slide">
+            <h3>History of ECMAScript</h3>
+            <p>First appeared December 4, 1995</p>
+            <p>The initial versions ES1 and ES2 were released in 1997 and 1998, but in 1999, the ES3 release was a major upgrade with new features like regular expressions, improved string handling, more control statements, better error handling, and try catch exception handling.
+            <b>ES5 was released in December 2009.</b></p>
+            <p>ES6 took a long time to become official. The deadline for <b>ES6 proposals was May 2011</b> and no major proposals were considered after that; but starting with the later versions, TC39 decided to time-box releases and release a new version every year with smaller incremental changes using whatever features are approved by that time</p>
+        </div>
+
+        <div class="step slide">
+            <h3>ECMAScript 2015</h3>
+            <p>Official name of ES6 was changed to ECMAScript 2015 just before the final release, but the name ES6 was so widely used for years that ES2015 is still commonly referred to as ES6 and that’s why we chose to refer to the new specification as ES6.</p>
+            <b>The goals aspire to fix the common pitfalls in JavaScript and add new features, while the requirements state that both of them need to be done in such a way that it does not break any existing code, while preserving the lightweight nature of the language.</b>
+            <p>ES6 aims to provide better support for large applications and library creation</p>
+            <p>ES6 offers enhancements like classes, modules, lexical block scoping, iterators, generators, native language support for promises, and much more.</p>
+        </div>
+        <div class="step slide">
+            <h3>Using ES6</h3>
+            <p>Many JavaScript environments including web browsers and Node.js are actively working on implementing all the features of ECMAScript 6 and later.</p>
+            <p>You can check the current feature-wise support for all engines at <b>http://kangax.github.io/compat-table/es6/</b>.</p>
+            <p>Until all of ES6 features are universally supported we need a way of converting ES6 into compatible JavaScript code.</p>
+            <p><b>This is where transpiling comes in. Transpiling (transformation + compiling) is a technique in which we use special tools to transform ES6 code into its closest equivalent, ES5 code, to work on older browsers or environments.</b></p>
+        </div>
+        <div class="step slide">
+            <h3>Transpiling</h3>
+            <pre>
+                <code>
+                //ES6 code
+                const fruits = ["apples", "bananas", "oranges"];
+                let store = {
+                    fruits
+                };
+                store.fruits; // ["apples", "bananas", "oranges"]
+                // This roughly transpiles to:
+                var fruits = ["apples", "bananas", "oranges"];
+                var store = {
+                    ruits: fruits
+                };
+                store.fruits; // ["apples", "bananas", "oranges"]
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Variable Declarations: let, const, and Block Scoping</h3>
+            <pre>
+                <code>
+                //es5
+                var price = 10; // Global Declaration
+                function showPrice() {
+                        var price = 12; // Local Declaration using var
+                        console.log(price); // 12
+                }
+                showPrice();
+                console.log(price); // 10
+                var price = 10;
+                if (price) {
+                        price = 12;
+                        console.log(price); // 12
+                }
+                console.log(price); // 12
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Block Scoping with let and const</h3>
+            <pre>
+                <code>
+                let nbr = 42;
+                {
+                    let nbr = 1000;
+                }
+                console.log(nbr); // 42
+                const value = 42;
+                console.log(value);   // 42
+                value = 1000;         // TypeError
+                const item;  // SyntaxError: Missing initializer in const declaration
+                const value = undefined;
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Block Scoping with let and const</h3>
+            <pre>
+                <code>
+                    console.log(nbr);  // undefined
+                    var nbr = 42;
+
+                    console.log(nbr); // Reference Error: nbr is not defined
+                    let nbr = 42;
+
+                    /// what is it ? 
+                    let data = true;                   
+                    if (true) { 
+                        console.log(data);
+                        let data;
+                    }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Temporal Dead Zones</h3>
+            <p>The main takeaway from this discussion is that let and const declare variables with a temporal dead zone (TDZ). A memory binding is created and remains uninitialized when the variable is declared. Trying to get or set the variable at this point raises a Reference Error.</p>
+            <pre>
+                <code>
+                let data = true;
+                if (true) { // enter new scope, TDZ starts
+                    // Uninitialized binding for "data" is created
+                    console.log(data); // ReferenceError
+                    let data; // TDZ ends, "data" is initialized with "undefined"
+                }
+                console.log(data); // true
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>const keyword</h3>
+            <p>const is used to declare an immutable variable but it does not make the value contained in the variable immutable</p>
+            <pre>
+                <code>
+                const obj = {};
+                obj.key = 42;
+                console.log(obj.key); // 42
+                obj = {}; // TypeError
+
+                // If you wanted to you could make the value itself immutable by freezing it.
+                const obj = Object.freeze({});
+                obj.key = 42;
+                console.log(obj);   // {}
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Variables Declarations in loops</h3>
+            <pre>
+                <code>
+                    let arr = [];
+                    for (var i=0; i < 3; i++) {
+                        arr.push(function () { return i });
+                    }
+                    let value = arr[0](); console.log(value); // 3
+                    
+                    for (let i=0; i < 3; i++) {
+                        arr.push(function () { return i });
+                    }
+                    let value = arr[0](); console.log(value); //0
+
+                    for (const i=0; i<3; i++) {
+                        console.log(i);
+                    } // TypeError: Assignment to constant variable (due to i++)
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Variable Declarations with Function Parameters</h3>
+            <pre>
+                <code>
+                function fn(param) {
+                    let param; // SyntaxError: Identifier 'param' has already been declared
+                }
+
+                let notGlobal = "hello";
+                var isGlobal = "what up";
+                { console.log(notGlobal); } // hello
+                { console.log(isGlobal); } // what up
+                window.isGlobal //'what up'
+                window.notGlobal // undefined
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Arrow Functions</h3>
+            <p>Arrow Functions are another major syntax update in ES6. Arrow functions are functions defined using a new syntax, the “fat” arrow =>.They help in making code more readable by opting out of the function and return syntax and read the same way the function executes.</p>
+            <pre>
+                <code>
+                    const fn = data => data;
+
+                    var fn = function(data) {
+                        return data;
+                    };
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Arrow Functions</h3>
+            <pre>
+                <code>
+                let getNumber = () => 42;
+                console.log(typeof getNumber); // function
+                console.log(getNumber()); // 42
+
+                var const = (quantity, tax) => (quantity * 5) * (1 + tax);
+                console.log(getPrice(2, .095)); //  10.95
+
+                var getNumber = data => ({ data: "check", number: 42 });
+                // effectively equivalent to:
+                var getNumber = function(data) {
+                    return { data: "check", number: 42 };
+                };
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>'this' keyword in JavaScript</h3>
+            <p><b>In JavaScript, this is the current execution context of a function</b></p>
+            <p>Call of the getContext() function in Chrome will print the Window object in the console. That’s because the context of the getContext() is Window/Global object. At the time getContext() is called, JavaScript automatically sets this as the global object, which in a browser is Window.</p>
+            <pre>
+                <code>
+                    function getContext() {
+                        console.log(this); // Global or Window
+                    }
+                    if (this === window) {
+                        console.log("this refers to the Global context");
+                    }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>'this' keyword in JavaScript</h3>
+            <p>Method call means an object’s method is called and in this case, this is the object that owns the method in a method call.</p>
+            <pre>
+                <code>
+                let myObj = {
+                    name: 'fancy',
+                    operation: function() {
+                        console.log(this);
+                    }
+                }
+                myObj.operation(); // { name: 'fancy', operation: [Function: operation]}
+
+                let x = myObj.operation;
+                x(); // Window
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>call() method (ES5)</h3>
+            <p>f we were to call x with the [myObj object] (for method invocation), we will have to use .call() method:</p>
+            <pre>
+                <code>
+                let myObj = {
+                    name: 'fancy',
+                    operation: function() {
+                        console.log(this);
+                    }
+                }
+                let x = myObj.operation;
+                x(); // Window
+
+                x.call(myObj); // { name: 'fancy', operation: [function]}
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>this in Arrow Functions</h3>
+            <p>Arrow Functions are designed to lexically bind the context, which means that this refers to the enclosing context where the arrow function is defined. Unlike a normal function, <b>an arrow function does not create its own execution context</b>, but takes this from the outer function where it is defined. </p>
+            <pre>
+                <code>
+                let myObj = {
+                    name: 'fancy',
+                    operation: () => {
+                        console.log(this);
+                    }
+                }
+                myObj.operation();
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>this in Arrow Functions</h3>
+            <pre>
+                <code>
+                function Employee(firstName, department, salary) {
+                    this.firstName = firstName;
+                    this.department = department;
+                    this.salary = salary;
+                    this.getInfo = function() {
+                        return () => {
+                            console.log(this.firstName + " from " +
+                            this.department + " earns " + this.salary);
+                        };
+                    }
+                }
+                let jim = new Employee('Jim', 'Finance', 5200);
+                let printInfo = jim.getInfo();
+                printInfo();  // Jim from Finance earns 5200
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>this in Arrow Functions</h3>
+            <p>In this case, the this keyword refers to the context of the function enclosing the arrow function. At this point, it is important to note that <b>arrow functions do not change their context on invocation.</b></p>
+            <pre>
+                <code>
+                function Employee() {
+                    this.firstName = 'Mike',
+                    this.department = 'HR',
+                    this.getContext = () => {
+                        console.log(this);
+                    }
+                }
+                let mark = new Employee();
+                mark.getContext(); // [Employee object]
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>bind() method (ES5)</h3>
+            <p>The bind() method creates a new function that, when called, has its this keyword set to the provided value, with a given sequence of arguments preceding any provided when the new function is called.</p>
+            <pre>
+                <code>
+                const module = {
+                  x: 42,
+                  getX: function() { return this.x; }
+                };
+                const unboundGetX = module.getX;
+                console.log(unboundGetX()); // output: undefined
+                const boundGetX = unboundGetX.bind(module);
+                console.log(boundGetX()); // output: 42
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>bind in Arrow Functions</h3>
+            <p>
+                An important thing to note here is that you cannot “rebind” an arrow function. The context is always fixed. So with an arrow function, calls to bind, call, or apply will not be able to change to value of this.
+            </p>
+            <pre>
+                <code>
+            const details = {
+                number: 42,
+                operation: function () {
+                    return () => console.log(this.number);
+                }
+            };
+            const details2 = {
+                number: 84
+            };
+            details.operation().bind(details2)(); // 42
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Using Arrow Functions</h3>
+            <p>functions that use the var self = this hack to deal with the this issue, or a .bind(this) call for proper this binding, arrow functions were built to help out with this exact problem</p>
+            <pre>
+                <code>
+                    btn.addEventListener('click', function() {
+                        var self = this;
+                        setTimeout(function() {
+                                self.id = 'newId'
+                        }, 1000);
+                    });
+                    btn.addEventListener('click', function() {
+                        setTimeout(() => {
+                                this.id = 'newId'
+                        }, 1000);
+                    });
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Default Function Parameters</h3>
+            <p>functions in JavaScript  allow you to call them by passing any number of parameters irrespective of the parameters declared in the function definition. </p>
+            <pre>
+                <code>
+                    // Default Parameters in ES5
+                    function getSum(a,b) {
+                        a =  a || 1;
+                        b =  b || 41;
+                        console.log( a + b );
+                    }
+                    getSum();            //42
+                    getSum(1, 2);        //3
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Default Function Parameters</h3>
+            <p>ES6 tries to streamline this process by giving us the ability to set a default value to the parameter in the function declaration statement itself.</p>
+            <pre>
+                <code>
+                const getSum2 = function(a = 1, b = 41) {
+                    console.log(a + b);
+                }
+                getSum2();            // 42
+                const a = () => "Name";
+                const getName = function(firstName = a(), lastName = "LName") {
+                    console.log(firstName + " " + lastName);
+                }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Rest and Spread Operators</h3>
+            <p>JavaScript has always had the feature of allowing functions to be passes fewer or more parameters than formally specified in the function declaration without any problems.<b>The ... symbol is the rest symbol</b></p>
+            <pre>
+                <code>
+            const showCollections = function (id, ...collection) {
+                console.log(collection instanceof Array);
+            };
+            showCollections(42, "movies", "music");  // true
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Rest and Spread Operators</h3>
+            <pre>
+                <code>
+                const show = function (id, ...collection) {
+                    console.log(collection);
+                };
+                show(42, "movies", "music"); // ["movies", "music"]
+                console.log(show.length); // 1
+
+                const show1 = function (id, ...collection) {
+                    console.log(arguments.length);
+                };
+                show1(123, "movies", "music"); // 3
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>The Spread Operator</h3>
+            <p>The spread operator, which is also denoted by ... before an array, does essentially the reverse operation of a rest operator. It spreads out an array and passes the values into the specified function.</p>
+            <pre>
+                <code>
+                let values = [200, 300, 400];
+                let newValues = [100, ...values, 500]
+                console.log(newValues);  // [100, 200, 300, 400, 500]
+
+                let numbers = [-25, 100, 42, -1000];
+                console.log(Math.max(...numbers, 900)); // 900
+                </code>
+            </pre>
+        </div> 
+        <div class="step slide">
+            <h3>Object Literal Extensions</h3>
+            <p>To declare object literals, currently using variables we have to use the following coding pattern:</p>
+            <pre>
+                <code>
+                const price = 4.20, quantity = 20;
+                const invoiceData = {
+                    price: price,
+                    quantity: quantity
+                };
+                console.log(invoiceData)
+                // ES6 Object Literal Extensions
+                const price = 4.20, quantity = 20;
+                const invoiceData = {
+                    price,
+                    quantity
+                };
+                console.log(invoiceData);
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Object Literal Extensions</h3>
+            <h3></h3>
+            <p>Note that you can use dynamic field names in an object literal:</p>
+            <pre>
+                <code>
+                const field = 'dynamicRandom';
+                const price = 5.99;
+                const quantity = 2;
+                const invoiceData = {
+                    [field]: price,
+                    [field + "-01"]: price,
+                    quantity,
+                    calculateTotal() {
+                        return this.price * this.quantity;
+                    }
+                };
+                console.log(invoiceData);
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Template Literals</h3>
+            <p>Strings in JavaScript have been historically limited, lacking the capabilities one might expect coming from other programming languages. ES6 introduces Template Literals, which provide you a way to define strings with additional functionalities</p>
+            <ul>
+                <li>String interpolation</li>
+                <li>Embedded expressions</li>
+                <li>Multiline strings without hacks</li>
+                <li>String formatting</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>Template Literals</h3>
+            <p>Template Literals use backticks (``) rather than the single or double quotes. Template literals, in the end, always produce strings.Template literals also allow you to add multiline strings easily</p>
+            <pre>
+                <code>
+                    let user = `Kevin`;
+                    console.log(`Hi ${user}!`); // Hi Kevin!
+
+                    let a = 10;
+                    let b = 20;
+                    console.log(`Sum of ${a} and ${b} is ${a+b}`);
+                    console.log(`I am line-one
+                    I am line-two`);
+                    // I am line-one
+                    // I am line-two
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Iterating with for...of</h3>
+            <p>Over the last two decades in JavaScript, we have been iterating using the for, for-in, and forEach (in case of arrays). ES6 introduces another structure, the for...of loop, which allows iterating over iterable objects such as array, map, set, string, etc.</p>
+            <pre>
+                <code>
+                let names = ['matt', 'smith', 'jack'];
+                for (let name of names) {
+                    console.log(name);
+                }
+                // matt smith jack
+
+                for (let char of 'Bye') {
+                    console.log(char);
+                }
+                // B // y // e
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Destructuring</h3>
+            <p>Destructuring is basically a convenient way of breaking the data structure into smaller pieces to access its data more easily and extract multiple values from Objects or Arrays.</p>
+            <pre>
+                <code>
+                const letters = ['a', 'b', 'c'],
+                    x = letters[0], y = letters[1], z = letters[2];
+                console.log( x, y, z ); // a b c
+
+                const numbers = {a: 1, b: 2, c: 3},
+                    a = numbers.a,
+                    b = numbers.b,
+                    c = numbers.c;
+                console.log( a, b, c ); // 1 2 3
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Destructuring</h3>
+            <p>ES6 makes this pattern of structured assignment simpler through a new and dedicated syntax called destructuring.</p>
+            <pre>
+                <code>
+                const [ x, y, z ] = ['a', 'b', 'c'];
+                const { a: a, b: b, c: c } = {a: 1, b: 2, c: 3};
+                console.log( x, y, z ); // a b c
+                console.log( a, b, c ); // 1 2 3
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Object Destructuring Syntax</h3>
+            <pre>
+                <code>
+                const { a: a, b: b, c: c } = {a: 1, b: 2, c: 3};
+                const { a, b, c } = {a: 1, b: 2, c: 3};
+                console.log( a, b, c ); // 1 2 3
+
+                const foo = 42, bar = 100;
+                const obj = { a: foo, b: bar };
+                const { a: FOO, b: BAR } = obj;
+                console.log( FOO, BAR ); // 42 100
+
+                const { x: foo, x: bar } = { x: 42 };
+                console.log( foo );  // 42
+                console.log( bar );  // 42
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Assignment Using Destructuring</h3>
+            <pre>
+                <code>
+                const a, b, c, x, y, z;
+                [x, y ,z] = getChars();
+                ( { a, b, c } = getNumbers() );
+                console.log( x, y, z );             // a b c
+                console.log( a, b, c );             // 1 2 3
+                
+                let item = { name: "Apples", quantity: 5},
+                    name = "Oranges",
+                    quantity = 3;
+                // assigning different values using destructuring
+                ({ name, quantity } = item);
+                console.log(name);          // "Apples"
+                console.log(quantity);      // 5
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Default Values</h3>
+            <pre>
+                <code>
+                const item = {
+                        name: "Apples",
+                        quantity: 5
+                };
+                var { name = "Oranges", quantity = 3, value = 25 } = item;
+                console.log(name);          // "Apples"
+                console.log(quantity);      // 5
+                console.log(value);         // 2
+                const { a, b, c: c = 3, d: FOO = 42 } = {a: 1, b: 2};
+                console.log( a, b, c, FOO );     // 1 2 3 42
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Nested Destructuring</h3>
+            <pre>
+                <code>
+                let items = {
+                    count : 2,
+                    name: "fruits",
+                    apple: {
+                        quantity: 5,
+                        value: 25
+                    },
+                    orange: {
+                        quantity: 3,
+                        value: 5
+                    }
+                };
+                let { apple: { quantity }} = items;
+                console.log(quantity);        // 5
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Destructuring Using the rest Syntax</h3>
+            <p>Using the rest operators along with the destructuring pattern can be a very powerful concise syntax to variable assignments in ES6</p>
+            <pre>
+                <code>
+                const num1, num2, rest;
+                const x, y, z;
+                [num1, num2, ...rest] = [1, 2, 3, 4, 5];
+                [x, y, z] = [1, 2, 3, 4, 5];
+                console.log(num1);        // 1
+                console.log(num2);        // 2
+                console.log(rest);        // [3, 4, 5]
+                console.log(x, y, z)      // 1 2 3
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Classes in ES6</h3>
+            <p>The class pattern was widely debated and argued on through the design process of ES6 and a compromise was reached. It is important here to understand that ES6 classes do not work exactly the same way as in other object oriented languages. That said, TC39 is still in the process of adding more features post-ES6 to augment classes to bring them closer to the classical definition.</p>
+            <p>A class in ES6 is simply a function under the hood. It is nothing more than syntactical sugar over Objects and Prototypes, offering a convenient declarative form for class patterns that encourage interoperability. This new class keyword in ES6 supports prototype-based inheritance, constructors, super calls, instance, and static methods.</p>
+        </div>
+        <div class="step slide">
+            <h3>Classes in ES6</h3>
+            <pre>
+                <code>
+                class Car {
+                    constructor(brand) {
+                        this.brand = brand;
+                    }
+                }
+                const myTesla = new Car("Tesla");
+                console.log(myTesla.hasOwnProperty("brand"));//true
+                console.log(typeof Car);  // function
+
+                const myTesla = {
+                    brand: "Tesla"
+                };
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Defining Classes in ES6</h3>
+            <p>You declare a class using the "class" keyword followed by a class-name, which is generally by convention written in TitleCase.</p>
+            <pre>
+                <code>
+                    class SimpleClass {
+                        constructor() {
+                            SimpleClass = "42"; // throws an error during execution
+                        }
+                    }
+                    SimpleClass = "42"; // works fine after the declaration
+
+                    const b = new Bike(); // ReferenceError
+                    class Bike {}
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Defining Classes in ES6</h3>
+            <pre>
+                <code>
+                class AeroPlane { // ES6
+                    constructor(model, capacity) {
+                        this.model = model; this.capacity = capacity;
+                    }
+                    getData() {
+                        console.log(`You're flying a ${this.model} aeroplane`);
+                    }
+                }
+                function AeroPlane(model, capacity) { // ES5
+                    this.model = model;
+                    this.capacity = capacity;
+                }
+                AeroPlane.prototype.getData = function() {
+                    console.log("You're flying a " + this.model + " aeroplane");
+                }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Class Methods and Accessor Properties</h3>
+            <pre>
+                <code>
+                class AeroPlane {
+                    constructor(model, capacity) {
+                        this._model = model;this._capacity = capacity;
+                    }
+                    get model() { return this._model; }
+                    get capacity() { return this._capacity; }
+                    set model(model) { this._model = model; }
+                    set capacity(capacity) { this._capacity = capacity; }
+                }
+                const jet = new AeroPlane("Jet", 100);
+                const jet = new AeroPlane("Jet", 100);
+                console.log(jet.capacity);
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Computed Method Names</h3>
+            <pre>
+                <code>
+                const methodName = "getColor", propName = "color";
+                class AeroPlane {
+                    constructor(color) { this._color = color }
+                    [methodName]() {
+                        return this._color;
+                    }
+                    get [propName]() {
+                        return this[`_${propName}`];
+                    }
+                    set [propName](value) {
+                        return this[`_${propName}`] = value;
+                    }
+                }
+                const whiteJet = new AeroPlane("white");
+                console.log(whiteJet.color);// white
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Static Methods and Properties</h3>
+            <p>With classes, you can also define properties and methods that are a part of a class and not particularly any instance of that class. These methods and properties are associated with the class, and not with the instances of the class, which is often useful in creating utility functions for an application. ES6 allows you to easily create static methods by using the static keyword before the method name</p>
+            <pre>
+                <code>
+                class AeroPlane {
+                    static radio(message) {
+                        console.log(`Message from broadcast: ${message}`)
+                    }
+                }
+                AeroPlane.radio("Sky is clear"); // Message from broadcast: Sky is clea
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Static Methods and Properties</h3>
+            <pre>
+                <code>
+                class AeroPlane {
+                    constructor(capacity) {
+                        this.capacity = capacity;
+                    }
+                }
+                AeroPlane.color = "white";
+                console.log(AeroPlane.color); // white
+                console.log(AeroPlane.capacity); // undefined
+                </code>
+            </pre>
+        </div>    
+        <div class="step slide">
+            <h3>Class Inheritance and the Super Keyword</h3>
+            <p>ES6 introduces the extends keyword to allow creation of a class as a child of another class. Inheritance lets us incorporate another class’s state and behavior into our own. Extending a class from its parent class prevents code duplication</p>
+        </div>
+        <div class="step slide">
+            <h3>Class Inheritance and the Super Keyword</h3>
+            <pre>
+                <code>
+            class AeroPlane {
+                constructor(capacity) { this.capacity = capacity; }
+                showCapacity() {
+                    console.log(`Capacity of this plane: ${this.capacity}`);
+                }
+            }
+            class FighterPlane extends AeroPlane {
+                fire() {
+                    console.log("Loading weapons and firing");
+                }
+            }
+            const phantom = new FighterPlane(2);
+            phantom.showCapacity(); // Capacity of this plane: 2
+            phantom.fire(); // Loading weapons and firing
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Inheriting Static Properties</h3>
+            <p>ES6 allows us to inherit static properties of a parent class into a child class.</p>
+            <pre>
+                <code>
+                class AeroPlane {
+                  static radio() {
+                       console.log("Radio works");
+                  }
+                }
+                class FighterPlane extends AeroPlane {}
+                FighterPlane.radio(); // Radio works
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Method Overriding</h3>
+            <p>The methods of the parent class can easily be shadowed with the same name on the parent class, inside the derived class</p>
+            <pre>
+                <code>
+                class AeroPlane {
+                    constructor(capacity) { this.capacity = capacity;}
+                    fly() {
+                        console.log("AeroPlane");
+                    }
+                }
+                class FighterPlane extends AeroPlane {
+                    fly() { console.log("FighterPlane"); }
+                }
+                const phantom = new FighterPlane(2);
+                phantom.fly(); // FighterPlane 
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>super keyword</h3>
+            <p>If you wish to access the parent class version of the method, you can do so using super</p>
+            <pre>
+                <code>
+                class AeroPlane {
+                    fly() {
+                        console.log("AeroPlane");
+                    }
+                }
+                class FighterPlane extends AeroPlane {
+                    fly() {
+                        super.fly();
+                        console.log("FighterPlane");
+                    }
+                }
+                phantom.fly(); // AeroPlane // FighterPlane
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>super keyword</h3>
+            <p>you can also override constructors</p>
+            <pre>
+                <code>
+                class AeroPlane {
+                    constructor(capacity, color) {
+                        this.capacity = capacity; this.color = color;
+                    }
+                }
+                class FighterPlane extends AeroPlane {
+                    constructor(color) {
+                        // This fighterplane is 2-seater
+                        super(2, color);
+                    }
+                }
+                const phantom = new FighterPlane("grey");
+                console.log(phantom.capacity);       // 2
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Exporting</h3>
+            <p>The ‘export’ keyword can be used to expose parts of code inside modules to other modules. You can export a variable, a function, or a class declaration from a module. Variables, Functions, or Classes not exported from a module are not accessible outside the module.  </p>
+            <pre>
+                <code>
+                export var text = "ES6 is awesome";
+                export let name = "Ian Murawski";
+                export const number = 7;
+                export function add(a, b) {
+                    return a + b;
+                }
+
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Exporting</h3>
+            <p>At this point it is important to understand that only functions or class declarations with names can be exported in this way, and all such exports are referred to as Named Exports.</p>
+            <pre>
+                <code>
+                export class Rectangle {
+                    constructor(length, width) {
+                        this.length = length;
+                        this.width = width;
+                    }
+                }
+                function multiply(a, b) {
+                    return a * b;
+                }
+                export { multiply };  
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Default Exports</h3>
+            <p>A single variable, function, or class can be specified as the default export of the module using the default keyword. You can have only one value as a default export inside a module. Using the keyword on more than one export inside the module will raise an error.</p>
+            <pre>
+                <code>
+                    export default function(a, b) {
+                        return a * b;
+                    }
+                    function multiply(a, b) {
+                        return a * b;
+                    }
+                    export default multiply;
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Importing</h3>
+            <p>Once a module with the relevant exports is set up, it can be accessed inside another module by using the import keyword. There are two parts to an import statement: the identifier you’re importing and the module from which those identifiers should be imported.</p>
+            <pre>
+                <code>
+                    import { identifier1, identifier2 } from "./moduleFile.js";
+                    // importing the functions sum and multiply
+                    import { sum, multiply } from "./ moduleFile.js";
+                    console.log(sum(1, 7)); // 8
+                    console.log(multiply(2, 3)); // 6
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Importing</h3>
+            <pre>
+                <code>
+                // import everything
+                import * as example from "./ moduleFile.js";
+                console.log(example.sum(1,7));          // 8
+                console.log(example.multiply(2, 3));    // 6
+                // Importing Default Values
+                import multiply from "./moduleFile.js"
+                export let message = "42 is the answer to the everything.";
+                export default function(a, b) {
+                    return a * b;
+                }
+                import multiply, { message } from "./moduleFile.js";
+                console.log(multiply (21, 2)); // 42
+                console.log(message); // "42 is the answer to the everything.
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Renaming Identifiers</h3>
+            <p>In many cases you might not want to use the original name of the imported variable, function, or class because it can cause a conflict with other declarations in the code. ES6 helps you solve this issue by letting you rename exports and imports using the as keyword</p>
+            <pre>
+                <code>
+                function sum(a, b) {
+                    return a + b;
+                }
+                export { sum as add };
+                console.log(typeof add); // "undefined"
+                console.log(sum(1, 2)); // 3
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Modules in Web Browsers</h3>
+            <p>There are many ways of using JavaScript inside your web applications but the primary way of inserting JavaScript inside html is through the < script> tag</p>
+            <p>The < script> element loads JavaScript files as scripts by default. It is equivalent to explicitly mentioning the type attribute with the content type as “text/javascript”. In order to support modules, the value module was added to type options</p>
+            <pre>
+                <code>
+                < script type="module" src="moduleFile.js">< /script>
+                <!-- load JavaScript file and recognize it as a module-->
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Symbols in ES6</h3>
+            <p>Symbols represent a unique value and at its heart, a symbol is a unique token that is guaranteed to never clash with any other Symbol. Symbols in ES6 can be created using a factory function. The Symbol() method can be used to create a new symbol.</p>
+            <p>Optionally, while creating a Symbol you can also give it a label by passing a string as an argument into the Symbol() method</p>
+            <pre>
+                <code>
+                const foo = Symbol();
+                console.log(typeof foo);      // "symbol"
+                const chocolate = Symbol("this is my chocolate");
+                console.log(chocolate); // Symbol(this is my chocolate)
+                console.log(chocolate.toString()); // "Symbol(this is my chocolate)
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Symbol.for(key)</h3>
+            <p>This method looks up existing symbols in the runtime-wide symbol registry with the given key. If a symbol with that key exists in the global registry, that symbol is returned. If no symbol with that key is found in the registry, a new symbol gets created.  </p>
+            <pre>
+                <code>
+                Symbol("name") === Symbol("name"); // false
+                Symbol.for('myCar') === Symbol.for('myCar')// true
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Arrays and New Methods</h3>
+            <ul>
+                <li>Array.from() - Prior to ES6, in order to convert the array-like objects (e.g., arguments and NodeList) to a true array</li>
+                <li>Array.of() - Array.of() takes a list of items as parameters and returns them to you as an array.</li>
+                <li>Array.prototype.entries( ) - The entries() method returns a sequence of values, instead of all at once as an array.</li>
+                <li>Array.prototype.keys( ) - This method returns a new Array Iterator that contains the keys for each index in the array:</li>
+                <li>Array.prototype.values( )</li>
+                <li>This method returns a new Array Iterator object that contains the values for each index in the array</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>Arrays and New Methods</h3>
+            <pre>
+                <code>
+                const list = document.querySelectorAll('li');
+                const liArray = Array.from(list);
+
+                let arr = Array.of(10, 20, 30, 40);
+                console.log(arr); // [10, 20, 30, 40];
+
+                const breakfast = ['apples', 'bananas', 'oranges'];
+                const eBreakfast = breakfast.entries();
+                console.log(eBreakfast.next().value); // [0, 'apples']
+                console.log(eBreakfast.next().value); // [1, 'bananas']
+
+                const kBreakfast = breakfast.keys();
+                console.log(kBreakfast.next().value); // 0
+                console.log(kBreakfast.next().value); // 1
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Arrays and New Methods</h3>
+            <p>This method returns a new Array Iterator object that contains the values for each index in the array:</p>
+            <pre>
+                <code>
+            const breakfast = ['apples', 'bananas', 'oranges'];
+            const vBreakfast = breakfast.values();
+            console.log(vBreakfast.next().value); // apples
+            console.log(vBreakfast.next().value); // bananas
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Array.prototype.find( )</h3>
+            <p>The find() method lets you iterate through your array and returns the first item that matches the callback(element, index, array) for the array.</p>
+            <pre>
+                <code>
+                arr.find(callback[, thisArg]);
+                const inventory = [
+                       {name: 'apples', quantity: 2},
+                       {name: 'bananas', quantity: 0},
+                       {name: 'oranges', quantity: 5}
+                ];
+                let result = inventory.find((fruit) => fruit.name === 'apples');
+                console.log(result); // {name: 'apples', quantity: 2}
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Array.prototype.findIndex( )</h3>
+            <p>This method is an equivalent of find(). Instead of returning an item, this method returns the index position.</p>
+            <pre>
+                <code>
+                const inventory = [
+                   {name: 'apples', quantity: 2},
+                   {name: 'bananas', quantity: 0},
+                   {name: 'oranges', quantity: 5}
+                ];
+                result = inventory.findIndex((fruit) => fruit.name === 'apples');
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Array.prototype.fill( )</h3>
+            <p>This is a very simple method that allows us to fill all the elements of an array with a static value</p>
+            <pre>
+                <code>
+                    [1, 2, 3].fill(4);         // [4, 4, 4]
+                    [1, 2, 3].fill(4, 1);      // [1, 4, 4]
+                    [1, 2, 3].fill(4, 1, 2);   // [1, 4, 3]
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Iterables and Iterators</h3>
+            <p>An Iterable is a simple representation of a series of elements that can be iterated over. It does not have any iteration state such as a “current element.” Instead, it has one method that produces an Iterator.</p>
+            <p>An Iterator is the object with an iteration state. All iterator objects come with a next() method that is used to return the next object in the collection. The object returned from the next() method has two properties.</p>
+            <p>Each call to the next() method produces the next value in the collection. Once all the values of the collection are iterated, calling the next() method will return the value as undefined and done as true.</p>
+        </div>
+        <div class="step slide">
+            <h3>Iterator</h3>
+            <pre>
+                <code>
+            function myIterator(data) {
+                   let currentIndex = 0;
+                   return {
+                       next: () => {
+                        const done = (currentIndex >= data.length);
+                        const value = !done ? data[currentIndex] : undefined;currentIndex += 1;
+                        return { done, value };
+                    }
+                };
+            }
+            const itrObj = myIterator([41, 42, 43]);
+            itrObj.next();  // { value: 41, done: false }
+            itrObj.next();  // { value: 42, done: false }
+            itrObj.next();  // { value: undefined, done: true }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Symbol.iterator</h3>
+            <p>ES6 simplifies the process of implementing iterators by introducing [Symbol. iterator], which specifies the default iterator for an object.Whenever an object needs to be iterated, such as at the beginning of a for..of loop, its @@iterator method is called with no arguments. This method returns the default Iterator for the object. In ES6, @@ describes a well-known symbol. Here, @@ iterator specifies the iterator function stored at the object’s key [Symbol.iterator].</p>
+            <pre>
+                <code>
+                myIterator[Symbol.iterator] = function () {
+                   return {
+                    next: function () {}
+                  }
+                }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Symbol.iterator</h3>
+            <p>Having a symbol used as the key to hold the iterator method ensures that it will never conflict with regular object keys.</p>
+            <pre>
+                <code>
+                const arr = [41, 42, 43];
+                const itrObj = arr[Symbol.iterator]();
+                itrObj.next(); // { value: 41, done: false }
+                itrObj.next(); // { value: 42, done: false }
+                itrObj.next(); // { value: 43, done: false }
+                itrObj.next(); // { value: undefined, done: true }
+
+                const message = "Ian is an awesome student";
+                const itrObj = message[Symbol.iterator]();
+                itrObj.next();      // { value: "I", done: false }
+                itrObj.next();      // { value: "a", done: false }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Iterator as an Iterable</h3>
+            <pre>
+                <code>
+                const infiniteSequenceGenerator = {
+                    currentNumber: 0,
+                    // making the "infiniteSequenceGenerator" iterator an iterable
+                    [Symbol.iterator]() { return this; },
+                    next() {
+                        return {value: this.currentNumber++,done: false}
+                    }
+                };
+                const iter = infiniteSequenceGenerator[Symbol.iterator]();
+                console.log(iter.next().value);   // 0
+                console.log(iter.next().value);   // 1
+                console.log(iter.next().value);   // 2
+                console.log(iter.next().value);   // 3
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Generators</h3>
+            <p>In simple words, Generators are functions that can be paused. Prior to ES6, JavaScript only had functions that would run to completion before anything could interrupt their execution. With ES6, a different kind of function has been introduced to us through generators that do not always run to completion like functions, but they can pause and resume cycle midway through executions</p>
+            <p>A generator is a function that allows us to create a special type of iterator, whose execution can be suspended and retained while keeping the context. A function is a generator if it contains one or more yield expressions and if it uses the function * syntax:</p>
+        </div>
+        <div class="step slide">
+            <h3>Generators</h3>
+            <pre>
+                <code>
+                function *gen() {
+                    yield 42;
+                }
+                function *gen()  {..}
+                function* gen()  {..}
+                function * gen() {..}
+                function*gen()   {..}
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Generator Function</h3>
+            <p>A generator function is paused by executing a yield keyword in the body of the function, which can be used any number of times in the function body. You can return a value from a yield expression.</p>
+            <pre>
+                <code>
+                function *gen() {
+                    yield "Hello";
+                    yield "from";
+                    yield "generator";
+                }
+                obj = gen();
+                console.log(obj.next()); //{value:"Hello", done: false}
+                console.log(obj.next()); //{value:"from", done: false}
+                console.log(obj.next()); //{value:"generator", done: false}
+                console.log(obj.next()); //{value:undefined, done: true}
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Generator Function</h3>
+            <pre>
+                <code>
+                function *infiniteNumbers() {
+                    var n = 1;
+                    while (true) {
+                        yield n++;
+                    }
+                }
+                const numbers = infiniteNumbers(); // returns an iterable object
+                console.log(numbers.next()); // { value: 1, done: false }
+                console.log(numbers.next()); // { value: 2, done: false }
+                console.log(numbers.next()); // { value: 3, done: false }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Generator Function</h3>
+            <pre>
+                <code>
+                function *getFruits() {
+                          yield "apple";
+                          yield "orange";
+                          yield "banana";
+                          return "kiwi";
+                          yield "watermelon";
+                }
+                const fruitIterator = getFruits();
+                for (let fruit of fruitIterator) {
+                          console.log(fruit);
+                }
+                // apple // orange // banana
+                </code>
+            </pre>
+        </div>    
+
+        <div id="overview" class="step" data-x="4500" data-y="1500" data-scale="10" style="pointer-events: none;">
+        </div>
+    </div>
+    <div id="impress-toolbar"></div>
+
+    <script type="text/javascript" src="./js/highlight.pack.js"></script>
+    <script type="text/javascript" src="./js/mermaid.min.js"></script>
+    <script type="text/javascript" src="./js/markdown.js"></script>
+    <script type="text/javascript" src="./js/MathJax.js"></script>
+    <script type="text/javascript" src="./js/impress.js"></script>
+    <script>
+        impress().init();
+    </script>
+
+</body>
+
+</html>

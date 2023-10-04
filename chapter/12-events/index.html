@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>DOM Events</title>
+    <meta name="description" content="Simple example impress.js slide show" />
+    <meta name="author" content="Henrik Ingo" />
+    <link rel="stylesheet" href="./css/github.css">
+    <link rel="stylesheet" href="./css/mermaid.forest.css">
+    <link href="./css/impress-common.css" rel="stylesheet" />
+    <link href="./css/classic-slides.css" rel="stylesheet" />
+</head>
+
+<body class="impress-not-supported">
+    <div id="impress" data-transition-duration="1000" data-width="1920" data-height="1080" data-max-scale="3" data-min-scale="0" data-perspective="1000">
+        <div class="step slide title" data-x="-2200" data-y="-3000">
+            <h1>Chapter 12 Events</h1>
+            <br><br>
+            <ul>
+                <li>Understanding event flow</li>
+                <li>Working with event handlers</li>
+                <li>Examining the different types of events</li>
+            </ul>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h3>Understanding event flow</h3>
+            <p>JavaScript’s interaction with HTML is handled through events, which indicate when particular moments of interest occur in the document or browser window. Events can be subscribed to using listeners (also called handlers) that execute only when an event occurs. This model, called the observer pattern</p>
+            <!-- <img src="images/npm_vs_yarn.png" class='img w1000' /> -->
+        </div>
+
+        <div class="step slide">
+            <h3>Event Bubbling</h3>
+            <p>When you click the < div> element in the page, the click event occurs in the following order</p>
+            <ul>
+                <li>< div></li>
+                <li>< body></li>
+                <li>< html></li>
+                <li>document</li>
+            </ul>
+            <pre>
+                <code style='font-size: 25px'>
+                            < html>
+                                < body>
+                                    < div id=”myDiv”>Click Me< /div>
+                                < /body>
+                            < /html>
+                </code>
+            </pre>     
+        </div>
+
+        <div class="step slide">
+            <h3>Event Bubbling</h3>
+            <p>The click event is first fired on the < div> , which is the element that was clicked. Then the click event goes up the DOM tree, firing on each node along its way until it reaches the document object</p>
+            <img src="images/event_bubling.png" class='img w700' />
+        </div>
+
+        <div class="step slide">
+            <h3>Event Capturing</h3>
+            <p> The theory of event capturing is that the least specific node should receive the event first and the most specific node should receive the event last. Event capturing was really designed to intercept the event before it reached the intended target.</p>
+            <ul>
+                <li>document</li>
+                <li>< html></li>
+                <li>< body></li>
+                <li>< div></li>
+            </ul>
+        </div>
+
+        <div class="step slide">
+            <h3>Event Capturing</h3>
+            <p>With event capturing, the click event is first received by the document and then continues down the DOM tree to the actual target of the event, the < div> element. </p>
+            <img src="images/event_capturing.png" class='img w700' />
+        </div>
+        <div class="step slide">
+            <h3>DOM Event Flow</h3>
+            <p>Event capturing occurs fi rst, providing the opportunity to intercept events if necessary. Next, the actual target receives the event. The final phase is bubbling, which allows a final response to the event.</p>
+            <img src="images/event_flow.png" class='img w800' />
+        </div>
+        <div class="step slide">
+            <h3>DOM Event Flow</h3>
+            <p>In the DOM event flow, the actual target (the < div> element) does not receive the event during the capturing phase. This means that the capturing phase moves from document to < html> to < body> and stops</p>
+            <p>Internet Explorer 9, Opera, Firefox, Chrome, and Safari all support the DOM event flow; Internet Explorer 8 and earlier do not.</p>
+        </div>
+        <div class="step slide">
+            <h3>EVENT HANDLERS</h3>
+            <p>Events are certain actions performed either by the user or by the browser itself. These events have names like click , load , and mouseover . A function that is called in response to an event is called an event handler (or an event listener). Event handlers have names beginning with “on” , so an event handler for the click event is called onclick and an event handler for the load event is called onload .</p>
+        </div>
+        <div class="step slide">
+            <h3>HTML Event Handlers</h3>
+            <p>Each event supported by a particular element can be assigned using an HTML attribute with the name of the event handler. The value of the attribute should be some JavaScript code to execute.When this button is clicked, an alert is displayed. This interaction is defi ned by specifying the onclick attribute and assigning some JavaScript code as the value. Note that since the JavaScript code is an attribute value, you cannot use HTML syntax characters such as the ampersand, double quotes, less-than, or greater-than without escaping them.</p>
+            <pre>
+                <code>
+                    < input type=”button” value=”Click Me” onclick=”alert(‘Clicked’)” />
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>HTML Event Handlers</h3>
+            <p>An event handler defi ned in HTML may contain the precise action to take or it can call a script defined elsewhere on the page</p>
+            <p>Code executing as an event handler has access to everything in the global scope.</p>
+            <pre>
+                <code>
+                    < script type=”text/javascript”>
+                        function showMessage(){
+                            alert(“Hello world!”);
+                        }
+                    < /script>
+                    < input type=”button” value=”Click Me” onclick=”showMessage()” />
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>HTML Event Handlers</h3>
+            <p>Event handlers assigned in this way have some unique aspects. First, a function is created that wraps the attribute value. That function has a special local variable called event , which is the event object</p>
+            <p>This gives you access to the event object without needing to defi ne it yourself and without needing to pull it from the enclosing function’s argument list. The this value inside of the function is equivalent to the event’s target elemen</p>
+            <pre>
+                <code>
+                    <!-- outputs “click” -->
+                    < input type=”button” value=”Click Me” onclick=”alert(event.type)”>
+                    <!-- outputs “Click Me” -->
+                    < input type=”button” value=”Click Me” onclick=”alert(this.value)”>
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>DOM Event Handlers</h3>
+            <p>The traditional way of assigning event handlers in JavaScript is to assign a function to an event handler property. This was the event handler assignment method introduced in the fourth generation of web browsers, and it still remains in all modern browsers because of its simplicity and cross-browser support.When assigning event handlers using the DOM Level 0 method, the event handler is considered to be a method of the element. The event handler, therefore, is run within the scope of element, meaning that this is equivalent to the element.</p>
+            <pre>
+                <code>
+                    const btn = document.getElementById(“myBtn”);
+                    btn.onclick = function(){
+                        alert(“Clicked”);
+                        alert(this.id); //”myBtn”
+                    };
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>DOM Event Handlers</h3>
+            <p>The ID is retrieved using this.id . It’s possible to use this to access any of the element’s properties or methods from within the event handlers. Event handlers added in this way are intended for the bubbling phase of the event fl ow. You can remove an event handler assigned via the DOM Level 0 approach by setting the value of the event handler property to null</p>
+            <pre>
+                <code>
+                    btn.onclick = null; //remove event handler
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>DOM Event Handlers</h3>
+            <p>DOM Level 2 Events defi ne two methods to deal with the assignment and removal of event handlers: addEventListener() and removeEventListener() . These methods exist on all DOM nodes and accept three arguments: the event name to handle, the event handler function, and a Boolean value indicating whether to call the event handler during the capture phase ( true ) or during the bubble phase ( false ).</p>
+            <pre>
+                <code>
+                const btn = document.getElementById(“myBtn”);
+                btn.addEventListener(“click”, function(){
+                    alert(this.id);
+                }, false);
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>DOM Event Handlers</h3>
+            <p>This code adds an onclick event handler to a button that will be fi red in the bubbling phase (since the last argument is false ). As with the DOM Level 0 approach, the event handler runs in the scope of the element on which it is attached. The major advantage to using the DOM Level 2 method for adding event handlers is that multiple event handlers can be added.</p>
+            <pre>
+                <code>
+                const btn = document.getElementById(“myBtn”);
+                btn.addEventListener(“click”, function(){
+                    alert(this.id);
+                }, false);
+                btn.addEventListener(“click”, function(){
+                    alert(“Hello world!”);
+                }, false);
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>DOM Event Handlers</h3>
+            <p>Event handlers added via addEventListener() can be removed only by using removeEventListener() and passing in the same arguments as were used when the handler was added. This means that anonymous functions added using addEventListener() cannot be removed</p>
+            <pre>
+                <code>
+                const btn = document.getElementById(“myBtn”);
+                btn.addEventListener(“click”, function(){
+                    alert(this.id);
+                }, false);
+                btn.removeEventListener(“click”, function(){
+                    alert(this.id); //won’t work!
+                }, false);
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>DOM Event Handlers</h3>
+            <p>The call to removeEventListener() looks like it’s using the same arguments, but in reality, the second argument is a completely different function than the one used in addEventListener() . The event handler function passed into removeEventListener() must be the same one that was used in addEventListener()</p>
+            <pre>
+                <code>
+                const btn = document.getElementById(“myBtn”);
+                const handler = function(){
+                    alert(this.id);
+                };
+                btn.addEventListener(“click”, handler, false);
+                //other code here
+                btn.removeEventListener(“click”, handler, false);//works!
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Internet Explorer Event Handlers</h3>
+            <p>Internet Explorer implements methods similar to the DOM called attachEvent() and detachEvent() . These methods accept the same two arguments: the event handler name and the event handler function. Since Internet Explorer 8 and earlier support only event bubbling, event handlers added using attachEvent() are attached on the bubbling phase. When using DOM Level 0, the event handler runs with a this value equal to the element on which it is attached; when using attachEvent() , the event handler runs in the global context, so this is equivalent to window</p>
+            <pre>
+                <code>
+                const btn = document.getElementById(“myBtn”);
+                btn.attachEvent(“onclick”, function(){
+                    alert(“Clicked”);
+                    alert(this === window); //true
+                });
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Cross-Browser Event Handlers</h3>
+            <pre>
+                <code>
+            const EventUtil = {
+                addHandler: function(element, type, handler){
+                    if (element.addEventListener){
+                        element.addEventListener(type, handler, false);
+                    } else if (element.attachEvent){
+                        element.attachEvent(“on” + type, handler);
+                    }
+                },
+                removeHandler: function(element, type, handler){
+                    if (element.removeEventListener){
+                        element.removeEventListener(type, handler, false);
+                    } else if (element.detachEvent){
+                        element.detachEvent(“on” + type, handler);
+                    } else {
+                        element[“on” + type] = null;
+                    }
+                }
+            };
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>The DOM Event Object</h3>
+            <p>In DOM-compliant browsers, the event object is passed in as the sole argument to an event handler. Regardless of the method used to assign the event handler, DOM Level 0 or DOM Level 2, the event object is passed in.</p>
+            <pre>
+                <code>
+                    const btn = document.getElementById(“myBtn”);
+                    btn.onclick = function(event){
+                        alert(event.type);
+                        //”click”
+                    };
+                    btn.addEventListener(“click”, function(event){
+                        alert(event.type);
+                        //”click”
+                    }, false);
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>The DOM Event Object</h3>
+            <img src="images/event_type.png" class='img w800' />
+        </div>
+
+        <div class="step slide">
+            <h3>The DOM Event Object</h3>
+            <p>Inside an event handler, the this object is always equal to the value of currentTarget , whereas target contains only the actual target of the event. If the event handler is assigned directly onto the intended target, then this , currentTarget , and target all have the same value</p>
+            <pre>
+                <code>
+                const btn = document.getElementById(“myBtn”);
+                btn.onclick = function(event){
+                    alert(event.currentTarget === this); //true
+                    alert(event.target === this); //true
+                };
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>The DOM Event Object</h3>
+            <p>the values of currentTarget and target relative to this . Since the target of the click event is the button, all three are equal. If the event handler existed on a parent node of the button, such as document.body , the values would be different.</p>
+            <pre>
+                <code>
+            document.body.onclick = function(event){
+            alert(event.currentTarget === document.body); //true
+            alert(this === document.body); //true
+            alert(event.target === document.getElementById( “myBtn”)); //true
+            };
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>The DOM Event Object</h3>
+            <p>When the button is clicked in this example, both this and currentTarget are equal to document.body because that’s where the event handler was registered. The target property, however, is equal to the button element itself, because that’s the true target of the click event. Since the button itself doesn’t have an event handler assigned, the click event bubbles up to document.body , where the event is handled.</p>
+            <pre>
+                <code>
+                const btn = document.getElementById(“myBtn”);
+                const handler = function(event){
+                switch(event.type){
+                    case “click”: alert(“Clicked”); break;
+                    case “mouseover”: event.target.style.backgroundColor = “red”; break;
+                    case “mouseout”: event.target.style.backgroundColor = “”; break;
+                    }
+                };
+                btn.onclick = handler; btn.onmouseover = handler; btn.onmouseout = handler;
+                </code>
+            </pre>
+        </div>
+       <div class="step slide">
+            <h3>The DOM Event Object</h3>
+            <p>The preventDefault() method is used to prevent the default action of a particular event. The default behavior of a link, for example, is to navigate to the URL specifi ed in its href attribute when clicked. If you want to prevent that navigation from occurring, an onclick event handler can cancel that behavior</p>
+            <pre>
+                <code>
+                    const link = document.getElementById(“myLink”);
+                    link.onclick = function(event){
+                        event.preventDefault();
+                    };
+                </code>
+            </pre>
+        </div>
+       <div class="step slide">
+            <h3>The DOM Event Object</h3>
+            <p>The stopPropagation() method stops the fl ow of an event through the DOM structure immediately, canceling any further event capturing or bubbling before it occurs. For example, an event handler added directly to a button can call stopPropagation() to prevent an event handler on document.body from being fi red</p>
+            <pre>
+                <code>
+                const btn = document.getElementById(“myBtn”);
+                btn.onclick = function(event){
+                    alert(“Clicked”);
+                    event.stopPropagation();
+                };
+                document.body.onclick = function(event){
+                    alert(“Body clicked”);
+                };
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>EVENT TYPES</h3>
+            <ul>
+                <li>User interface (UI) events are general browser events that may have some interaction with the BOM.</li>
+                <li>Focus events are fired when an element gains or loses focus.</li>
+                <li>Mouse events are fired when the mouse is used to perform an action on the page.</li>
+                <li>Wheel events are fired when a mouse wheel (or similar device) is used.</li>
+                <li>Text events are fi red when text is input into the document.</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>EVENT TYPES</h3>
+            <ul>
+                <li>Keyboard events are fi red when the keyboard is used to perform an action on the page.</li>
+                <li>Composition events are fired when inputting characters for an Input Method Editor (IME).</li>
+                <li>Mutation events are fired when a change occurs to the underlying DOM structure</li>
+                <li>Mutation name events are fi red when element or attribute names are changed</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>UI Events</h3>
+            <p>UI events are those events that aren’t necessarily related to user actions. These events existed in some form or another prior to the DOM specifi cation and were retained for backwards compatibility</p>
+            <ul>
+                <li>DOMActivate — Fires when an element has been activated by some user action, by either mouse or keyboard (more generic than click or keydown ).</li>
+                <li>load — Fires on a window when the page has been completely loaded, on a frameset when all frames have been completely loaded, on an < img> element</li>
+                <li>unload — Fires on a window when the page has been completely unloaded, on a frameset when all frames have been completely unloaded</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>UI Events</h3>
+            <ul>
+                <li>abort — Fires on an < object> element if it is not fully loaded before the user stops the download process</li>
+                <li>error — Fires on a window when a JavaScript error occurs, on an < img> element if the image specifi ed cannot be loaded</li>
+                <li>select — Fires when the user selects one or more characters in a text box</li>
+                <li>resize — Fires on a window or frame when it is resized</li>
+                <li>scroll — Fires on any element with a scrollbar when the user scrolls it.</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>Focus Events</h3>
+            <p>Focus events are fi red when elements of a page receive or lose focus. These events work in concert with the document.hasFocus() and document.activeElement properties to give insight as to how the user is navigating the page</p>
+            <ul>
+                <li>blur — Fires when an element has lost focus</li>
+                <li>DOMFocusIn — Fires when an element has received focus.</li>
+                <li>DOMFocusOut — Fires when an element has lost focus. This is a generic version of the blur HTML event.</li>
+                <li>focus — Fires when an element has received focus.</li>
+                <li>focusin — Fires when an element has received focus</li>
+                <li>focusout — Fires when an element has lost focus.</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>Mouse and Wheel Events</h3>
+            <p>Mouse events are the most commonly used group of events on the Web, because the mouse is the primary navigation device used</p>
+            <ul>
+                <li>click — Fires when the user clicks the primary mouse button or when the user presses the Enter key.</li>
+                <li>dblclick — Fires when the user double-clicks the primary mouse button</li>
+                <li>mousedown — Fires when the user pushes any mouse button down.</li>
+                <li>mouseenter — Fires when the mouse cursor is outside of an element and then the user first moves it inside of the boundaries of the element.</li>
+                <li>mouseleave — Fires when the mouse cursor is over an element</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>Mouse and Wheel Events</h3>
+            <ul>
+                <li>mousemove — Fires repeatedly as the cursor is being moved around an element.</li>
+                <li>mouseout — Fires when the mouse cursor is over an element</li>
+                <li>mouseover — Fires when the mouse cursor is outside of an element and then the user first moves it inside of the boundaries of the element.</li>
+                <li>mouseup — Fires when the user releases a mouse button.</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>Client Coordinates</h3>
+            <p>Mouse events all occur at a particular location within the browser viewport. This information is stored in the clientX and clientY properties of the event object.</p>
+            <pre>
+                <code>
+                const div = document.getElementById(“myDiv”);
+                div.addEventListener(“click”, function(event){
+                    alert(“Client coordinates: “ + event.clientX + “,” + event.clientY);
+                });
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Page Coordinates</h3>
+            <p>Where client coordinates give you information about where an event occurred in the viewport, page coordinates tell you where on the page the event occurred via the pageX and pageY properties of the event object. These properties indicate the location of the mouse cursor on the page, so the coordinates are from the left and top of the page itself rather than the viewport</p>
+            <pre>
+                <code>
+                const div = document.getElementById(“myDiv”);
+                div.addEventListener(“click”, function(event){
+                    alert(“Page coordinates: “ + event.pageX + “,” + event.pageY);
+                })
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Screen Coordinates</h3>
+            <p>Mouse events occur not only in relation to the browser window but also in relation to the entire screen. It’s possible to determine the location of the mouse in relation to the entire screen by using the screenX and screenY properties.</p>
+            <pre>
+                <code>
+                const div = document.getElementById(“myDiv”);
+                div.addEventListener(“click”, function(event) {
+                    alert(“Screen coordinates: “ + event.screenX + “,” + event.screenY);
+                })
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Keyboard and Text Events</h3>
+            <p>Keyboard events are fi red when the user interacts with the keyboard. DOM Level 2 Events originally specified keyboard events, but that section was removed before the specification became fi nal. As a result, keyboard events are largely supported based on the original DOM Level 0 implementations.</p>
+            <ul>
+                <li>keydown — Fires when the user presses a key on the keyboard and fires repeatedly while the key is being held down.</li>
+                <li>keypress — Fires when the user presses a key on the keyboard that results in a character and fires repeatedly while the key is being held down. This event also fires for the Esc key.</li>
+                <li>keyup — Fires when the user releases a key on the keyboard.</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>Key Codes</h3>
+            <p>For keydown and keyup events, the event object’s keyCode property is fi lled in with a code that maps to a specifi c key on the keyboard. For alphanumeric keys, the keyCode is the same as the ASCII value for the lowercase letter or number on that key, so the 7 key has a keyCode of 55 and the A key has a keyCode of 65, regardless of the state of the Shift key</p>
+            <pre>
+                <code>
+                const textbox = document.getElementById(“myText”);
+                textbox.addEventListener(“keyup”, function(event){
+                    alert(event.keyCode);
+                });
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Key Codes</h3>
+            <img src="images/key_code.png" class='img w800' />
+        </div> 
+        <div class="step slide">
+            <h3>The textInput Event</h3>
+            <p>The DOM Level 3 Events specifi cation introduced an event called textInput that fi res when a character is input to an editable area. Designed as a replacement for keypress , a textInput event behaves somewhat differently.</p>
+            <pre>
+                <code>
+                const textbox = document.getElementById(“myText”);
+                textbox.addHandler(“textInput”, function(event){
+                    alert(event.data);
+                });
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>The beforeunload and load Events</h3>
+            <pre>
+                <code>
+                window.addEventListener( “load”, function(event){
+                    const div = document.getElementById(“myDiv”);
+                    alert(“load”);
+                });
+
+                document.addEventListener( “beforeunload”, function(event){
+                    alert(“beforeunload”);
+                });
+                document.addEventListener( “DOMContentLoaded”,, function(event){
+                    alert(“DOMContentLoaded”);
+                });
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>The hashchange Event</h3>
+            <p>The onhashchange event handler must be attached to the window , and it is called whenever the URL hash changes. The event object should have two additional properties: oldURL and newURL . These properties hold the complete URL including the hash before the change and after the change.</p>
+            <pre>
+                <code>
+                window.addEventListener(“hashchange”, function(event){
+                    alert(“Old URL: “ + event.oldURL + “\nNew URL: “ + event.newURL);
+                });
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Device Events</h3>
+            <p>The orientationchange Event window.orientation</p>
+            <p>Apple created the orientationchange event on mobile Safari so that developers could determine when the user switched the device from landscape to portrait mode. There is a window.orientation property on mobile Safari that contains one of three values: 0 for portrait mode, 90 for landscape mode when rotated to the left</p>
+            <pre>
+                <code>
+            window.addEventListener(“load”, function(event){
+                var div = document.getElementById(“myDiv”);
+                div.innerHTML = “Current orientation is “ + window.orientation;
+                window.addEventListener(“orientationchange”, function(event){
+                    div.innerHTML = “Current orientation is “ + window.orientation;
+                });
+            });
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Touch Events</h3>
+            <ul>
+                <li>touchstart — Fires when a fi nger touches the screen even if another fi nger is already touching the screen</li>
+                <li>touchmove — Fires continuously as a fi nger is moved across the screen. Calling preventDefault() during this event prevents scrolling</li>
+                <li>touchend — Fires when a fi nger is removed from the screen</li>
+                <li>touchcancel — Fires when the system has stopped tracking the touch. It’s unclear in the documentation as to when this can occur</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>Removing Event Handlers</h3>
+            <pre>
+                <code>
+            < div id=”myDiv”>
+                < input type=”button” value=”Click Me” id=”myBtn”>
+            < /div>
+            < script type=”text/javascript”>
+                const btn = document.getElementById(“myBtn”);
+                btn.onclick = function(){ //do something
+                    btn.onclick = null; //remove event handler
+                    document.getElementById(“myDiv”).innerHTML = “Processing...”;
+                };
+            < /script>
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Removing Event Handlers</h3>
+            <pre>
+                <code>
+            < div id=”myDiv”>
+                < input type=”button” value=”Click Me” id=”myBtn”>
+            < /div>
+            < script type=”text/javascript”>
+                const btn = document.getElementById(“myBtn”);
+                const handler = function(event) {console.log(event)}
+                btn.addEventListener('click', handler);
+                btn.removeEventListener('click', handler);
+            < /script>
+                </code>
+            </pre>
+        </div>
+
+        <div id="overview" class="step" data-x="4500" data-y="1500" data-scale="10" style="pointer-events: none;">
+        </div>
+    </div>
+    <div id="impress-toolbar"></div>
+
+    <script type="text/javascript" src="./js/highlight.pack.js"></script>
+    <script type="text/javascript" src="./js/mermaid.min.js"></script>
+    <script type="text/javascript" src="./js/markdown.js"></script>
+    <script type="text/javascript" src="./js/MathJax.js"></script>
+    <script type="text/javascript" src="./js/impress.js"></script>
+    <script>
+        impress().init();
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Classic Slides with impress.js | Simple example impress.js slide show | by Henrik Ingo @henrikingo</title>
+    <meta name="description" content="Simple example impress.js slide show" />
+    <meta name="author" content="Henrik Ingo" />
+    <link rel="stylesheet" href="./css/github.css">
+    <link rel="stylesheet" href="./css/mermaid.forest.css">
+    <link href="./css/impress-common.css" rel="stylesheet" />
+    <link href="./css/classic-slides.css" rel="stylesheet" />
+</head>
+
+<body class="impress-not-supported">
+    <div id="impress" data-transition-duration="1000" data-width="1920" data-height="1080" data-max-scale="3" data-min-scale="0" data-perspective="1000">
+        <div class="step slide title" data-x="-2200" data-y="-3000">
+            <h1>Chapter 5</h1>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h2>Programming languages</h2>
+            <img src="images/top-languages.png" class='img w1000' />
+        </div>
+
+        <div class="step slide">
+            <h1>Levels of Programming Language </h1>
+            <ul>
+                <li>Microcode ( Hardware )</li>
+                <li>Machine code</li>
+                <li>Assembly Language</li>
+                <li>Low-level Programming Language</li>
+                <li>High-level Programming Language</li>
+            </ul>  
+        </div>
+
+        <div class="step slide">
+            <h1>Levels of Programming Language </h1>
+            <img src="images/height_low.jpg" class='img w1000' /> 
+        </div>
+
+        <div class="step slide">
+            <h1>Microcode</h1>
+            <ul>
+                <li>Machine-specific code that directs the individual components of a CPU’s data-path to perform small-scale operations.</li>
+                <li> Data-path: the ALU, its inputs and outputs.</li>
+                <li>Every machine code instruction tells the CPU to execute a certain microprogram, written in micro-code</li>
+                <li>People who build computers program in micro-code. The programs that you write are converted into machine code.</li>
+            </ul>
+        </div>
+
+        <div class="step slide">
+            <h1>Machine code</h1>
+            <ul>
+                <li>Machine code is a computer program written in machine language. It uses the instruction set of a particular computer architecture. It is usually written in binary. Machine code is the lowest level of software. Other programming languages are translated into machine code so the computer can execute them.</li>
+                <li>Machine code instructions still depend on the computer’s
+                architecture, but the variation isn’t as great; many CPUs
+                manufactured around the same time or by the same
+                company will use the same machine code sets, in fact.
+                </li>
+            </ul>
+        </div>
+
+        <div class="step slide">
+            <h1>Assembly language</h1>
+            <ul>
+                <li>An assembly language is a low-level programming language designed for a specific type of processor. It may be produced by compiling source code from a high-level programming language (such as C/C++) but can also be written from scratch.</li>
+                <li>Assembly code is converted into executable machine code by a utility program referred to as an assembler</li>
+                <li>First appeared  1949</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h1>Instructions of assembler( x86 )</h1>
+            <ul>
+                <li>MOV - move data from one location to another</li>
+                <li>ADD - add two values</li>
+                <li>SUB - subtract a value from another value</li>
+                <li>PUSH - push data onto a stack</li>
+                <li>POP - pop data from a stack</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h1>"Hello, World" in x86 Assembly Language</h1>
+            <img src="images/hello_world_asm.png" class='img w1000' /> 
+        </div>
+
+        <div class="step slide">
+            <h1>Low-level Programming Language</h1>
+            <p>
+                A low-level programming language is a programming language that provides little or no abstraction from a computer's instruction set architecture—commands or functions in the language map that are structurally similar to processor's instructions. Generally, this refers to either machine code or assembly language. Because of the low (hence the word) abstraction between the language and machine language, low-level languages are sometimes described as being "close to the hardware". Programs written in low-level languages tend to be relatively non-portable, due to being optimized for a certain type of system architecture.
+            </p>
+        </div>
+        <div class="step slide">
+            <h1>High-level Programming Language</h1>
+            <p>
+                High-level programming language is a programming language with strong abstraction from the details of the computer. In contrast to low-level programming languages, it may use natural language elements, be easier to use, or may automate (or even hide entirely) significant areas of computing systems (e.g. memory management), making the process of developing a program simpler and more understandable than when using a lower-level language. The amount of abstraction provided defines how "high-level" a programming language is
+            </p>
+        </div>
+        <div class="step slide">
+            <h1>High-level vs Low-level</h1>
+            <img src="images/height_vs_low.jpg" class='img w1000' /> 
+        </div>
+        <div class="step slide">
+            <h1>Categories of Programing Languages</h1>
+            <img src="images/categories_languages.png" class='img w1000' /> 
+        </div>
+
+        <div class="step slide">
+            <h1>Implementation Methods</h1>
+            <ul>
+                <li>Compilation (Ahead-of-time ( AOT ) )</li>
+                <li>Interpretation</li>
+                <li>Hybrid Implementation ( Just-in-time ( JIT ) compilation )</li>
+            </ul>
+        </div>
+
+        <div class="step slide">
+            <h1>Compilation</h1>
+            <p>
+                Compilation is the process the computer takes to convert a high-level programming language into a machine language that the computer can understand. The software which performs this conversion is called a compiler.
+            </p>
+            <ul>
+                <li>Compile once, run target many times.</li>
+                <li>Compiler will convert the code into machine code (create an exe) before program run.</li>
+                <li>Compiler can optimize the speed of the target, even if the optimization itself takes a long time.</li>
+            </ul>
+        </div>
+
+        <div class="step slide">
+            <h1>Compiled programming languages</h1>
+            <br><br>
+            <ul>
+                <li>C, C++, Rust, ALGOL</li>
+                <li>Go, Haskell, Lisp, Pascal</li>
+                <li>COBOL, Fortran, D, Forth</li>
+                <li>JOVIAL, Mercury, F#</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h1>Interpretation</h1>
+            <br><br>
+            <p>An interpreter is a computer program, which coverts each high-level program statement into the machine code. This includes source code, pre-compiled code, and scripts. <b>Interpreters convert code into machine code when the program is run.<b></p>
+        </div>
+        <div class="step slide">
+            <h1>Interpreted programming languages</h1>
+            <ul>
+                <li>PHP</li>
+                <li>Ruby</li>
+                <li>Perl</li>
+                <li>Python</li>
+                <li>BASIC</li>
+            </ul>
+        </div>
+
+        <div class="step slide">
+            <h1>How Compiler and Interpreter Works </h1><br>
+            <img src="images/hwo_works.png" class='img w1000' /> 
+        </div>
+
+        <div class="step slide">
+            <h2>KEY DIFFERENCE</h2>
+            <ul>
+                <li>Compiler transforms code written in a high-level programming language into the machine code, at once, before program runs, whereas an Interpreter coverts each high-level program statement, one by one, into the machine code, during program run.</li>
+                <li>Compiled code runs faster while interpreted code runs slower.</li>
+                <li>Compiler displays all errors after compilation, on the other hand, the Interpreter displays errors of each line one by one.</li>
+                <li>Compiler is based on translation linking-loading model, whereas Interpreter is based on Interpretation Method.</li>
+                <li>Compiler takes an entire program whereas the Interpreter takes a single line of code.</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h1>Just-in-time compilation</h1>
+            <p>
+                 Just-In-Time (JIT) compilation (also dynamic translation or run-time compilations) is a way of executing computer code that involves compilation during execution of a program – at run time – rather than before execution. Most often, this consists of source code or more commonly bytecode translation to machine code, which is then executed directly. A system implementing a JIT compiler typically continuously analyses the code being executed and identifies parts of the code where the speedup gained from compilation or recompilation would outweigh the overhead of compiling that code.
+            </p>
+        </div>
+        <div class="step slide">
+            <h1>Just-in-time compilation</h1>
+            <p>
+                When computers became a million times faster and compilation shrunk down to a few fractions of a second, the balance between compiled and interpreted languages changed. Clever people blurred the boundaries between the two with a technique called JIT (just-in-time compilation). And that paved the way for most of the modern runtimes we use today.
+                The basic idea was this: Since compilers have godly powers of optimization, and seeing as compiled code is so much faster than interpreted code, why not just compile everything? The trick is to compile is just before you run it. That way there’s no problem with compatibility, because your code is compiled on the same computer that’s going to run it.
+            </p>
+        </div>
+        <div class="step slide">
+            <h1>Just-in-time compilation languages</h1>
+            <ul>
+                <li>Java</li>
+                <li>C#</li>
+                <li>Perl</li>
+                <li>Groovy</li>
+                <li>Scala</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h1>JavaScript</h1>
+            <p>JavaScript often abbreviated as JS, is a programming language that conforms to the ECMAScript specification. JavaScript is high-level, often just-in-time compiled, and multi-paradigm. It has curly-bracket syntax, dynamic typing, prototype-based object-orientation, and first-class functions.</p>
+            <img src='./images/javascript_logo.jpeg' class='img w300'>
+        </div>
+        <div class="step slide">
+            <h1>JavaScript</h1>
+            <p>JavaScript = ECMAScript + DOM + WEB API ( BOM )</p>
+            <ul>
+                <li>ECMAScript  (or ES) is a general-purpose programming language, standardised by Ecma International according to the document ECMA-262.</li>
+                <li>DOM - Document Object Model</li>
+                <li>BOM - Browser Object Model</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>ECMAScript</h3>
+            <p>ECMAScript is programming language</p>
+            <ul>
+                <li>ECMA-262- ECMAScript® language specification</li>
+                <li>TC32</li>
+  
+            </ul>
+            <p>TC32 stages</p>
+            <ul>              
+                <li>Finished Proposals</li>
+                <li>Active Proposals</li>
+                <li>Stage 1 Proposals</li>
+                <li>Stage 0 Proposals</li>
+                <li>Inactive Proposals</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h1>ECMAScript Editions</h1>
+            <ul>
+                <li>ES1 ECMAScript 1 (1997) First edition</li>
+                <li>ES2 ECMAScript 2 (1998) Editorial changes</li>
+                <li>ES3 ECMAScript 3 (1999) Added regular expressions, try/catch</li>
+                <li>ES4 ECMAScript 4 Never released</li>
+                <li>ES5 ECMAScript 5 (2009) Added "strict mode", JSON support</li>
+                <li>ES6 ECMAScript 2015 Added let and const, default parameter values e.t.c</li>
+                <li>Current 11th edition, June 2020</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>Variables</h3>
+            <p>A variable is a “named storage” for data. We can use variables to store goodies, visitors, and other data.</p>
+            <p>To create a variable in JavaScript, use the.</p>
+            <ul>
+                <li>var - is an old-school variable declaration</li>
+                <li>let - is a modern variable declaration</li>
+                <li>const-  is like let, but the value of the variable can’t be changed.</li>
+            </ul>
+
+        </div>
+        <div class="step slide">
+            <h3>Variables</h3>
+            <pre>
+                <code>
+                    let message;
+                    message = 'Hello'; // store the string
+                    const BIRTHDAY = '18.04.1982';
+                    const COLOR_RED = "#F00";
+                    let имя = 'имя';
+                    let 我 = 'Name';
+                    var num = 5;
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h1>Data types</h1>
+            <ul>
+                <li>Number, BigInt</li>
+                <li>String</li>
+                <li>Boolean (logical type)</li>
+                <li>null</li>
+                <li>undefined</li>
+                <li>Symbols</li>
+                <li>Objects (reference type)</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h1>The typeof operator</h1>
+            <pre>
+                <code>
+                    typeof undefined // "undefined"
+                    typeof 0 // "number"
+                    typeof 10n // "bigint"
+                    typeof true // "boolean"
+                    typeof "foo" // "string"
+                    typeof Symbol("id") // "symbol"
+                    typeof Math // "object"  (1)
+                    typeof null // "object"  (2)
+                    typeof alert // "function"  (3)
+                </code>
+            </pre>
+        </div>
+
+        <div id="overview" class="step" data-x="4500" data-y="1500" data-scale="10" style="pointer-events: none;">
+        </div>
+    </div>
+    <div id="impress-toolbar"></div>
+
+    <script type="text/javascript" src="./js/highlight.pack.js"></script>
+    <script type="text/javascript" src="./js/mermaid.min.js"></script>
+    <script type="text/javascript" src="./js/markdown.js"></script>
+    <script type="text/javascript" src="./js/MathJax.js"></script>
+    <script type="text/javascript" src="./js/impress.js"></script>
+    <script>
+        impress().init();
+    </script>
+
+</body>
+
+</html>

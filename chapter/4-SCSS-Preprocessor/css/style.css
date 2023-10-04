@@ -1,0 +1,18 @@
+.full-width-img-content {
+    margin: auto;
+    display: flex;
+}
+.full-width-img-content img {
+    width: 90%;
+    margin: auto;
+    text-align: center;
+}
+
+.features-content h2 {
+    margin: 0;
+    
+}
+
+.features-content li {
+    font-size: 40px 
+}

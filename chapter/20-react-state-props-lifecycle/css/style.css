@@ -1,0 +1,67 @@
+.html-title-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.html-title-content img {
+    width: 80px;
+}
+.what-we-need {
+    display: flex;
+    justify-content: space-around;
+}
+.what-we-need h5 {
+    text-align: center;
+}
+
+.html-syntax, .tag-attributes, .html-semantic-tags {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.doctype-content img, .tag-attributes img{
+    width: 100%;
+}
+.html-semantic-tags img {
+    width: 30%;
+}
+
+.html-element-list-content div {
+    display: flex;
+}
+
+
+.task-img-content {
+    display: flex;
+    justify-content: center;
+}
+
+
+
+.full-width-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.full-width-img img{
+    width: 90%;
+}
+
+.brands-opted {
+    display: flex;
+    justify-content: space-between;
+}
+.brands-opted h4 {
+    text-align: center;
+}
+
+.react-icon-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.react-icon-content img {
+    width: 64px;
+    height: 64px;
+}

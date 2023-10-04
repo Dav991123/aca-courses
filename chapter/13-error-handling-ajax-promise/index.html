@@ -1,0 +1,907 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>DOM Events</title>
+    <meta name="description" content="Simple example impress.js slide show" />
+    <meta name="author" content="Henrik Ingo" />
+    <link rel="stylesheet" href="./css/github.css">
+    <link rel="stylesheet" href="./css/mermaid.forest.css">
+    <link href="./css/impress-common.css" rel="stylesheet" />
+    <link href="./css/classic-slides.css" rel="stylesheet" />
+</head>
+
+<body class="impress-not-supported">
+    <div id="impress" data-transition-duration="1000" data-width="1920" data-height="1080" data-max-scale="3" data-min-scale="0" data-perspective="1000">
+        <div class="step slide title" data-x="-2200" data-y="-3000">
+            <h1>Chapter 13 Error Handling and Debugging</h1>
+            <br><br><br><br><br>
+            <ul>
+                <li>Understanding browser error reporting</li>
+                <li>Handling errors</li>
+                <li>Debugging JavaScript code</li>
+            </ul>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h3>Error Handling</h3>
+            <p>JavaScript has traditionally been known as one of the most difficult programming languages to debug because of its dynamic nature and years without proper development tools. Errors typically resulted in confusing browser messages such as “object expected” that provided little or no contextual information. The third edition of ECMAScript aimed to improve this situation, introducing the  try-catch and throw statements</p>
+            <p>JavaScript debuggers and debugging tools began appearing for web browsers. By 2008, most web browsers supported some JavaScript debugging capabilities.</p>
+        </div>
+        <div class="step slide">
+            <h3>ERROR HANDLING</h3>
+            <p>Error handling has slowly been adopted on the browser side of web applications even though it is just as important. An important fact to understand is that most people who use the Web are not technically savvy — most don’t even fully comprehend what a web browser is, let alone which one they’re using.  each browser behaves a little bit differently when a JavaScript error occurs. </p>
+            <p>In the best case, the user has no idea what happened and will try again; in the worst case, the user gets incredibly annoyed and never comes back. Having a good error-handling strategy keep your users .</p>
+        </div>
+        <div class="step slide">
+            <h3>The try-catch Statement</h3>
+            <p>ECMA-262, third edition, introduced the try-catch statement as a way to handle exceptions in JavaScript.</p>
+            <p>Any code that might possibly throw an error should be placed in the try portion of the statement, and the code to handle the error is placed in the catch portion</p>
+            <pre>
+                <code>
+                    try {
+                        window.someNonexistentFunction();
+                    } catch (error){
+                        alert(“An error happened!”);
+                    }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>The try-catch Statement</h3>
+            <p>If an error occurs at any point in the try portion of the statement, code execution immediately exits and resumes in the catch portion. The catch portion of the statement receives an object containing information about the error that occurred. Unlike other languages, you must define a name for the error object even if you don’t intend to use it. The exact information available on this object varies from browser to browser but contains, at a minimum, a message property that holds the error message.</p>
+            <pre>
+                <code>
+                try {
+                    window.someNonexistentFunction();
+                } catch (error){
+                    alert(error.message);
+                }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>The finally Clause</h3>
+            <p>The optional finally clause of the try-catch statement always runs its code no matter what. If the code in the try portion runs completely, the finally clause executes; if there is an error and the catch portion executes, the finally portion still executes. There is literally nothing that can be done in the try or catch portion of the statement to prevent the code in finally from executing, which includes using a return statement.</p>
+            <pre>
+                <code>
+                try {
+                    return 2;
+                } catch (error){
+                    return 1;
+                } finally {
+                    return 0;
+                }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Error Types</h3>
+            <p>Each error type has a corresponding object type that is thrown when an error occurs. ECMA-262 defines the following seven error types.</p>
+            <ul>
+                <li>Error, EvalError</li>
+                <li>RangeError</li>
+                <li>ReferenceError</li>
+                <li>SyntaxError</li>
+                <li>TypeError</li>
+                <li>URIError</li>
+                <li>AggregateError</li>
+                <li>InternalError</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>The Error type</h3>
+            <p>The Error type is the base type from which all other error types inherit. As a result of this, all error types share the same properties (the only methods on error objects are the default object methods). An error of type Error is rarely, if ever, thrown by a browser; it is provided mainly for developers to throw custom errors.</p>
+            <pre>
+                <code>
+                try {
+                  throw new Error('Whoops!')
+                } catch (e) {
+                  console.error(e.name + ': ' + e.message)
+                }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>The EvalError</h3>
+            <p>The EvalError object indicates an error regarding the global eval() function. This exception is not thrown by JavaScript anymore, however the EvalError object remains for compatibility.</p>
+            <pre>
+                <code>
+                new eval(); //throws EvalError in old ECMAScript versions
+                eval = foo; //throws EvalError in old ECMAScript versions
+
+                try {
+                  throw new EvalError('Whoops!')
+                } catch (e) {
+                  console.log(e instanceof EvalError); // true
+                  console.log(e.name);                 // "EvalError"
+                  console.error(e.name + ': ' + e.message)
+                }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>The RangeError</h3>
+            <p>A RangeError occurs when a number is outside the bounds of its range. For example, this error may occur when an attempt is made to defi ne an array with an unsupported number of items, such as –20 or Number.MAX_VALUE</p>
+            <pre>
+                <code>
+                const items1 = new Array(-20); //throws RangeError
+                const items2 = new Array(Number.MAX_VALUE); //throws RangeError
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Using RangeError</h3>
+            <pre>
+                <code>
+                function check(n, value) {
+                    if( !(n >= -500 && n <= 500) ) {
+                        throw new RangeError("The argument must be between -500 and 500.")
+                    }
+                    if(["apple", "banana"].includes(value) === false) {
+                        throw new RangeError('The argument must be an "apple" or "banana"')
+                    }
+                }
+                try { check(2000, 'carrot') }
+                catch(error) {
+                    if (error instanceof RangeError) {
+                        // Handle the error
+                    }
+                }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>The ReferenceError</h3>
+            <p>The ReferenceError type is used when an object is expected. This type of error typically occurs when attempting to access a variable that doesn’t exist</p>
+            <pre>
+                <code>
+                    const obj = x; //throws ReferenceError when x isn’t declared
+                    try {
+                      let a = undefinedVariable;
+                    } catch (e) {
+                      console.log(e instanceof ReferenceError)  // true
+                      console.log(e.message) // "undefinedVariable is not defined"
+                      console.log(e.name)// "ReferenceError"
+                    }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>The SyntaxError</h3>
+            <p>A SyntaxError object is thrown most often when there is a syntax error in a JavaScript string that is passed to eval() </p>
+            <p>Outside of using eval() , the SyntaxError type is rarely used, because <b>syntax errors occurring in JavaScript code stop execution immediately.</b></p>
+            <p>It is thrown when the JavaScript engine encounters tokens or token order that does not conform to the syntax of the language when parsing code</p>
+
+        </div>
+        <div class="step slide">
+            <h3>The SyntaxError</h3>
+            <pre>
+                <code>
+                    eval(“a ++ b”); //throws SyntaxError
+                    try {
+                      throw new SyntaxError('Hello');
+                    } catch (e) {
+                      console.error(e instanceof SyntaxError); // true
+                      console.error(e.message); // Hello
+                      console.error(e.name); // SyntaxError
+                    } 
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>The TypeError</h3>
+            <p>The TypeError type is the most used in JavaScript and occurs when a variable is of an unexpected type or an attempt is made to access a nonexistent method.</p>
+            <p>A TypeError may be thrown when:</p>
+            <ul>
+                <li>an operand or argument passed to a function is incompatible with the type expected by that operator or function</li>
+                <li>when attempting to modify a value that cannot be changed</li>
+                <li>when attempting to use a value in an inappropriate way.</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>The TypeError</h3>
+            <pre>
+                <code>
+                try {
+                  null.f()
+                } catch (e) {
+                  console.log(e instanceof TypeError) // true
+                  console.log(e.message) // "null has no properties"
+                  console.log(e.name) // "TypeError"
+                }
+                try {
+                  throw new TypeError('Hello', "someFile.js", 10)
+                } catch (e) {
+                  console.log(e instanceof TypeError) // true
+                  console.log(e.message) // "Hello"
+                  console.log(e.name) // "TypeError"
+                }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>The URIError</h3>
+            <p>The  URIError error occurs  only when using the encodeURI() or  decodeURI() with a malformed URI.</p>
+            <pre>
+                <code>
+                try { decodeURIComponent('%') } 
+                catch (e) {
+                  console.log(e instanceof URIError) // true
+                  console.log(e.message) // "malformed URI sequence"
+                  console.log(e.name) // "URIError"
+                }
+                try { throw new URIError('Hello') } 
+                catch (e) {
+                  console.log(e instanceof URIError) // true
+                  console.log(e.message) // "Hello"
+                  console.log(e.name) // "URIError"
+                }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>The AggregateError</h3>
+            <p>The AggregateError object represents an error when several errors need to be wrapped in a single error. It is thrown when multiple errors need to be reported by an operation, for example by Promise.any(), when all promises passed to it reject.</p>
+            <pre>
+                <code>
+                Promise.any([
+                  Promise.reject(new Error("some error")),
+                ]).catch(e => {
+                  console.log(e instanceof AggregateError); // true
+                  console.log(e.message); // "All Promises rejected"
+                  console.log(e.name); // "AggregateError"]
+                });
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>The InternalError</h3>
+            <p>The InternalError object indicates an error that occurred internally in the JavaScript engine.</p>
+            <ul>
+                <li>too many switch cases</li>
+                <li>too many parentheses in regular expression</li>
+                <li>array initializer too large</li>
+                <li>too much recursion</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>The InternalError</h3>
+            <pre>
+                <code>
+                function loop(x) {
+                  if (x >= 1000000000000)
+                    return;
+                  loop(x + 1);
+                }
+                loop(0); // InternalError: too much recursion
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Usage of try-catch</h3>
+            <p>When an error occurs within a try-catch statement, the browser considers the error to have been handled, and so it won’t report it . The try-catch statement allows you to implement your own error-handling mechanism for specifi c error types. The try-catch statement is best used where an error might occur that is out of your control. For example, if you are using a function that is part of a larger JavaScript library, that function may throw errors either purposefully or by mistake.</p>
+        </div>
+        <div class="step slide">
+            <h3>Throwing Errors</h3>
+            <p>A companion to the try-catch statement is the throw operator, which can be used to throw custom errors at any point in time. The throw operator must be used with a value but places no limitation on the type of value. All of the following lines are legal:</p>
+            <pre>
+                <code>
+                    throw 12345;
+                    throw “Hello world!”;
+                    throw true;
+                    throw { name: “JavaScript”};
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Throwing Errors</h3>
+            <p>Browser errors can be more accurately simulated by using one of the built-in error types. Each error type’s constructor accepts a single argument, which is the exact error message. This code throws a generic error with a custom error message. The error is handled by the browser as if it were generated by the browser itself, meaning that it is reported by the browser in the usual way and your custom error message is displayed.</p>
+            <pre>
+                <code>
+                    throw new Error(“Something bad happened.”);
+                    throw new ReferenceError(“You didn’t cite your references properly.”);
+                    throw new SyntaxError(“I don’t like your syntax.”);
+                    throw new TypeError(“What type of variable do you take me for?”);
+                    throw new RangeError(“Sorry, you just don’t have the range.”);
+                    throw new EvalError(“That doesn’t evaluate.”);
+                    throw new URIError(“Uri, is that you?”);
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Custom Errors</h3>
+            <p>You can also create custom error types by inheriting from Error using prototype chaining . You should provide both a name property and a message property on your error type. Custom error types that are inherited from Error are treated just like any other error by the browser. Creating custom error types is helpful when you will be catching the errors that you throw and need to decipher them from browser-generated errors.</p>
+            <pre>
+                <code>
+                function CustomError(message){
+                    this.name = “CustomError”; this.message = message;
+                }
+                CustomError.prototype = new Error();
+                throw new CustomError(“My message”);
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>The error Event</h3>
+            <p>Any error that is not handled by a try-catch causes the error event to fi re on the window object. This event was one of the fi rst supported by web browsers. An onerror event handler doesn’t create an event object in any browser, instead, it receives three arguments: the error message, the URL on which the error occurred, and the line number. You can prevent the default browser error reporting by returning false</p>
+            <pre>
+                <code>
+                window.onerror = function(message, url, line){
+                    alert(message);
+                    return false;
+                };
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Error Handling</h3>
+             <img src="images/error_handling.png" class='img w1000' />
+        </div>
+        <div class="step slide">
+            <h3>DEBUGGING TECHNIQUES</h3>
+            <p>The most common debugging technique was to insert alerts throughout the code in question, which was both tedious, because it required cleanup after the code was debugged, and annoying if an alert was mistakenly left in code that was used in a production environment. Alerts are no longer recommended for debugging purposes, because several other, more elegant solutions are available.</p>
+            <pre>
+                <code>
+                window.onerror = function(message, url, line){
+                    alert(message);
+                    return false;
+                };
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Logging Messages to a Console</h3>
+            <p>Internet Explorer 8+, Firefox, Opera, Chrome, and Safari all have JavaScript consoles that can be used to view JavaScript errors. All three also allow you to write directly to the console from code.</p>
+            <ul>
+                <li>error(message) — Logs an error message to the console</li>
+                <li>info(message) — Logs an informational message to the console</li>
+                <li>log(message) — Logs a general message to the console</li>
+                <li>warn(message) — Logs a warning message to the console</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <p>Error messages contain a red icon, whereas warnings contain a yellow icon. Console messages may be used,</p>
+            <pre>
+                <code>
+                function sum(num1, num2){
+                    console.log(“Entering sum(), arguments are “ + num1 + “,” + num2);
+                    console.log(“Before calculation”);
+                    const result = num1 + num2;
+                    console.log(“After calculation”);
+                    console.log(“Exiting sum()”);
+                    return result;
+                }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>console object</h3>
+            <p>The console object provides access to the browser's debugging console . The specifics of how it works varies from browser to browser, but there is a de facto set of features that are typically provided. The console object can be accessed from any global object. Window on browsing scopes. It's exposed as Window.console, and can be referenced as console.</p>
+        </div>
+        <div class="step slide">
+            <h3>console Methods</h3>
+            <ul>
+                <li>console.assert() Log a message and stack trace to console if the first argument is false.</li>
+                <li>console.clear() Clear the console.</li>
+                <li>console.count() Log the number of times this line has been called with the given label.</li>
+                <li>console.debug() Outputs a message to the console with the log level debug.</li>
+                <li>console.error() Outputs an error message. You may use string substitution and additional arguments with this method.</li>
+                <li>console.dir() Displays an interactive listing of the properties of a specified JavaScript object.</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>console Methods</h3>
+            <ul>
+                <li>console.group() console.groupEnd() Creates a new inline group, indenting all following output by another level. To move back out a level, call groupEnd().</li>
+                <li>console.info() Informative logging of information. You may use string substitution and additional arguments with this method.</li>
+                <li>console.log() For general output of logging information. You may use string substitution and additional arguments with this method</li>
+                <li>console.table() Displays tabular data as a table.</li>
+                <li>console.timeEnd() Stops the specified timer and logs the elapsed time in milliseconds since it started</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>console Methods</h3>
+            <pre>
+                <code>
+                const someObject = { str: "Some text", id: 5 };
+                console.log(someObject);
+                console.info("My first car was a", car");
+                console.log("This is %cMy stylish message", "color: yellow; font-style: italic; 
+                background-color: blue;padding: 2px");
+
+                console.log("This is the outer level");
+                console.group("First group");
+                console.log("In the first group");
+                console.group("Second group");
+                console.log("In the second group");
+                console.warn("Still in the second group")
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>JSON</h3>
+            <ul>
+                <li>Understanding JSON syntax</li>
+                <li>JSON parsing</li>
+                <li>JSON serialization</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>JSON</h3>
+            <p>Douglas Crockford fi rst specifi ed JavaScript Object Notation (JSON) as IETF RFC 4627 in 2006 even though it was in use as early as 2001. JSON is a strict subset of JavaScript, making use of several patterns found in JavaScript to represent structured data</p>
+            <p>The most important thing to understand about JSON is that it is a data format, not a programming language. JSON is not a part of JavaScript even though they share syntax. JSON is also not solely used by JavaScript, since it is a data format. There are parsers and serializers available in many programming languages</p>
+        </div>
+        <div class="step slide">
+            <h3>JSON Syntax</h3>
+            <p>JSON syntax allows the representation of three types of values</p>
+            <ul>
+                <li>Simple Values — Strings, numbers, Booleans, and null can all be represented in JSON using the same syntax as JavaScript. The special value undefined is not supported.</li>
+                <li>Objects — The fi rst complex data type, objects represent ordered key-value pairs. Each value may be a primitive type or a complex type</li>
+                <li>Arrays — The second complex data type, arrays represent an ordered list of values that are accessible via a numeric index. The values may be of any type, including simple values, objects, and even other arrays.</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>JSON</h3>
+            <p>Objects are represented using a slight modifi cation of object literal notation. Object literals in JavaScript look like this:</p>
+            <p>The JSON representation of this same object is then:</p>
+            <pre>
+                <code>
+                    const object = {
+                        “name”: 'Maximus',
+                        “age”: 29
+                    };
+                    {
+                        “name”: 'Maximus',
+                        “age”: 29
+                    }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>JSON and javascript objects</h3>
+            <p>The value can be any simple or complex value, allowing you to embed objects within objects</p>
+            <pre>
+                <code>
+                {
+                    “name”: 'Maxiums',
+                    “age”: 29,
+                    “school”: {
+                        “name”: “Merrimack College”,
+                        “location”: “North Andover, MA”
+                    }
+                }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>JSON and JavaScript Array</h3>
+            <pre>
+                <code>
+                    [
+                        {
+                            “title”: “Professional JavaScript”,
+                            “authors”: [“Name”],
+                            edition: 3, year: 2011
+                        },
+                        {
+                            “title”: “Professional JavaScript”,
+                            “authors”: [“Name”],
+                            edition: 2, year: 2009
+                        }
+                    ]
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>PARSING AND SERIALIZATION</h3>
+            <p>JSON’s rise to popularity was not necessarily because it used familiar syntax. More so, it was because the data could be parsed into a usable object in JavaScript. ECMAScript 5 formalized JSON parsing under a native global called JSON. The JSON object has two methods: stringify() and parse() .In simple usage, these methods serialize JavaScript objects into a JSON string and parse JSON into a native JavaScript value, respectively</p>
+        </div>
+        <div class="step slide">
+            <h3>JSON.stringify</h3>
+            <p>JSON.stringify() outputs a JSON string without any extra white space or indentation, so the value stored in jsonText</p>
+            <pre>
+                <code>
+                    const book = {
+                        title: “Professional JavaScript”,
+                        authors: [“Name”],
+                        edition: 3,
+                        year: 2011
+                    };
+                    const jsonText = JSON.stringify(book);
+                    const jsonText1 = JSON.stringify(book, [“title”, “edition”]);
+                    {“title”:”Professional JavaScript”,”authors”:[“Name”],”edition”:3, “year”:2011}
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>JSON.parse</h3>
+            <p>An error is thrown if the text passed into JSON.parse() is not valid JSON.</p>
+            <p>A JSON string can be passed directly into JSON.parse() and it creates an appropriate JavaScript value. For example, you can create an object similar to the book object using this code:</p>
+            <pre>
+                <code>
+                    const jsonText = {“title”:”Professional JavaScript”,
+                        ”authors”:[“Name”],”edition”:3, “year”:2011};
+
+                    const book = JSON.parse(jsonText);
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>The toJSON() Method</h3>
+            <p>Sometimes objects need custom JSON serialization above and beyond what JSON.stringify() can do. In those cases, you can add a toJSON() method to the object and have it return the proper JSON representation for itself.</p>
+            <pre>
+                <code>
+                    const book = {
+                        “title”: “Professional JavaScript”,
+                        “authors”: [ 'name' ],
+                        edition: 3,
+                        year: 2011,
+                        toJSON: function(){
+                            return this.title;
+                        }
+                    };
+                    const jsonText = JSON.stringify(book);
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Parsing Options</h3>
+            <p>The JSON.parse() method also accepts an additional argument, which is a function that is called on each key-value pair.</p>
+            <pre>
+                <code>
+                const bookCopy = JSON.parse(jsonText, function(key, value){
+                    if (key == “releaseDate”){
+                        return new Date(value);
+                    } else {
+                        return value;
+                    }
+                });
+                alert(bookCopy.releaseDate.getFullYear());
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Ajax</h3>
+            <ul>
+                <li>Using the XMLHttpRequest object</li>
+                <li>Working with XMLHttpRequest events</li>
+                <li>Cross-domain Ajax restrictions</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>Ajax</h3>
+            <p>In 2005, Jesse James Garrett penned an online article titled “Ajax: A New Approach to Web Applications”. The technique consisted of making server requests for additional data without unloading the web page, resulting in a better user experience. The key technology pushing Ajax forward was the XMLHttpRequest (XHR) object, fi rst invented by Microsoft and then duplicated by other browser vendors. Prior to the introduction of XHR, Ajax-style communication had to be accomplished through a number of hacks, mostly using hidden frames or iframes.</p>
+        </div>
+        <div class="step slide">
+            <h3>THE XMLHttpRequest OBJECT</h3>
+            <p>Internet Explorer 5 was the fi rst browser to introduce the XHR object. It did so through the use of an ActiveX object included as part of the MSXML library. As such, three versions of the XHR object may be used in the browser</p>
+            <p>XHR object that can be created using the XMLHttpRequest constructor as follows:</p>
+            <pre>
+                <code>
+                    const xhr = new XMLHttpRequest();
+                </code>
+            </pre>
+        </div>
+        <div  class="step slide">
+            <h3>XHR Usage</h3>
+            <p>To begin using an XHR object, you will fi rst call the method open() , which accepts three arguments: the type of request to be sent (“get” , “post” , and so on), the URL for the request, and a Boolean value indicating if the request should be sent asynchronously.</p>
+            <p>To send the specifi ed request, you must call the send() method</p>
+            <pre>
+                <code>
+                    const xhr = new XMLHttpRequest();
+                    xhr.open(“get”, “example.php”, false);
+                    xhr.send(null);
+                </code>
+            </pre>
+        </div>
+        <div  class="step slide">
+            <h3>XHR Usage</h3>
+            <p>Since this request is synchronous, the JavaScript code will wait for the response to return before continuing execution. When a response is received, the XHR object properties are fi lled with data. The relevant properties are as follows:</p>
+            <ul>
+                <li>responseText — The text that was returned as the body of the response.</li>
+                <li>responseXML — Contains an XML DOM document with the response data if the response has a content type of “text/xml” or “application/xml” .</li>
+                <li>status — The HTTP status of the response.</li>
+                <li>statusText — The description of the HTTP status</li>
+            </ul>
+        </div>
+        <div  class="step slide">
+            <h3>XHR Usage</h3>
+            <p>You can cancel an asynchronous request before a response is received by calling the abort() method</p>
+            <pre>
+                <code>
+                    const xhr = new XMLHttpRequest();
+                    xhr.open(“get”, “example.txt”, false);
+                    xhr.send(null);
+                    if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
+                        alert(xhr.responseText);
+                    } else {
+                        alert(“Request was unsuccessful: “ + xhr.status);
+                    }
+                    xhr.abort();
+                </code>
+            </pre>
+        </div>
+        <div  class="step slide">
+            <h3>XHR State</h3>
+            <p>The XHR object has a readyState property that indicates what phase of the request/ response cycle is currently active.</p>
+            <ul>
+                <li>0 — Uninitialized. The open() method hasn’t been called yet.</li>
+                <li>1 — Open. The open() method has been called but send() has not been called.</li>
+                <li>2 — Sent. The send() method has been called but no response has been received.</li>
+                <li>3 — Receiving. Some response data has been retrieved.</li>
+                <li>4 — Complete. All of the response data has been retrieved and is available</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>XHR Usage</h3>
+            <p>Whenever the readyState changes from one value to another, the readystatechange event is fired. You can use this opportunity to check the value of readyState .</p>
+            <pre>
+                <code>
+                const xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function(){
+                    if (xhr.readyState == 4){
+                        if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
+                            alert(xhr.responseText);
+                        } else {
+                            alert(“Request was unsuccessful: “ + xhr.status);
+                        }
+                    }
+                };
+                xhr.open(“get”, “example.txt”, true);
+                xhr.send(null);
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>GET Requests</h3>
+            <p>The most common type of request to execute is a GET, which is typically made when the server is being queried for some sort of information. If necessary, query-string arguments can be appended to the end of the URL to pass information to the server</p>
+            <pre>
+                <code>
+                    const xhr = new XMLHttpRequest();
+                    xhr.open(“get”, “example.php?name1=value1&name2=value2”, true);
+                    xhr.send(null);
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>POST Requests</h3>
+            <p>The second most frequent type of request is POST, which is typically used to send data to the server that should save data. Each POST request is expected to have data submitted as the body of the request, whereas GET requests traditionally do not. The body of a POST request can contain a very large amount of data, and that data can be in any format.</p>
+            <pre>
+                <code>
+                    const xhr = new XMLHttpRequest();
+                    xhr.open(“post”, “example.php”, true)
+                    xhr.send(null);
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>HTTP request methods</h3>
+            <ul>
+                <li>PUT - The PUT method replaces all current representations of the target resource with the request payload. </li>
+                <li>DELETE The DELETE method deletes the specified resource</li>
+                <li>PATCH The PATCH method is used to apply partial modifications to a resource.</li>
+                <li>OPTIONS The OPTIONS method is used to describe the communication options for the target resource.</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>Promises in ES6</h3>
+            <p>In cases where it is required to wait for an asynchronous operation to complete and then perform a task, JavaScript heavily relies on callbacks, allowing the code execution to proceed past the long-running task</p>
+            <p>While the concept is simple and easy to understand in theory, it can lead to some really confusing and difficult-to-follow code, especially in cases when it is needed to make a callback after a callback (nested callbacks), which is more often termed “Callback Hell.”</p>
+            <pre>
+                <code>
+                    x = getData();
+                    y = getMoreData(x);
+                    z = getMoreData(y);
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Callback Hell</h3>
+            <p>Prior to ES6, you could have asynchronously fetched x and then passed it as an argument to fetch y and similarly for z, using callbacks as follows:</p>
+            <pre>
+                <code>
+                    getData(function(x){
+                        getMoreData(x, function(y){
+                            getMoreData(y, function(z){
+                                ...
+                            });
+                        });
+                    });
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Promises in ES6</h3>
+            <p>ES6 has native support for promises. A promise is an object that is waiting for an asynchronous operation to complete, and when that operation completes, the promise is either fulfilled or rejected. A promise object can be any of these three states</p>
+            <ul>
+                <li>fulfilled – when the promise succeeds</li>
+                <li>rejected – when the promise fails</li>
+                <li>pending – when it’s neither fulfilled or rejected</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>Creating a Promise</h3>
+            <p>Promises are created using the new Promise() constructor that accepts an executor (a function) that takes two parameters:</p>
+            <ul>
+                <li>The first parameter (typically named resolve) is a function that is called with the future value when it's ready, that is, when the promise is fulfilled;</li>
+                <li>And the second parameter (typically named reject) is a function that is called to reject the promise if it can't resolve the future value</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>Creating a Promise</h3>
+            <p>The executor initiates some asynchronous work and then, once that completes, calls either the resolve or reject function to resolve the promise or else reject it if an error occurred.</p>
+            <pre>
+                <code>
+                    const p = new Promise((resolve, reject) => {
+                        if (/* some condition */) {
+                            resolve(/* some value */);  // fulfilled successfully
+                        } else {
+                            reject(/* some reason */);  // error, rejected
+                        }
+                    });
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Creating a Promise</h3>
+            <p>You can also create an immediately resolved promise using:</p>
+            <p>The second method (reject) is optional, and you can very well create a promise with only the resolve method, as demonstrated in the code snippet below where the promises are fulfilled and rejected, respectively:</p>
+            <pre>
+                <code>
+                    new Promise(resolve => resolve()) // promise is fulfilled
+                    new Promise((resolve, reject) => reject()) // promise is rejected
+                    const sayHello = Promise.resolve("hello!");
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Consuming a Promise with then() and catch()</h3>
+            <p>Once a promise is created, it can be passed around as a value, essentially representing a placeholder for a future value. This value can be consumed when the promise is fulfilled using .then() method</p>
+            <pre>
+                <code>
+                    const p = new Promise((resolve, reject) => resolve(42));
+                    p.then((val) => console.log(val)); // 42
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Creating a Promise</h3>
+            <p>Every promise must have a .then() method that actually takes two possible parameters. The first parameter is the function to be called when the promise is fulfilled and the second parameter is a function to be called if the promise is rejected as depicted</p>
+            <pre>
+                <code>
+                    const p = new Promise((resolve, reject) => resolve(42));
+                    p.then((value) => { console.log("Promise Fulfilled:", value) },
+                            (error) => { console.log("Promise Rejected: ", error) });
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Creating a Promise</h3>
+            <pre>
+                <code>
+                    const pizza = new Promise((resolve) => {
+                           console.log("Getting your pizza in 5 seconds...");
+                           setTimeout(function() {
+                                  resolve("Onion Pizza");
+                           }, 5000);
+                    });
+                    pizza.then(
+                        (item) => { console.log(`Order Received: ${item}`) },
+                        (error) => { console.log("Something went wrong with your pizza") }
+                    );
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Creating a Promise</h3>
+            <pre>
+                <code>
+                    const networkReq = new Promise((resolve, reject) => {
+                           reject("No Server Found");
+                    });
+                    networkReq.then(
+                           null,
+                           (error) => { console.log(error); }
+                    );
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Chaining of Promises</h3>
+            <p>ince .then() and .catch() always return a new promise, it is easy to chain promises with extreme control over how and where the errors are handled. Chaining promises allows asynchronous operations to be chained together</p>
+            <pre>
+                <code>
+                    const bond = new Promise((resolve, reject) => { resolve("Bond"); });
+                    bond.then((str) => `${str}, James ${str}`)
+                        .then((str) => `Hello, I’m ${str}!`)
+                        .then((str) => console.log(str));
+
+                    getPaymentFromUser
+                       .then(displayTransactionDetails)
+                       .then(queueTransactionEmail)
+                       .then(redirectToOrdersPage)
+                       .catch(logError);   
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Combining Promises with Promises.all</h3>
+            <p>Promise.all takes an array of promises (or any iterable) and returns a promise that resolves when all of the promises in the iterable argument have resolved, or rejects with the reason of the first passed promise that rejects.</p>
+            <pre>
+                <code>
+                    const p1 = Promise.resolve(3);
+                    const p2 = 42;
+                    const p3 = new Promise((resolve, reject) => {
+                          setTimeout(resolve, 100, "foo");
+                    });
+                    Promise.all([p1, p2, p3]).then(values => {
+                           console.log(values); // [3, 42, "foo"]
+                    });
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Promise Methods</h3>
+            <ul>
+                <li>Promise.allSettled(iterable) Wait until all promises have settled (each may resolve or reject).
+                <b>Returns a Promise</b> that resolves after all of the given promises have either resolved or rejected, with an array of objects that each describe the outcome of each promise.</li>
+                <li>Promise.any(iterable) Takes an iterable of Promise objects and, as soon as one of the promises in the iterable fulfills, returns a single promise that resolves with the value from that promise.</li>
+                <li>Promise.race(iterable) Wait until any of the promises is resolved or rejected. If the returned promise resolves, it is resolved with the value of the first promise in the iterable that resolved</li>
+            </ul>
+        </div>
+
+        <div class="step slide">
+            <h3>Using Fetch</h3>
+            <p>The Fetch API provides a JavaScript interface for accessing and manipulating parts of the HTTP pipeline, such as requests and responses. It also provides a global fetch() method that provides an easy, logical way to fetch resources asynchronously across the network. This kind of functionality was previously achieved using XMLHttpRequest.</p>
+            <pre>
+                <code>
+                    fetch('http://example.com/movies.json')
+                      .then(response => response.json())
+                      .then(data => console.log(data));
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Fetch example</h3>
+            <pre>
+                <code>
+                    // Example POST method implementation:
+                    function postData(url = '', data = {}) {
+                      fetch(url, {
+                        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                        mode: 'cors', // no-cors, *cors, same-origin
+                        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                        credentials: 'same-origin', // include, *same-origin, omit
+                        headers: {
+                          'Content-Type': 'application/json'
+                          // 'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: JSON.stringify(data) // body data type must match "Content-Type" header
+                      });
+                      return response.json(); // parses JSON response into native JavaScript objects
+                    }
+                </code>
+            </pre>
+        </div>
+
+
+
+        <div id="overview" class="step" data-x="4500" data-y="1500" data-scale="10" style="pointer-events: none;">
+        </div>
+    </div>
+    <div id="impress-toolbar"></div>
+
+    <script type="text/javascript" src="./js/highlight.pack.js"></script>
+    <script type="text/javascript" src="./js/mermaid.min.js"></script>
+    <script type="text/javascript" src="./js/markdown.js"></script>
+    <script type="text/javascript" src="./js/MathJax.js"></script>
+    <script type="text/javascript" src="./js/impress.js"></script>
+    <script>
+        impress().init();
+    </script>
+
+</body>
+
+</html>

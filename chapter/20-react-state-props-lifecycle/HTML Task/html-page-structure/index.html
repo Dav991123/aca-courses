@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>My WebSite</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" name="Davit Sargsyan">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My WebSite Description">
+</head>
+<body>
+    <header>
+        <h1>Enter Site Title</h1>
+    </header>
+
+    <article>
+        <small>
+           <u><i>Enter Site Slogan</i></u>
+        </small>
+        <p>
+            <strong>Lorem</strong> ipsum dolor sit amet consectetur adipisicing elit. 
+            Fuga, illum aut cupiditate provident voluptates officia 
+            totam qui dolores culpa laboriosam facere reprehenderit 
+            ea cumque ducimus distinctio dignissimos ratione quas autem.
+            <a href="">Read More</a>
+        </p>
+    </article>
+    <hr>
+
+    <section>
+        <div>
+            <h2><u>Ordered List</u></h2>
+            <ul>
+                <li>list item</li>
+                <li>list item</li>
+                <li>list item</li>
+                <li>list item</li>
+                <li>list item</li>
+            </ul>
+        </div>
+       
+        <div>
+            <h2><u>Unordered List</u></h2>
+            <ul>
+                <li>list item</li>
+                <li>list item</li>
+                <li>list item</li>
+                <li>list item</li>
+                <li>list item</li>
+            </ul>
+        </div>
+
+        <hr>
+        <pre>
+            function message() {
+                alert('Hello HTML')
+            }
+
+            message()
+        </pre>
+    </section>
+
+    <hr>
+
+    <details>
+        <summary>Details</summary>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+            Recusandae dicta necessitatibus praesentium quo nobis 
+            officia nihil ducimus ad inventore, exercitationem earum 
+            provident aperiam ratione eveniet omnis at veniam. Quia,
+             eligendi!
+        </p>
+    </details>
+    
+    <section>
+        <h2>HTML table 1</h2>
+        <table width="600" border="1">
+            <tr>
+                <th>Product ID</th>
+                <th>Product Name</th>
+                <th>Product Quality</th>
+                <th>Product Quantity</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Wheat</td>
+                <td>Good</td>
+                <td>200 Bags</td>
+            </tr>
+
+            <tr>
+                <td>2</td>
+                <td>Rice</td>
+                <td>Good</td>
+                <td>250 Bags</td>
+            </tr>
+
+            <tr>
+                <td>3</td>
+                <td>Sugar</td>
+                <td>Good</td>
+                <td>200 Bags</td>
+            </tr>
+        </table>
+    </section>
+
+
+    <section>
+        <h2>HTML table 2</h2>
+        <table width="600" border="1">
+            <tr>
+                <th>Heading1</th>
+                <th>Heading2</th>
+                <th>Heading3</th>
+                <th>Heading4</th>
+            </tr>
+
+            <tr>
+                <td rowspan="4">
+                    <img 
+                        width="350"
+                        src="./image/html-code.jpg" 
+                        alt=""
+                    >
+                </td>
+                <td colspan="3">Long row top</td>
+            </tr>
+
+            <tr>
+                <td>data</td>
+                <td>data</td>
+                <td>data</td>
+            </tr>
+
+            <tr>
+                <td>data</td>
+                <td colspan="2">marge 2 cols</td>
+            </tr>
+            <tr>
+                <td colspan="3">Long wor bottom</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>Coding</h2>
+        <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/j-3eArinB7E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+    </section>
+
+    <hr>
+    <form action="data.js" method="GET" name="register">
+        <form>
+            <table>
+                <tr>
+                    <td>Name :</td>
+                    <td>
+                        <input type="text" required placeholder="Name">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Password :</td>
+                    <td>
+                        <input type="password" required placeholder="Password">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Gender :</td>
+
+                    <td>
+                        <input type="radio" name="Gender"> Male
+                        <input type="radio" name="Gender"> Female
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Email :</td>
+                    <td>
+                        <input type="email" required placeholder="Email">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Phone no :</td>
+                    <td>
+                        <select>
+                            <option>+374</option>
+                            <option>978</option>
+                            <option>979</option>
+                            <option>973</option>
+                            <option>972</option>
+                            <option>974</option>
+                        </select>
+                        <input type="phone" placeholder="(xxx)">
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="Submit"></td>
+                </tr>
+            </table>
+           </form>
+    </form>
+    
+</body>
+</html>

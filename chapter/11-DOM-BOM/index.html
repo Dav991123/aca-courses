@@ -1,0 +1,714 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Classic Slides with impress.js | Simple example impress.js slide show | by Henrik Ingo @henrikingo</title>
+    <meta name="description" content="Simple example impress.js slide show" />
+    <meta name="author" content="Henrik Ingo" />
+    <link rel="stylesheet" href="./css/github.css">
+    <link rel="stylesheet" href="./css/mermaid.forest.css">
+    <link href="./css/impress-common.css" rel="stylesheet" />
+    <link href="./css/classic-slides.css" rel="stylesheet" />
+</head>
+
+<body class="impress-not-supported">
+    <div id="impress" data-transition-duration="1000" data-width="1920" data-height="1080" data-max-scale="3" data-min-scale="0" data-perspective="1000">
+        <div class="step slide title" data-x="-2200" data-y="-3000">
+            <h1>Chapter 11 DOM and BOM</h1>
+            <br><br><br><br>
+            <ul>
+                <li>The Browser Object Model</li>
+                <li>The Document Object Model</li>
+            </ul>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h3>The Browser Object Model (BOM)</h3>
+            <ul>
+                <li>Understanding the window object, the core of the BOM</li>
+                <li>Controlling windows, frames, and pop-ups</li>
+                <li>Page information from the location object</li>
+                <li>Using the navigator object to learn about the browser</li>
+            </ul>
+        </div>
+
+        <div class="step slide">
+            <h3>The Browser Object Model (BOM)</h3><br><br>
+            <img src="images/bom.jpg" class='img w1000' />
+        </div>
+
+        <div class="step slide">
+            <h1>The window object</h1>
+            <p>At the core of the BOM is the window object, which represents an instance of the browser. The window object serves a dual purpose in browsers, acting as the JavaScript interface to the browser window and the ECMAScript Global object. This means that every object, variable, and function defi ned in a web page uses window as its Global object.</p>
+        </div>
+
+        <div class="step slide">
+            <h1>The Global Scope</h1>
+            <p>Since the window object doubles as the ECMAScript Global object, all variables and functions declared globally become properties and methods of the window object.</p>
+            <pre>
+                <code>
+            var age = 29;                   let age = 29;
+            function sayAge(){              function sayAge(){
+                alert(this.age); //29           alert(this.age); //undefined
+            }                               }
+            alert(window.age); //29         alert(window.age); //undefined     
+            sayAge();                       sayAge();
+            window.sayAge(); //29           window.sayAge(); //undefined
+                </code>
+            </pre>
+        </div>
+
+        <div class="step slide">
+            <h1>The Global Scope</h1>
+            <p>Despite global variables becoming properties of the window object, there is a slight difference between defining a global variable and defi ning a property directly on window : global variables cannot be removed using the delete operator, while properties defi ned directly on window can.</p>
+            <pre>
+                <code>
+                //throws an error in IE < 9, returns false in all other browsers
+                delete window.age;
+                //throws an error in IE < 9, returns true in all other browsers
+                delete window.color; //returns true
+                alert(window.age);   //29
+                alert(window.color); //undefined
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Navigating and Opening Windows</h3>
+            <p>The window.open() method can be used both to navigate to a particular URL and to open a new browser window. This method accepts four arguments: the URL to load, the window target, a string of features, and a Boolean value indicating that the new page should take the place of the currently loaded page in the browser history.</p>
+            <pre>
+                <code>
+                //same as <a href=”http://www.wrox.com” target=”topFrame”></a>
+                window.open(“http://www.wrox.com/”, “topFrame”);
+                window.open(“http://www.wrox.com/”,”wroxWindow”,
+                “height=400,width=400,top=10,left=10,resizable=yes”);
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Intervals and Timeouts</h3>
+            <p>JavaScript execution in a browser is single-threaded, but does allow for the scheduling of code to run at specifi c points in time through the use of timeouts and intervals. Timeouts execute some code after a specifi ed amount of time, whereas intervals execute code repeatedly, waiting a specific amount of time in between each execution.</p>
+            <p>You set a timeout using the window ’s setTimeout() method, which accepts two arguments: the code to execute and the number of time (in milliseconds) to wait before attempting to execute the code. The fi rst argument can be either a string containing JavaScript code (as would be used with eval() ) or a function.</p>
+        </div>
+        <div class="step slide">
+            <h3>Intervals and Timeouts</h3>
+            <pre>
+                <code>
+                    setTimeout(“alert(‘Hello world!’) “, 1000);//avoid!
+                    //preferred
+                    setTimeout(function() {
+                        alert(“Hello world!”);
+                    }, 1000);
+
+                    setInterval(function() {
+                        console.log(“Hello world!”);
+                    }, 1000);
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>clearTimeout</h3>
+            <p>When setTimeout() is called, it returns a numeric ID for the timeout. The timeout ID is a unique identifi er for the scheduled code that can be used to cancel the timeout. To cancel a pending timeout, use the clearTimeout() method and pass in the timeout ID </p>
+            <pre>
+                <code> 
+                //set the timeout
+                const timeoutId = setTimeout(function() {
+                    alert(“Hello world!”);
+                }, 1000);
+                clearTimeout(timeoutId); //nevermind - cancel it
+                </code>
+
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>setInterval</h3>
+            <p>Intervals work in the same way as timeouts except that they execute the code repeatedly at specific time intervals until the interval is canceled or the page is unloaded. The setInterval() method lets you set up intervals, and it accepts the same arguments as setTimeout() : the code to execute (string or function) and the milliseconds to wait between executions</p>
+            <pre>
+                <code>
+                    setInterval(“alert(‘Hello world!’) “, 10000); //avoid!
+                    //preferred
+                    setInterval(function() {
+                        alert(“Hello world!”);
+                    }, 10000);
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <p>
+            The setInterval() method also returns an interval ID that can be used to cancel the interval at some point in the future. The clearInterval() method can be used with this ID to cancel all
+            pending intervals.
+            </p>
+            <pre>
+                <code>
+                let num = 0, max = 10, intervalId = null;
+                function incrementNumber() {
+                    num++;
+                    //if the max has been reached, cancel all pending executions
+                    if (num == max) {
+                        clearInterval(intervalId);
+                        alert(”Done”);
+                    }
+                }
+                intervalId = setInterval(incrementNumber, 500);
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>The Location Object</h3>
+            <p>One of the most useful BOM objects is location , which provides information about the document that is currently loaded in the window, as well as general navigation functionality</p>
+            <p>
+                window.location and document.location point to the same object. Not only does location know about the currently loaded document, but it also parses the URL into discrete segments that can be accessed via a series of properties.
+            </p>
+        </div>
+        <div class="step slide">
+            <h3>The Location Object</h3>
+            <img src="images/location.png" class='img w1000' />
+        </div>
+        <div class="step slide">
+            <h3>Manipulating the Location</h3>
+            <p>The browser location can be changed in a number of ways using the location object.</p>
+            <p>immediately starts the process of navigating to the new URL and makes an entry in the browser’s history stack.</p>
+            <p>Each time a property on location is changed, with the exception of hash , the page reloads with the new URL.</p>
+            <pre>
+                <code>
+                location.assign(“http://www.wrox.com”);
+                window.location = “http://www.wrox.com”;
+                location.href = “http://www.wrox.com”;
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Manipulating the Location</h3>
+            <p>Changing various properties on the location object can also modify the currently loaded page. The hash , search , hostname , pathname , and port properties can be set with new values that alter the current URL</p>
+            <pre>
+                <code>
+            //changes URL to “http://www.wrox.com/WileyCDA/#section1”
+            location.hash = “#section1”;
+            //changes URL to “http://www.wrox.com/WileyCDA/?q=javascript”
+            location.search = “?q=javascript”;
+            //changes URL to “http://www.yahoo.com/WileyCDA/”
+            location.hostname = “www.yahoo.com”;
+            //changes URL to “http://www.yahoo.com/mydir/”
+            location.pathname = “mydir”;
+            //changes URL to “http://www.yahoo.com:8080/WileyCDA/
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>The navigator object</h3>
+            <p>The navigator object is the standard for browser identifi cation on the client. Though some browsers offer alternate ways to provide the same or similar information (for example, window.clientInformation in Internet Explorer and window opera in Opera), the navigator object is common among all JavaScript-enabled web browsers.</p>
+            <p>The navigator object’s properties are typically used to determine the type of browser that is running a web page</p>
+        </div>
+
+        <div class="step slide">
+            <h3>The navigator object</h3>
+            <img src="images/navigator.png" class='img w800' />
+        </div>
+
+        <div class="step slide">
+            <h3>The screen object</h3>
+            <p>
+                The screen object (also a property of window ) is one of the few JavaScript objects that have little to no programmatic use; it is used purely as an indication of client capabilities. This object provides information about the client’s display outside the browser window, including information such as pixel width and height. Each browser provides different properties on the screen object.
+            </p>
+        </div>
+
+        <div class="step slide">
+            <h3>The screen object</h3>
+            <img src="images/screen.png" class='img w800' />
+        </div>
+
+        <div class="step slide">
+            <h3>The history object</h3>
+            <p>
+                The history object represents the user’s navigation history since the given window was first used. Because history is a property of window , each browser window, tab, and frame has its own history object relating specifi cally to that window object. For security reasons, it’s not possible to determine the URLs that the user has visited. It is possible, however, to navigate backwards and forwards through the list of places the user has been without knowing the exact URL
+            </p>
+        </div>
+        <div class="step slide">
+            <h3>The history object</h3>
+            <p>The go() method navigates through the user’s history in either direction, backward or forward.</p>
+            <p>This method accepts a single argument, which is an integer representing the number of pages to go backward or forward. A negative number moves backward in history (similar to clicking the browser’s Back button), and a positive number moves forward (similar to clicking the browser’s Forward button)</p>
+            <pre>
+                <code>
+                history.go(-1); //go back one page
+                history.go(1); //go forward one page
+                history.go(2); //go forward two pages
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>The history object</h3>
+            <p>Two shortcut methods, back() and forward() , may be used in place of go()</p>
+            <pre>
+                <code>
+                history.back(); //go back one page
+                history.forward(); //go forward one page
+                if (history.length == 0) {
+                    //this is the first page in the user’s window
+                }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h1>The Document Object Model</h1>
+            <ul>
+                <li>Understanding the DOM as a hierarchy of nodes</li>
+                <li>Working with the various node types</li>
+                <li>Coding the DOM around browser incompatibilities and gotchas</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h1>The Document Object Model</h1>
+            <p>The Document Object Model (DOM) is an application programming interface (API) for HTML and XML documents.</p>
+            <p>The DOM represents a document as a hierarchical tree of nodes, allowing developers to add, remove, and modify individual parts of the page</p>
+        </div>
+        <div class="step slide">
+            <h3>HIERARCHY OF NODES</h3>
+            <p>Any HTML or XML document can be represented as a hierarchy of nodes using the DOM.</p>
+            <p>Each node type has different characteristics, data, and methods, and each may have relationships with other nodes</p>
+            <pre>
+                <code>
+                    < html >
+                        < head >
+                            < title>Sample Page < /title>
+                        < /head>
+                        < body>
+                            < p>Hello World!< /p>
+                        < /body>
+                    < /html>
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>HIERARCHY OF NODES</h3>
+            <img src="images/dom.png" class='img w800' />
+        </div>
+        <div class="step slide">
+            <h3>The Node Type</h3>
+            <p>The Node interface is implemented in JavaScript as the Node type, which is accessible in all browsers except Internet Explorer. All node types inherit from Node in JavaScript, so all node types share the same basic properties and methods.</p>
+            <p>Every node has a nodeType property that indicates the type of node that it is. Node types are represented by one of the following 12 numeric constants on the Node type</p>
+        </div>
+        <div class="step slide">
+            <h3>Node Types</h3>
+            <ul>
+                <li>Node.ELEMENT_NODE Node.ATTRIBUTE_NODE</li>
+                <li>Node.TEXT_NODE</li>
+                <li>Node.CDATA_SECTION_NODE</li>
+                <li>Node.ENTITY_REFERENCE_NODE</li>
+                <li>Node.ENTITY_NODE</li>
+                <li>Node.PROCESSING_INSTRUCTION_NODE</li>
+                <li>Node.COMMENT_NODE</li>
+                <li>Node.DOCUMENT_NODE</li>
+                <li>Node.DOCUMENT_TYPE_NODE</li>
+                <li>Node.DOCUMENT_FRAGMENT_NODE</li>
+                <li>Node.NOTATION_NODE</li>
+            </ul>          
+        </div>
+        <div class="step slide">
+            <h3>Node Relationships</h3>
+            <p>All nodes in a document have relationships to other nodes. These relationships are described in terms of traditional family relationships as if the document tree were a family tree</p>
+            <p>In HTML, the < body> element is considered a child of the < html> element; likewise the < html> element is considered the parent of the < body> element. The < head> element is considered a sibling of the < body> element, because they both share the same immediate parent, the < html> element</p>
+        </div>
+        <div class="step slide">
+            <h3>Node Relationships</h3>
+            <p>Each node has a childNodes property containing a NodeList . A NodeList is an array-like object used to store an ordered list of nodes that are accessible by position</p>
+            <p>length property indicates the number of nodes in the NodeList at that time. It’s possible to convert NodeList objects into arrays using Array.from(nodeList)</p>
+            <pre>
+                <code>
+                const firstChild = someNode.childNodes[0];
+                const secondChild = someNode.childNodes.item(1);
+                const count = someNode.childNodes.length;
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Node Relationships</h3>
+            <p>Another relationship exists between a parent node and its fi rst and last child nodes. The firstChild and lastChild properties point to the fi rst and last node in the childNodes list, respectively. The value of someNode.firstChild is always equal to someNode.childNodes[0] , and the value of someNode.lastChild is always equal to someNode.childNodes[someNode.childNodes.length-1] . If there is only one child node, firstChild and lastChild point to the same node; if there are no children, then firstChild and lastChild are both null .</p>
+        </div>    
+        <div class="step slide">
+            <h3>Node Relationships</h3>
+            <p>childNodes property is really more of a convenience than a necessity, since it’s possible to reach any node in a document tree by simply using the relationship pointers. Another convenience method is hasChildNodes() , which returns true if the node has one or more child nodes and is more effi cient than querying the length of the childNodes list.</p>
+            <img src="images/nodes.png" class='img w800' />
+        </div>
+        <div class="step slide">
+            <h3>Manipulating Nodes</h3>
+            <p>Because all relationship pointers are read-only, several methods are available to manipulate nodes. The most often-used method is appendChild() , which adds a node to the end of the childNodes list</p>
+            <pre>
+                <code>
+                    const returnedNode = someNode.appendChild(newNode);
+                    alert(returnedNode == newNode); //true
+                    alert(someNode.lastChild == newNode);//true
+                    var returnedNode = someNode.appendChild(someNode.firstChild);
+                    alert(returnedNode == someNode.firstChild); //false
+                    alert(returnedNode == someNode.lastChild); //true
+                    returnedNode = someNode.insertBefore(newNode, null); //insert as last child
+                    //insert as the new first child
+                    returnedNode = someNode.insertBefore(newNode, someNode.firstChild); 
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Manipulating Nodes</h3>
+            <p>cloneNode() , which creates an exact clone of the node on which it’s called.The cloneNode() method accepts a single Boolean argument indicating whether to do a deep copy.</p>
+            <pre>
+                <code>
+                //replace first child
+                const returnedNode = someNode.replaceChild(newNode, someNode.firstChild);
+                //remove first child
+                const formerFirstChild = someNode.removeChild(someNode.firstChild);
+                //remove last child
+                const formerLastChild = someNode.removeChild(someNode.lastChild);
+                const deepList = myList.cloneNode(true);
+                alert(deepList.childNodes.length);
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Document Children</h3>
+            <p>DOM specifi cation states that the children of a Document node can be a DocumentType , Element , ProcessingInstruction , or Comment , there are two built-in shortcuts to child nodes. The first is the documentElement property, which always points to the < html> element in an HTML page</p>
+            <pre>
+                <code>
+                const html = document.documentElement; //get reference to < html>
+                alert(html === document.childNodes[0]); //true
+                alert(html === document.firstChild); //true
+                const body = document.body; //get reference to < body>
+                const doctype = document.doctype; //get reference to < !DOCTYPE>
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Document Information</h3>
+            <p>document object properties provide information about the web page that is loaded.</p>
+            <pre>
+                <code>
+                    const originalTitle = document.title //get the document title
+                    document.title = “New page title” //set the document title
+                    const url = document.URL; //get the complete URL
+                    const domain = document.domain; //get the domain
+                    const referrer = document.referrer //get the referrer
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Locating Elements</h3>
+            <p>The getElementById() method accepts a single argument — the ID of an element to retrieve — and returns the element if found, or null if an element with that ID doesn’t exist.</p>
+            <p>The getElementsByTagName() method is another commonly used method for retrieving element references. It accepts a single argument — the tag name of the elements to retrieve — and returns a NodeList containing zero or more elements. In HTML documents, this method returns an HTMLCollection object, which is very similar to a NodeList   </p>
+        </div>
+        <div class="step slide">
+            <h3>Locating Elements</h3>
+            <pre>
+                <code>
+            < img src=”myimage.gif” name=”myImage”>
+            < div id=”myDiv”>Some text< /div>
+            const div = document.getElementById(“myDiv”); //retrieve reference to the < div>
+
+            const images = document.getElementsByTagName(“img”);
+            alert(images.length); //output the number of images
+            alert(images[0].src); //output the src attribute of the first image
+            alert(images.item(0).src); //output the src attribute of the first image
+            const myImage = images.namedItem(“myImage”)
+            const myImage = images[“myImage”];
+            const allElements = document.getElementsByTagName(“*”);
+            const elements = document.getElementsByName(”myImage”);
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Special Collections</h3>
+            <p>The document object has several special collections. Each of these collections is an HTMLCollection object and provides faster access to common parts of the document</p>
+            <ul>
+                <li>document.anchors — Contains all < a> elements with a name attribute in the document.</li>
+                <li>document.forms — Contains all < form> elements in the document. The same as document.getElementsByTagName(“form”) .</li>
+                <li>document.images — Contains all < img> elements in the document. The same as document.getElementsByTagName(“img”) .</li>
+                <li>document.links — Contains all < a> elements with an href attribute in the document.</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>The Element Type</h3>
+            <p>The Element type represents an XML or HTML element, providing access to information such as its tag name, children, and attributes.</p>
+            <ul>
+                <li>nodeType is 1</li>
+                <li>nodeName is the element’s tag name</li>
+                <li>nodeValue is nul</li>
+                <li>parentNode may be a Document or Element</li>
+                <li>Child nodes may be Element , Text , Comment,ProcessingInstruction , CDATASection , or EntityReference  </li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>The Element Type</h3>
+            <pre>
+                <code>
+                    < div id=”myDiv”>< /div>
+                    const div = document.getElementById(“myDiv”);
+                    alert(div.tagName); //”DIV”
+                    alert(div.tagName == div.nodeName); //true
+                    if (element.tagName.toLowerCase() == “div”){ 
+                        //do something here
+                    }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Getting Attributes</h3>
+            <p>Each element may have zero or more attributes, which are typically used to give extra information about the particular element or its contents. The three primary DOM methods for working with attributes are getAttribute() , setAttribute() , and removeAttribute() .The getAttribute() method can also retrieve the value of custom attributes that aren’t part of the formal HTML language.</p>
+            <pre>
+                <code>
+                < div id='myDiv' class='bd' my_special_attribute=”hello!>< /div>
+                const div = document.getElementById(“myDiv”);
+                alert(div.getAttribute(“id”)); //”myDiv”
+                alert(div.getAttribute(“class”)); //”bd”
+                const value = div.getAttribute(“my_special_attribute”);
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Setting Attributes</h3>
+            <p>The sibling method to getAttribute() is setAttribute() , which accepts two arguments: the name of the attribute to set and the value to set it to. If the attribute already exists, setAttribute() replaces its value</p>
+            <pre>
+                <code>
+                    < div>< /div>
+                    div.setAttribute(“id”, “someOtherId”);
+                    div.setAttribute(“class”, “ft”);
+                    div.setAttribute(“title”, “Some other text”);
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Creating Elements</h3>
+            <p>New elements can be created by using the document.createElement() method. This method accepts a single argument, which is the tag name of the element to create.The element can be added to the document tree using appendChild() , insertBefore() , or replaceChild() .</p>
+            <pre>
+                <code>
+                    const div = document.createElement(“div”);
+                    div.id = “myNewDiv”;
+                    div.className = “box”;
+                    document.body.appendChild(div);
+                    const attr = document.createAttribute(“align”);
+                    attr.value = “left”;
+                    div.setAttributeNode(attr);
+                    alert(div.getAttribute(“align”)); //”left”
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Dynamic Scripts</h3>
+            <p>The < script> element is used to insert JavaScript code into the page, either using by the src attribute to include an external fi le or by including text inside the element itself. Dynamic scripts are those that don’t exist when the page is loaded but are included later by using the DOM.</p>
+            <pre>
+                <code>
+                < script type=”text/javascript” src=”client.js”>< /script>
+                const script = document.createElement(“script”);
+                script.type = “text/javascript”;
+                script.src = “client.js”;
+                script.text = “function sayHi(){alert(‘hi’);}”;
+                document.body.appendChild(script);
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Dynamic Styles</h3>
+            <p>CSS styles are included in HTML pages using one of two elements. The < link> element is used to include CSS from an external fi le, whereas the < style> element is used to specify inline styles. Similar to dynamic scripts, dynamic styles don’t exist on the page when it is loaded initiall</p>
+            <pre>
+                <code>
+                    < link rel=”stylesheet” type=”text/css” href=”styles.css”>
+                    const link = document.createElement(“link”);
+                    link.rel = “stylesheet”;
+                    link.type = “text/css”;
+                    link.href = “styles.css”;
+                    const head = document.getElementsByTagName(“head”)[0];
+                    head.appendChild(link)
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Using NodeLists</h3>
+            <pre>
+                <code>
+                    const divs = document.getElementsByTagName(“div”), div;
+                    for (let i = 0; i < divs.length; i++){
+                        p = document.createElement('p');
+                        p.textContent = 'some text';
+                        document.body.appendChild(p);
+                    }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>SELECTORS API</h3>
+            <p>One of the most popular capabilities of JavaScript libraries is the ability to retrieve a number of DOM elements matching a pattern specifi ed using CSS selectors.</p>
+            <p>The Selectors API ( www.w3.org/TR/selectors-api ) was started by the W3C to specify native support for CSS queries in browsers.</p>
+            <p>At the core of Selectors API Level 1 are two methods: querySelector() and querySelectorAll() . On a conforming browser, these methods are available on the Document type and on the Element type</p>
+        </div>
+        <div class="step slide">
+            <h3>The querySelector() Method</h3>
+            <p>The querySelector() method accepts a CSS query and returns the first descendant element that matches the pattern or null if there is no matching element</p>
+            <pre>
+                <code>
+                //get the body element
+                const body = document.querySelector(“body”);
+                //get the element with the ID “myDiv”
+                const myDiv = document.querySelector(“#myDiv”);
+                //get first element with a class of “selected”
+                const selected = document.querySelector(“.selected”);
+                //get first image with class of “button”
+                const img = document.body.querySelector(“img.button”)
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>The querySelectorAll() Method</h3>
+            <p>The querySelectorAll() method accepts the same single argument as querySelector() — the CSS query — but returns all matching nodes instead of just one. This method returns a static instance of NodeList.Any call to querySelectorAll() with a valid CSS query will return a NodeList object regardless of the number of matching elements; if there are no matches, the NodeList is empty.</p>
+            <pre>
+                <code>
+            //get all < em> elements in a < div> (similar to getElementsByTagName(“em”))
+            const ems = document.getElementById(“myDiv”).querySelectorAll(“em”);
+            //get all elements with class of “selected”
+            const selecteds = document.querySelectorAll(“.selected”);
+            //get all < strong> elements inside of < p> elements
+            const strongs = document.querySelectorAll(“p strong”);
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>ELEMENT TRAVERSAL</h3>
+            <p>This led to differences in behavior when using properties such as childNodes and firstChild . In an effort to equalize the differences while still remaining true to the DOM specifi cation, a new group of properties was defi ned in the Element Traversal ( www.w3.org/TR/ElementTraversal/ )</p>
+            <ul>
+                <li>childElementCount — Returns the number of child elements</li>
+                <li>firstElementChild — Points to the fi rst child that is an element</li>
+                <li>lastElementChild — Points to the last child that is an element.</li>
+                <li>previousElementSibling — Points to the previous sibling that is an element</li>
+                <li>nextElementSibling — Points to the next sibling that is an element</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>The getElementsByClassName() Method</h3>
+            <p>The getElementsByClassName() method accepts a single argument, which is a string containing one or more class names, and returns a NodeList containing all elements that have all of the specifi ed classes applied.</p>
+            <pre>
+                <code>
+        //get all elements with a class containing “username” and “current”, though it
+        //doesn’t matter if one is declared before the other
+        const allCurrentUsernames = document.getElementsByClassName(“username current”);
+        //get all elements with a class of “selected” that exist in myDiv’s subtree
+        const selected = document.getElementById(“myDiv”).getElementsByClassName(“selected”)
+                </code>
+            </pre>
+        </div>
+
+        <div class="step slide">
+            <h3>The classList Property</h3>
+            <p>In class name manipulation, the className property is used to add, remove, and replace class names.</p>
+            <p>HTML5 introduces a way to manipulate class names in a much simpler and safer manner through the addition of the classList property for all elements. The classList property is an instance of a new type of collection named DOMTokenList .</p>
+            <ul>
+                <li>add(value) — Adds the given string value to the list. If the value already exists, it will not be added.</li>
+                <li>contains(value) — Indicates if the given value exists in the list</li>
+                <li>remove(value) — Removes the given string value from the list.  </li>
+                <li>toggle(value) — If the value already exists in the list, it is removed</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>The classList Property</h3>
+            <pre>
+                <code>
+                    < div class=”bd user disabled”>...< /div>
+                    div.classList.remove(“disabled”);//remove the “disabled” class
+                    div.classList.add(“current”);//add the “current” class
+                    div.classList.toggle(“user”);//toggle the “user” class
+                    if (div.classList.contains(“bd”)) {
+                        //do something
+                    }
+                    for (var i=0, len=div.classList.length; i < len; i++){
+                        doSomething(div.classList[i]);
+                    }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Focus Management</h3>
+            <p>HTML5 adds functionality to aid with focus management in the DOM. The fi rst is document.activeElement , which always contains a pointer to the DOM element that currently has focus</p>
+            <pre>
+                <code>
+                    const button = document.getElementById(“myButton”);
+                    button.focus();
+                    alert(document.activeElement === button); //true
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Custom Data Attributes</h3>
+            <p>HTML5 allows elements to be specifi ed with nonstandard attributes prefi xed with data- in order to provide information that isn’t necessary to the rendering or semantic value of the element. These attributes can be added as desired and named anything, provided that the name begins with data- .</p>
+            <pre>
+                <code>
+                < div id=”myDiv” data-appId=”12345” data-myname=”Maximus”>< /div>
+                const div = document.getElementById(“myDiv”);
+                const appId = div.dataset.appId;
+                const myName = div.dataset.myname;
+                div.dataset.appId = 23456;//set the value
+                div.dataset.myname = ”Michael”;
+                if (div.dataset.myname) { //is there a ”myname” value?
+                    alert(”Hello, ” + div.dataset.myname);
+                }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>The innerHTML Property</h3>
+            <p>When used in read mode, innerHTML returns the HTML representing all of the child nodes, including elements, comments, and text nodes. When used in write mode, innerHTML completely replaces all of the child nodes in the element with a new DOM subtree based on the specified value.</p>
+            <pre>
+                <code>
+            < div id=”content”>Hello &amp; welcome, < b>&quot;reader&quot;!< /b>< /div>
+            const div = document.getElementById('content')
+            div.innerHTML = “Hello world!”;
+            div.innerHTML = “< script defer>alert(‘hi’);< /script>”;//won’t work
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>The children Property, contains() Method</h3>
+            <p>The children property is an HTMLCollection that contains only an element’s child nodes that are also elements.</p>
+            <p>The contains() method is called on the ancestor node from which the search should begin and accepts a single argument, which is the suspected descendant node. If the node exists as a descendant of the root node, the method returns true</p>
+            <pre>
+                <code>
+                    const childCount = element.children.length;
+                    const firstChild = element.children[0];
+                    alert(document.documentElement.contains(document.body));//true
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Scrolling</h3>
+            <p>As mentioned previously, scrolling is one area where specifi cations didn’t exist prior to HTML5.While scrollIntoView() was standardized in HTML5</p>
+            <ul>
+                <li>scrollIntoViewIfNeeded ( alignCenter ) — Scrolls the browser window or container element so that the element is visible in the viewport only if it’s not already visible; if the element is already visible in the viewport, this method does nothing</li>
+                <li>scrollByLines ( lineCount ) — Scrolls the contents of the element by the height of the given number of text lines, which may be positive or negative</li>
+                <li>scrollByPages ( pageCount ) — Scrolls the contents of the element by the height of a page, which is determined by the height of the element</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>Scrolling</h3>
+            <p>scrollIntoView() and scrollIntoViewIfNeeded() act on the element’s container, whereas scrollByLines() and scrollByPages() affect the element itself</p>
+            <pre>
+                <code>
+                //scroll body by five lines
+                document.body.scrollByLines(5);
+                //make sure this element is visible only if it’s not already
+                document.images[0].scrollIntoViewIfNeeded();
+                //scroll the body back up one page
+                document.body.scrollByPages(-1);
+                </code>
+            </pre>
+        </div>
+
+        <div id="overview" class="step" data-x="4500" data-y="1500" data-scale="10" style="pointer-events: none;">
+        </div>
+    </div>
+    <div id="impress-toolbar"></div>
+
+    <script type="text/javascript" src="./js/highlight.pack.js"></script>
+    <script type="text/javascript" src="./js/mermaid.min.js"></script>
+    <script type="text/javascript" src="./js/markdown.js"></script>
+    <script type="text/javascript" src="./js/MathJax.js"></script>
+    <script type="text/javascript" src="./js/impress.js"></script>
+    <script>
+        impress().init();
+    </script>
+
+</body>
+
+</html>

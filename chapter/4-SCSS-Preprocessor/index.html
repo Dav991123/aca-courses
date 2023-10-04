@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Classic Slides with impress.js | Simple example impress.js slide sCreating | by Henrik Ingo @henrikingo</title>
+    <meta name="description" content="Simple example impress.js slide show" />
+    <meta name="author" content="Henrik Ingo" />
+    <link rel="stylesheet" href="./css/github.css">
+    <link rel="stylesheet" href="./css/mermaid.forest.css">
+    <link href="./css/impress-common.css" rel="stylesheet" />
+    <link href="./css/classic-slides.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body class="impress-not-supported">
+    <div id="impress" data-transition-duration="1000" data-width="1920" data-height="1080" data-max-scale="3" data-min-scale="0" data-perspective="1000">
+       
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h1 class="html-title-content">Sass (stylesheet language)</h1>
+            <p>syntactically awesome style sheets</p>
+            <img class='img w1000' src="./images/sass-compile-css.png" alt="">
+        </div>
+
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <div class="features-content">
+                <h2>Main SASS Features</h2>
+                <ol>
+                    <li><strong>Variables:</strong> for reusable values such as colors, font-sizes, spacing, etc;</li>
+                    <li><strong>Nesting:</strong> to nest selectors inside of one another,allowing us to write less code;</li>
+                    <li><strong>Operators:</strong> for mathematical operations right inside of CSS;</li>
+                    <li><strong>Partials and imports:</strong> to write CSS in different files and importing them all into one single file; </li>
+                    <li><strong>Mixins:</strong> to write reusable pieces of CSS code;</li>
+                    <li><strong>Functions:</strong> similar to mixins, with the difference that they produce a value that can than be used;</li>
+                    <li><strong>Extends:</strong> to make different selectors inherit declarations that are common to all of them;</li>
+                    <li><strong>Control directives:</strong> for writing complex code using conditionals and loops (not covered in this course).</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h2>SASS VC SCSS</h2>
+            <div class="full-width-img-content">
+                <img src="./images/syntax.png" alt="">
+            </div>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h2>NPM & NODE</h2>
+            <div class="full-width-img-content">
+                <img src="./images/node-npm.png" alt="">
+            </div>
+        </div>
+      
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h2>SCSS Works Steps</h2>
+            <ol>
+                <li>install node.js</li>
+                <li>create package.json command <strong>npm init</strong></li>
+                <li>install sass package command <strong>npm install node-sass --save-dev</strong></li>
+                <li>script add <strong>"compile:sass": "node-sass sass/main.scss css/style.css -w"</strong></li>
+            </ol>
+        </div>
+
+        <div id="overview" class="step" data-x="4500" data-y="1500" data-scale="10" style="pointer-events: none;">
+        </div>
+    </div>
+    <div id="impress-toolbar"></div>
+
+    <script type="text/javascript" src="./js/highlight.pack.js"></script>
+    <script type="text/javascript" src="./js/mermaid.min.js"></script>
+    <script type="text/javascript" src="./js/markdown.js"></script>
+    <script type="text/javascript" src="./js/MathJax.js"></script>
+    <script type="text/javascript" src="./js/impress.js"></script>
+    <script>
+        impress().init();
+    </script>
+
+</body>
+
+</html>
+
+
+
+

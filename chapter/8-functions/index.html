@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Classic Slides with impress.js | Simple example impress.js slide show | by Henrik Ingo @henrikingo</title>
+    <meta name="description" content="Simple example impress.js slide show" />
+    <meta name="author" content="Henrik Ingo" />
+    <link rel="stylesheet" href="./css/github.css">
+    <link rel="stylesheet" href="./css/mermaid.forest.css">
+    <link href="./css/impress-common.css" rel="stylesheet" />
+    <link href="./css/classic-slides.css" rel="stylesheet" />
+</head>
+
+<body class="impress-not-supported">
+    <div id="impress" data-transition-duration="1000" data-width="1920" data-height="1080" data-max-scale="3" data-min-scale="0" data-perspective="1000">
+        <div class="step slide title" data-x="-2200" data-y="-3000">
+            <h1>Chapter 8 JavaScript Functions</h1>
+            <br><br><br>
+            <ul>
+                <li>Variable Declarations</li>
+                <li>let, var, const</li>
+                <li>IIFE</li>
+                <li>Block Scoping</li>
+                <li>Temporal Dead Zones (TDZ)</li>
+                <li>Local Global Scope</li>
+                <li>JavaScript Function</li>
+                <li>Closure</li>
+            </ul>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h3>Variable Declarations</h3>
+            <p>
+                In the past, all variables in JavaScript were declared using the keyword var. These variables
+                were function scoped, meaning their scope was within the function enclosing them.
+            </p>
+            <pre>
+                <code>
+                    var price = 10; // Global Declaration
+                    function showPrice() {
+                     var price = 12; // Local Declaration using var
+                     console.log(price); // 12
+                    }
+                    showPrice();
+                    console.log(price); // 10
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Following is an example of function level scopes with IIFE</h3>
+            <pre>
+                <code>
+                    var price = 10; // Global Declaration
+                    (function () {
+                     var price = 12; // Local Declaration using var
+                     console.log(price); // 12
+                    })();
+                    console.log(price); // 10
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Block Scoping with let and const</h3>
+            <p>Block scoping means that a new scope is created between a pair of { }.
+            The variables declared using the keywords let and const only exist within the innermost
+            block that surrounds them</p>
+            <pre>
+                <code>
+                    let nbr = 42;
+                    {
+                      let nbr = 1000;
+                    }
+                    console.log(nbr); // 42
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Block Scoping with let and const</h3>
+            <p>
+                The value 42 is printed to the console, because the second nbr variable is scoped to the block within which it is declared and does not affect the nbr variable outside of the
+                block, where it remains 42. 
+            </p>
+            <p>
+                We now know that var is bound to function scope, whereas let and const are block
+                scopes, which means if you've got a set of curly brackets (a block of code), you have a block scope.
+            </p>
+            <p>
+                On the other hand, unlike let, const creates immutable variables. The values of
+                the variables created using const need to be assigned during declaration and cannot be changed later in the program.
+            </p>
+        </div>
+        <div class="step slide">
+            <h3>Block Scoping with let and const</h3>
+            <p>Trying to change the value of a const variable will throw a TypeError.</p>
+            <p>Make sure that you always initialize the variable with a value declared using const;
+            otherwise it will throw an error. Consider the following example</p>
+            <pre>
+                <code>
+                    const value = 42;
+                    console.log(value); // 42
+                    value = 1000; // TypeError
+
+                    const item; // SyntaxError: Missing initializer in const declaration.
+                    const value = undefined
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Block Scoping with let and const</h3>
+            <p>
+                let and const throw an exception if you try to access the
+                variables declared by them outside the blocks they were declared and do away with
+                hoisting, helping you localize the effects of your code fragments.
+                Consider the following example to understand how hoisting affects the variables
+                declared using the keyword var
+            </p>
+            <pre>
+                <code>
+                    console.log(nbr); // undefined
+                    var nbr = 42;
+                </code>
+            </pre>
+        </div>
+
+        <div class="step slide">
+            <h3>Block Scoping with let and const</h3>
+            <p>
+                When the execution reaches the declaration, this variable is then set to the
+                specified value in the assignment statement.
+            </p>
+            <p>
+                This would actually give you a Reference Error: nbr is not defined since no hoisting takes place here. This can be a big help in debugging different types of bugs that can be caused by a variable being used before it is declared. This Reference Error is technically called a Temporal Dead Zone (TDZ) error because you are accessing a variable that's been declared but not yet initialized.
+            </p>
+            <pre>
+                <code>
+                    console.log(nbr); // Reference Error: nbr is not defined
+                    let nbr = 42;
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+             <h3>Temporal Dead Zones</h3>
+             <p>The main takeaway from this discussion is that let and const declare variables with a temporal dead zone (TDZ), in contrast to the hoisting that happens when you use var. Trying to get or set the variable at this point raises a Reference Error.
+             const works in a similar fashion, the only difference being that it needs an initializing value during declaration, which cannot be changed later</p>
+             <pre>
+                 <code>
+                    let data = true;
+                    if (true) { // enter new scope, TDZ starts
+                     // Uninitialized binding for "data" is created
+                     console.log(data); // ReferenceError
+                     let data; // TDZ ends, "data" is initialized with "undefined"
+                    }
+                    console.log(data); // true
+                 </code>
+             </pre>
+        </div>
+        <div class="step slide">
+            <h3>Variables Declarations in loops</h3>
+            <p>
+                For loops (for, for-in, for-of) let you declare variables in their heads. But the way you declare these variables using var, let, or const changes things. Let’s look at each of these cases
+            </p>
+            <pre>
+                <code>
+                    for (var i=0; i < 3; i++) {}
+                    console.log(i); // i
+                    for (let j=0; j < 3; j++) {}
+                    console.log(j); // ReferenceError: j is not defined
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <p>Variable Declarations with Function Parameters and Global Scope</p>
+            <p>If you declare a variable using let inside a function, having the same name as a parameter, ES6 will throw a static (load-time) error</p>
+            <pre>
+                <code>
+                    function fn(param) {
+                      let param; // SyntaxError: Identifier 'param' has already been declared
+                    }
+                </code>
+            </pre>
+        </div>
+
+        <div class="step slide">
+            <h1>JavaScript Function</h1>
+            <p>A function is a block of code that performs a specific task.</p>
+            <p>A JavaScript function is executed when "something" invokes it (calls it).</p>
+            <code>
+                <pre>
+                    function add(p1, p2) {
+                      return p1 + p2;
+                    }
+                </pre>
+            </code>
+            <!-- <img src="images/npm_vs_yarn.png" class='img w1000' /> -->
+        </div>
+        <div class="step slide">
+            <h1>JavaScript Function Syntax </h1>
+            <p>
+                A JavaScript function is defined with the <b>function</b> keyword, followed by a <b>name</b>, followed by parentheses ().<br>
+            Function names can contain letters, digits, underscores, and dollar signs (same rules as variables).<br>
+            The parentheses may include parameter names separated by commas:<br>
+            (parameter1, parameter2, ...)<br>
+            The code to be executed, by the function, is placed inside curly brackets: <b>{}</b>
+            </p>       
+        </div>
+
+        <div class="step slide">
+            <h1>JavaScript parameters, arguments</h1>
+
+            <p>Function parameters are listed inside the parentheses () in the function definition.</p>
+            <p>Function arguments are the values received by the function when it is invoked.</p>
+            <p>Inside the function, the arguments (the parameters) behave as local variables.</p>
+        </div>
+
+        <div class="step slide">
+            <h1>Function Invocation</h1>
+            <p>The code inside the function will execute when "something" invokes (calls) the function:</p>
+            <ul>
+                <li>When an event occurs (when a user clicks a button)</li>
+                <li>When it is invoked (called) from JavaScript code</li>
+                <li>Automatically (self invoked)</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h1>Function Return</h1>
+            <p>When JavaScript reaches a return statement, the function will stop executing.</p>
+            <p>Example</p>
+            <pre>
+                <code>
+                    const x = add(4, 3);   // Function is called, return value will end up in x
+
+                    function add(a, b) {
+                      return a + b;             // Function returns the sum of a and b
+                    }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h1>Why use Functions ?</h1>
+            <ul>
+                <li>
+                    You can reuse code: Define the code once, and use it many times.
+                </li>
+                <li>
+                    You can use the same code many times with different arguments, to produce different results.
+                </li>
+            </ul>
+            <pre>
+                <code>
+                    function toCelsius(fahrenheit) {
+                      return (5/9) * (fahrenheit-32);
+                    }
+                    const text1 = "Today the temperature is " + toCelsius(75) + " Celsius";
+                    const text2 = "Tomorrow the temperature will be" + toCelsius(75) + "Celsius";
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Type of functions in JavaScript</h3>
+            <ul>
+                <li>Function Declaration</li>
+                <li>Function Expression</li>
+                <li>Shorthand method definition. ES2015</li>
+                <li>Arrow Function</li>
+                <li>Generator function</li>
+                <li>new Function</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>Function declaration</h3>
+            <p>A function declaration is made of function keyword, followed by an obligatory function name, a list of parameters in a pair of parenthesis (para1, ..., paramN) and a pair of curly braces {...} that delimits the body code.</p>
+            <pre>
+                <code>
+                    // function declaration
+                    function isEven(num) {
+                      return num % 2 === 0;
+                    }
+                    isEven(24); // => true
+                    isEven(11); // => false
+                </code>
+            </pre>
+        </div>
+
+        <div class="step slide">
+            <h3>Function declaration</h3>
+            <ul>
+               <li>The function declaration creates a variable in the current scope with the identifier equal to the function name. This variable holds the function object.</li>
+
+                <li>The function variable is hoisted up to the top of the current scope, which means that the function can be invoked before the declaration (see this chapter for more details).</li>
+
+                <li>The created function is named, which means that the name property of the function object holds its name. It is useful when viewing the call stack: in debugging or error messages reading.</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>Function declaration</h3>
+            <p>The function declaration function hello(name) {...} create a variable hello that is hoisted to the top of the current scope. hello variable holds the function object and hello.name contains the function name: 'hello'</p>
+            <pre>
+                <code>
+                    // Hoisted variable
+                    console.log(hello('Aliens')); // => 'Hello Aliens!'
+                    // Named function
+                    console.log(hello.name)       // => 'hello'
+                    // Variable holds the function object
+                    console.log(typeof hello);    // => 'function'
+                    function hello(name) {
+                      return `Hello ${name}!`;
+                    }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Function Expression</h3>
+            <p>A function expression is determined by a function keyword, followed by an optional function name, a list of parameters in a pair of parenthesis (para1, ..., paramN) and a pair of curly braces { ... } that delimits the body code.</p>
+            <pre>
+                <code>
+                    // function expression
+                    const isEven = function(num) {
+                      return num % 2 === 0;
+                    }
+                    isEven(24); // => true
+                    isEven(11); // => false
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Named function expression</h3>
+            <p>function funName(variable) {...} is a named function expression. The variable funName is accessible within function scope, but not outside. Either way, the property name of the function object holds the name: funName.</p>
+            <pre>
+                <code>
+                    const getType = function funName(variable) {
+                      console.log(typeof funName === 'function'); // => true
+                      return typeof variable;
+                    }
+                    console.log(getType(3));     // => 'number'
+                    console.log(getType.name);   // => 'funName'
+
+                    console.log(typeof funName); // => 'undefined'
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Function Expression</h3>
+            <p>Function declarations are hoisted but function expressions are not.</p>
+            <pre>
+                <code>
+                    // Hoisted variable
+                    console.log(hello('Aliens')); 
+                    // => ReferenceError: Cannot access 'hello' before initialization
+                    const hello = function (name) {
+                      return `Hello ${name}!`;
+                    }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Shorthand method definition</h3>
+            <p>Shorthand method definition can be used in a method declaration on object literals and ES2015 classes.</p>
+            <pre>
+                <code>
+                    const collection = {
+                      items: [],
+                      add(item) {
+                        this.items.push(item);
+                      },
+                      get(index) {
+                        return this.items[index];
+                      }
+                    };
+                    collection.add('C'); collection.add('Java');
+                    collection.get(1) // => 'Java'
+                </code>
+            </pre>
+        </div>
+
+        <div  class="step slide">
+            <h3>Arrow function</h3>
+            <p>
+                An arrow function is defined using a pair of parenthesis that contains the list of parameters (param1, param2, ..., paramN), followed by a fat arrow => and a pair of curly braces {...} that delimits the body statements.
+            </p>
+            <pre>
+                <code>
+                    const absValue = (number) => {
+                      if (number < 0) {
+                        return -number;
+                      }
+                      return number;
+                    }
+                    absValue(-10); // => 10
+                    absValue(5);   // => 5
+                </code>
+            </pre>
+        </div>
+
+        <div class="step slide">
+            <h3>Arrow function</h3>
+            <p>The function declared using a fat arrow has the following properties:</p>
+            <ul>
+                <li>The arrow function does not create its execution context, but takes it lexically (contrary to function expression or function declaration, which create own this depending on invocation)</li>
+                <li>The arrow function is anonymous. However, the engine can infer its name from the variable holding the function.</li>
+                <li>arguments object is not available in the arrow function (contrary to other declaration types that provide arguments object). You are free to use rest parameters (...params), though.</li>
+            </ul>
+        </div>
+
+        <div class="step slide">
+            <h3>Generator function</h3>
+            <p>
+                The generator function in JavaScript returns a Generator object. Its syntax is similar to function expression, function declaration or method declaration, just that it requires a star character *.
+            </p>
+            <pre>
+                <code>
+                    function* indexGenerator(){
+                      var index = 0;
+                      while(true) {
+                        yield index++;
+                      }
+                    }
+                    const g = indexGenerator();
+                    console.log(g.next().value); // => 0
+                    console.log(g.next().value); // => 1
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>new Function</h3>
+            <p>In JavaScript functions are first-class objects - a function is a regular object of type function</p>
+            <pre>
+                <code>
+                    function sum1(a, b) {
+                      return a + b;
+                    }
+                    const sum2 = function(a, b) {
+                      return a + b;
+                    }
+                    const sum3 = (a, b) => a + b;
+                    console.log(typeof sum1 === 'function'); // => true
+                    console.log(typeof sum2 === 'function'); // => true
+                    console.log(typeof sum3 === 'function'); // => true
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>new Function</h3>
+            <p>sumFunction created with Function constructor invocation has parameters numberA and numberB and the body return numberA + numberB.</p>
+            <pre>
+                <code>
+                    const numberA = 'numberA', numberB = 'numberB';
+                    const sumFunction = new Function(numberA, numberB, 
+                       'return numberA + numberB'
+                    );
+                    sumFunction(10, 15) // => 25
+                </code>
+            </pre>
+        </div>
+
+        <div class="step slide">
+            <h3>IIFE immediately invoked function expression</h3>
+            <p>The name — immediately invoked function expressions — pretty much says it all here. When a function is created at the same time it is called, you can use an IIFE</p>
+            <p>(function() => {})()</p>
+            <p>(() => {})()</p>
+        </div>
+
+        <div class="step slide">
+            <h3>Global Variables Local Variables</h3>
+            <ul>
+                <li>Global Variables − A global variable has a global scope which means it can be defined anywhere in your JavaScript code.</li>
+                <li>Local Variables − A local variable will be visible only within a function where it is defined. Function parameters are always local to that function.</li>
+                <li>Within the body of a function, a local variable takes precedence over a global variable with the same name. If you declare a local variable or function parameter with the same name as a global variable, you effectively hide the global variable</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>Global Variables Local Variables</h3>
+            <pre>
+                <code>
+                    var myVar = "global"; // Declare a global variable
+                    function checkscope( ) {
+                       var myVar = "local";  // Declare a local variable
+                       document.write(myVar);
+                    }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Local vs Global Scope</h3>
+            <p>The Scope of a variable or constant determines where a variable or constant is accessible during runtime. There’s a general discussion about the differences between Local and Global scopes In JavaScript. I’ll highlight the major differences between the two concepts in this article</p>
+        </div>
+        <div class="step slide">
+            <h3>Local Scope</h3>
+            <p>Variables or Constants declared within a code block are said to be in a local scope. When we declare a variable or constants with the let or const keywords, their scope is limited to the code block or function in which they were defined. We can not access variables that are in a local scope outside of the code block or function in which they were defined</p>
+            <img src="images/local.jpeg" class='img w300' />
+        </div>
+        <div class="step slide">
+            <h3>Global Scope</h3>
+            <p>When a variable or constant is defined outside of a function,which isn’t limited to any code block, it is said to have a global scope. Constants or Variables which have a global scope can be accessible anywhere globally outside our function in our JavaScript code.</p>
+            <ul>
+                <li>Scope: The let keyword creates a Block-scoped variable unlike the var keyword which creates a Function-scoped variable.</li>
+                <li>Re-declaration: The let keyword does not allow the need to redeclare a variable,an error message will be logged on the console if the same variable is redeclared somewhere else in our code. The var keyword allows the flexibility for this to happen without any issue.</li>
+                <li>When we use the var keyword outside of a function, it creates a global variable and attaches that global variable to window object in the browser.</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>Lexical Environment</h3>
+            <p>
+                Every time the JavaScript engine creates an execution context to execute the function or global code, it also creates a new lexical environment to store the variable defined in that function during the execution of that function.
+                A lexical environment is a data structure that holds identifier-variable mapping. (here identifier refers to the name of variables/functions, and the variable is the reference to actual object [including function type object] or primitive value).
+            </p>
+        </div>
+        <div class="step slide">
+            <h3>What is a Closure ?</h3>
+            <p>A closure is the combination of a function bundled together (enclosed) with references to its surrounding state (the lexical environment). In other words, a closure gives you access to an outer function’s scope from an inner function. In JavaScript, closures are created every time a function is created, at function creation time.</p>
+        </div>
+
+        <div class="step slide">
+            <h3>JavaScript Closures</h3>
+            <p>Global variables can be made local (private) with closures</p>
+            <p>All functions have access to the global scope.</p>
+            <pre>
+                <code>
+                function add() {
+                  var counter = 0;
+                  function plus() {counter += 1;}
+                  plus();   
+                  return counter;
+                }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>JavaScript Function Parameters</h3>
+            <p>Function parameters are the names listed in the function definition.</p>
+            <p>Function arguments are the real values passed to (and received by) the function.</p>
+            <p>Parameter Rules</p>
+            <ul>
+                <li>JavaScript function definitions do not specify data types for parameters.</li>
+                <li>JavaScript functions do not perform type checking on the passed arguments.</li>
+                <li>JavaScript functions do not check the number of arguments received.</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>Default Parameters</h3>
+            <p>If a function is called with missing arguments (less than declared), the missing values are set to undefined.</p>
+            <pre>
+                <code>
+                    function (x, y = 2) {
+                      // function code
+                    }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>The Arguments Object</h3>
+            <p>JavaScript functions have a built-in object called the arguments object.</p>
+            <pre>
+                <code>
+                    function sumAll() {
+                        console.log(arguments); // [1, 123, 500, 115, 44, 88]
+                    }
+                    sumAll(1, 123, 500, 115, 44, 88);
+                </code>
+            </pre>
+        </div>
+
+        <div id="overview" class="step" data-x="4500" data-y="1500" data-scale="10" style="pointer-events: none;">
+        </div>
+    </div>
+    <div id="impress-toolbar"></div>
+
+    <script type="text/javascript" src="./js/highlight.pack.js"></script>
+    <script type="text/javascript" src="./js/mermaid.min.js"></script>
+    <script type="text/javascript" src="./js/markdown.js"></script>
+    <script type="text/javascript" src="./js/MathJax.js"></script>
+    <script type="text/javascript" src="./js/impress.js"></script>
+    <script>
+        impress().init();
+    </script>
+
+</body>
+
+</html>

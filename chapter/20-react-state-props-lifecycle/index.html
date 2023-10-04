@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Classic Slides with impress.js | Simple example impress.js slide sCreating | by Henrik Ingo @henrikingo</title>
+    <meta name="description" content="Simple example impress.js slide show" />
+    <meta name="author" content="Henrik Ingo" />
+    <link rel="stylesheet" href="./css/github.css">
+    <link rel="stylesheet" href="./css/mermaid.forest.css">
+    <link href="./css/impress-common.css" rel="stylesheet" />
+    <link href="./css/classic-slides.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body class="impress-not-supported">
+    <div id="impress" data-transition-duration="1000" data-width="1920" data-height="1080" data-max-scale="3" data-min-scale="0" data-perspective="1000">
+  
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <div>
+               <h2>Component: Function vs. Classes</h2>
+               <p>
+                    The most obvious one difference is the syntax. A functional component is just a plain JavaScript 
+                    function which accepts props as an argument and returns a React element. A class component requires
+                    you to extend from React. Component and create a render function which returns a React element.
+               </p>
+
+               <img class='img w1000' src="./images/syntax-function-class-component.JPG" alt="">
+            </div>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h2>Function Component</h2>
+            <ul>
+                <li>It is simple javascript functions that simply returns html UI </li>
+                <li>It is also called “stateless” components because they simply accept data and display them in some form that is they are mainly responsible for rendering UI.</li>
+                <li>It accept properties(props) in function and return html(JSX)</li>
+                <li>It gives solution without using state</li>
+                <li>There is no render method used in functional components.</li>
+                <li>These can be typically defined using arrow functions but can also be created with the regular function keyword.</li>
+            </ul>
+        </div>
+
+
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h2>Function component syntax</h2>
+
+            <div class="full-width-img">
+                <img  src="./images/function-component.png" alt="">
+            </div>
+          
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h2>Class Component or Stateful Component</h2>
+            <ul>
+                <li>It is regular ES6 classes that extends component class form react library</li>
+                <li>Also known as “stateful” components because they implement logic and state.</li>
+                <li>It must have render() method returning html</li>
+                <li>It has complex UI Logic</li>
+                <li>You pass props to class components and access them with this.props</li>
+                <li>If you need lifecycle hooks you should probably use a class component.</li>
+            </ul>
+        </div>
+      
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h2>Class component syntax</h2>
+            <img class='img w1000' src="https://miro.medium.com/max/1400/1*7iVRKUU5QrW7B0erzzVyEg.png" alt="">
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h2>Props class Component</h2>
+            <img class='img w800' src="./images/class-component-props.png" alt="">
+        </div>
+
+        
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h2>State class Component</h2>
+            <p>
+                The state is an instance of React Component Class can be defined as an object of a set of observable 
+                properties that control the behavior of the component. In other words, the State of a component is
+                an object that holds some information that may change over the lifetime of the component.
+            </p>
+
+            <ul>
+                <li>The state object is where you store property values that belongs to the component.</li>
+                <li>When the state object changes, the component re-renders.</li>
+            </ul>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h2>Changing the state Object </h2>
+            <p>
+                To change a value in the state object, use the this.setState() method.
+                When a value in the state object changes, the component will re-render, meaning that the output will change according to the new value(s).
+                <hr>
+                <b>
+                    Always use the setState() method to change the state object, it will ensure that the component knows its been 
+                    updated and calls the render() method (and all the other lifecycle methods).
+                </b>
+            </p>
+
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h2>Lifecycle of Components</h2>
+            <p>
+                All the React component's lifecycle methods can be split into four phases: initialization, mounting, updating and unmounting. 
+                The process where all these stages are involved is called the component's lifecycle and every React component goes through it
+                Each component in React has a lifecycle which you can monitor and manipulate during its three main phases.
+                The three phases are: <b>Mounting</b>, <b>Updating</b>, and <b>Unmounting</b>.
+            </p>
+            <ul>
+            </ul>
+        </div>
+        
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h2>Mounting</h2>
+            <p>
+                Mounting means putting elements into the DOM.
+                React has four built-in methods that gets called, in this order, 
+                when mounting a component:
+            </p>
+            <ul>
+                <li>constructor()</li>
+                <li>render()</li>
+                <li>componentDidMount()</li>
+                <li>getDerivedStateFromProps()</li>
+                <li><del>componentWillMount()</del></li>
+            </ul>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h2>Constructor</h2>
+            <p>
+                The <mark>constructor()</mark> method is called before anything else, when the component is initiated, 
+                and it is the natural place to set up the initial <b>state</b> and other initial values.
+                The <mark>constructor()</mark> method is called with the <b>props</b>, as arguments, and you should always 
+                start by calling the <b>super(props)</b> before anything else, this will initiate the parent's constructor 
+                method and allows the component to inherit methods from its parent <b>(React.Component)</b>.
+                <hr>
+                <b>The constructor method is called, by React, every time you make a component:</b>
+            </p>
+        </div>
+
+        
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h2>Render</h2>
+            <p>
+                First of all, render() is not user callable. It is part of the React component lifecycle and is called by
+                React at various app stages, generally when the React component is first instantiated, or when there is
+                a new update to the component state. Render does not take any arguments, and returns a JSX.Element which 
+                contains the view hierarchy of the current component. This view hierarchy will later be translated into HTML 
+                and displayed in the browser window.
+            </p>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h2>4 methods to force a re-render in React</h2>
+            <ol>
+                <li>Re-render component when state changes. Any time a React component state has changed, React has to run the render() method. ...</li>
+                <li>Re-render component when props change. ...</li>
+                <li>Re-render with key prop. ...</li>
+                <li>Force a re-render. this.forceUpdate();</li>
+            </ol>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h2>What is componentDidMount?</h2>
+            <p>
+                The <mark>componentDidMount()</mark> method allows us to execute the React code when the component is 
+                already placed in the DOM (Document Object Model). This method is called during the Mounting 
+                phase of the React Life-cycle i.e after the component is rendered.
+                The <mark>componentDidMount()</mark> method of child components is invoked before that of parent components. 
+                If you want to integrate with other JavaScript frameworks, set timers using setTimeout or setInterval ,
+                 or send AJAX requests, perform those operations in this method
+            </p>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h2>What is getDerivedStateFromProps?</h2>
+            <p>
+                Also at updates the getDerivedStateFromProps method is called. 
+                This is the first method that is called when a component gets updated.
+                This is still the natural place to set the state object based on the initial props.
+                The example below has a button that changes the favorite color to blue, but since the getDerivedStateFromProps() 
+                method is called, which updates the state with the color from the favcol attribute, the favorite color is still rendered 
+                as yellow:
+            </p>
+        </div>
+
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h2>Updating</h2>
+            <p>
+                The next phase in the lifecycle is when a component is updated.
+                A component is updated whenever there is a change in the component's <b>state</b> or <b>props</b>.
+                React has five built-in methods that gets called, in this order, when a component is updated:
+            </p>
+            <ul>
+                <li>render()</li>
+                <li>componentDidUpdate()</li>
+                <li>getSnapshotBeforeUpdate()</li>
+                <li>shouldComponentUpdate()</li>
+                <li>getDerivedStateFromProps()</li>
+            </ul>
+
+            <b>The render() method is required and will always be called, the others are optional and will be called if you define them.</b>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h2>What is componentDidUpdate?</h2>
+            <p>
+                The componentDidUpdate function is a part of a React component’s life cycle. It is called when a component got updated. 
+                This might happen if new props have been provided by a parent component or an internal state has been changed.
+                The componentDidUpdate  gets called after a render, which means that we can access DOM nodes in it. This function receives previous props and state as parameters. 
+                It can also access new props and state with this.props and this.state:
+            </p>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h2>What is shouldComponentUpdate?</h2>
+            <p>
+                In the shouldComponentUpdate() method you can return a Boolean value 
+                that specifies whether React should continue with the rendering or not. The default value is true.
+                The example below shows what happens when the shouldComponentUpdate() method returns false:
+            </p>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h2>Unmounting</h2>
+            <p>
+                The next phase in the lifecycle is when a component is removed from the DOM, or unmounting as React likes to call it.
+                React has only one built-in method that gets called when a component is unmounted:
+                <ul>
+                    <li><mark>componentWillUnmount()</mark></li>
+                </ul>
+                <hr>
+
+                <p> The componentWillUnmount method is called when the component is about to be removed from the DOM.</p>
+            </p>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h2>What is a react Event</h2>
+            <p>
+                An event is an action that could be triggered as a result of the user action or system generated event. 
+                For example, a mouse click, loading of a web page, pressing a key, window resizes, and other interactions 
+                are called events. React has its own event handling system which is very similar to handling events on DOM elements. 
+                The react event handling system is known as Synthetic Events. The synthetic event is a cross-browser wrapper of the
+                browser's native event.
+            </p>
+            <ol>
+                <li>React events are named as <b>camelCase</b> instead of <b>lowercase</b>.</li>
+                <li>With JSX, a function is passed as the <b>event handler</b> instead of a <b>string</b>. For example:</li>
+            </ol>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h2>Adding Forms in React</h2>
+            <p>
+                Handling forms is about how you handle the data when it changes value or gets submitted.
+                In HTML, form data is usually handled by the DOM.
+                In React, form data is usually handled by the components.
+                When the data is handled by the components, all the data is stored in the component state.
+                You can control changes by adding event handlers in the onChange attribute:
+            </p>
+
+            <ul>
+                <li><b>Note</b>: You must initialize the state in the constructor method before you can use it.</li>
+                <li><b>Note</b>: You get access to the field value by using the <b>event.target.value</b> syntax.</li>
+        </div>
+
+
+
+        <div id="overview" class="step" data-x="4500" data-y="1500" data-scale="10" style="pointer-events: none;">
+        </div>
+    </div>
+    <div id="impress-toolbar"></div>
+
+    <script type="text/javascript" src="./js/highlight.pack.js"></script>
+    <script type="text/javascript" src="./js/mermaid.min.js"></script>
+    <script type="text/javascript" src="./js/markdown.js"></script>
+    <script type="text/javascript" src="./js/MathJax.js"></script>
+    <script type="text/javascript" src="./js/impress.js"></script>
+    <script>
+        impress().init();
+    </script>
+
+</body>
+
+</html>
+
+
+
+

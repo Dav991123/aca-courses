@@ -1,0 +1,757 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Classic Slides with impress.js | Simple example impress.js slide show | by Henrik Ingo @henrikingo</title>
+    <meta name="description" content="Simple example impress.js slide show" />
+    <meta name="author" content="Henrik Ingo" />
+    <link rel="stylesheet" href="./css/github.css">
+    <link rel="stylesheet" href="./css/mermaid.forest.css">
+    <link href="./css/impress-common.css" rel="stylesheet" />
+    <link href="./css/classic-slides.css" rel="stylesheet" />
+</head>
+
+<body class="impress-not-supported">
+    <div id="impress" data-transition-duration="1000" data-width="1920" data-height="1080" data-max-scale="3" data-min-scale="0" data-perspective="1000">
+        <div class="step slide title" data-x="-2200" data-y="-3000">
+            <h1>Chapter 9 Reference Types</h1>
+            <br><br><br>
+            <ul>
+                <li>Object</li>
+                <li>Array</li>
+                <li>Date</li>
+                <li>Primitive Wrapper Types</li>
+                <li>The String Type</li>
+                <li>The Number Type</li>
+                <li>The Boolean Type</li>
+            </ul>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h1>Reference Types</h1>
+            <p>A reference value (object) is an instance of a specifi c reference type. In ECMAScript, reference types are structures used to group data and functionality together and are often incorrectly called classes.</p> 
+            <p>
+                objects are considered to be instances of a particular reference type. New objects are created by using the new operator followed by a constructor. A constructor is simply a function whose purpose is to create a new object
+            </p>
+        </div>
+
+        <div class="step slide">
+            <h1>Working with objects </h1>
+            <p>This code creates a new instance of the Object reference type and stores it in the variable person. </p> 
+            <p>The constructor being used is Object(), which creates a simple object with only the default properties and methods.</p>
+            <p> ECMAScript provides a number of native reference types, such as Object.</p>
+            <pre>
+                <code>
+                    const person = new Object();
+                </code>
+            </pre>
+        </div>
+
+        <div class="step slide">
+            <h3>new operator</h3>
+            <p>The new operator lets developers create an instance of a user-defined object type or of one of the built-in object types that has a constructor function.</p>
+            <h4>Syntax</h4>
+            <ul>
+                <li>constructor: A class or function that specifies the type of the object instance.</li>
+                <li>arguments A list of values that the constructor will be called with.</li>
+            </ul>
+            <pre>
+                <code>
+                    new constructor[([arguments])]
+                </code>
+            </pre>
+
+        </div>
+
+        <div class="step slide">
+            <h1>new keyword: description</h1>
+            <p>The new keyword does the following things:</p>
+            <ul>
+                <li>Creates a blank, plain JavaScript object.</li>
+                <li>Adds a property to the new object (__proto__) that links to the constructor function's prototype object</li>
+                <li>Binds the newly created object instance as the this context ( all references to this in the constructor function now refer to the object created in the first step).</li>
+                <li>Returns this if the function doesn't return an object.</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>constructor</h3>
+            <p>The constructor method is a special method of a class for creating and initializing an object of that class.</p>
+            <pre>
+                <code>
+                    class Person {
+                      constructor(name) {
+                        this.name = name;
+                      }
+                      sayHello() {
+                        console.log(`Hello, my name is ${this.name}`);
+                      }
+                    }
+                    const maximus = new Person('Maximus');
+                    maximus.sayHello();
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Working with objects</h3>
+            <p>There are two ways to <b>explicitly</b> create an instance of Object.</p>
+            <ul>
+                <li>use the new operator</li>
+                <li>use object literal notation</li>
+            </ul>
+            <pre>
+                <code>
+                    const person = new Object(); // new operator
+                    person.name = "Maximus";
+                    person.age = 29;
+
+                    const person = { // literal notation
+                     name : "Maximus",
+                     age : 29
+                    };
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Working with objects</h3>
+            <p>Property names can also be specifi ed as <b>strings or numbers when using object literal notation</b></p>
+            <pre>
+                <code>
+                    const person = {
+                      “name” : "Maximus",
+                      “age” : 29,
+                      5: true
+                    };
+                    const person = {}; //same as new Object()
+                    person.name = "Maximus";
+                    person.age = 29;
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Working with objects</h3>
+            <p>object literal notation  requires less code and visually encapsulates all related data. In fact, object literals have become a preferred way of passing a large number of optional arguments to.</p>
+            <pre>
+                <code>
+                function displayInfo(args) {
+                 let output = '';
+                 if (typeof args.name == “string”)
+                    output += “Name: “ + args.name + “\n”;
+                 if (typeof args.age == “number”) 
+                    output += “Age: “ + args.age + “\n”;
+                 console.log(output);
+                }
+                displayInfo({ name: "Maximus", age: 29});
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Working with objects</h3>
+            <p>Although object properties are typically accessed using dot notation, which is common to many object-oriented languages, it’s also possible to access properties via bracket notation. When you use bracket notation, a string containing the property name is placed between the brackets.</p>
+            <pre>
+                <code>
+                    const person = {
+                      “name” : "Maximus",
+                      “age” : 29
+                    };
+
+                    const propertyName = “name”;
+                    alert(person[propertyName]); // Maximus
+                    person[propertyName] = 'Name';
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Array 'Type'</h3>
+            <p>
+                ECMAScript arrays are ordered lists of data, but unlike in other languages, they can hold any type of data in each slot. This means that it’s possible to create an array that has a string in the first position, a number in the second, an object in the third, and so on. 
+            </p>
+            <p>ECMAScript arrays are also dynamically sized, automatically growing to accommodate any data that is added to them</p>
+        </div>
+
+        <div class="step slide">
+            <h3>Arrays can be created in two basic ways</h3>
+            <br><br><br>
+            <ul>
+                <li>use the Array constructor</li>
+                <li>use array literal notation</li>
+            </ul>
+
+        </div>
+        <div class="step slide">
+            <h3>Create an array using the Array constructor</h3>
+            <pre>
+                <code>
+        const colors = new Array();
+        const colors = new Array(“red”, “blue”, “green”);
+        const names = new Array(“Greg”); //create an array with one item, the string “Greg”
+                </code>
+            </pre>
+        </div>
+
+        <div class="step slide">
+            <h3>Working with Arrays</h3>
+            <p>It’s possible to omit the new operator when using the Array constructor. It has the same result.</p>
+            <p>If you know the number of items that will be in the array, you can pass the count into the constructor, and the length property will automatically be created with that value</p>
+            <pre>
+                <code>
+        const colors = Array(“red”, “blue”, “green”);
+        const names = Array(“Greg”); //create an array with one item, the string “Greg”
+
+        const colors = new Array(20); // create an array with 20 items
+        const values = [1,2,]; //AVOID! Creates an array with 2 or 3 items
+        const options = [,,,,,]; //AVOID! creates an array with 5 or 6 items
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Working with Arrays</h3>
+            <p>The index provided within the square brackets indicates the value being accessed.</p>
+            <p>To get and set array values, you use square brackets and provide the zero-based numeric index of the value</p>
+            <p>The number of items in an array is stored in the length property</p>
+            <pre>
+                <code>
+                const colors = [“red”, “blue”, “green”]; //define an array of strings
+                alert(colors[0]); //display the first item
+                colors[2] = “black”; //change the third item
+                colors[3] = “brown”; //add a fourth item
+                const names = Array("Greg", "Maximus")
+                names.length; // 2
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Working with Arrays</h3>
+            <p>length is that it’s not read-only</p>
+            <p>By setting the length property, you can easily remove items from or add items to the end of the array</p>
+            <p>If the length were set to a number greater than the number of items in the array, the new items would each get fi lled with the value of undefined</p>
+            <pre>
+                <code>
+                const colors = [“red”, “blue”, “green”, "Yellow"]; 
+                colors.length = 2; alert(colors[2]); //undefined
+                const colors = [“red”, “blue”, “green”]; //creates an array with three strings
+                colors.length = 4; alert(colors[3]); //undefined
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Working with Arrays</h3>
+            <p>The length property can also be helpful in adding items to the end of an array</p>
+            <b>The last item in an array is always at position length – 1</b>
+            <p>The new length is automatically calculated when an item is placed into a position that’s outside of the current array size, which is done by adding 1 to the position<p>
+            <pre>
+                <code>
+            const colors = [“red”, “blue”, “green”]; //creates an array with three strings
+            colors[colors.length] = “black”; //add a color (position 3)
+            colors[colors.length] = “brown”; //add another color (position 4)
+
+            colors[99] = “black”; //add a color (position 99)
+            alert(colors.length); //100
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Detecting Arrays</h3>
+            <ul>
+                <li>instanceof operator</li>
+                <li>Array.isArray() method.</li>
+                <li>constructor.name property</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>instanceof operator</h3>
+            <p>The instanceof operator in JavaScript is used to check the type of an object at run time. It returns a boolean value if true then it indicates that the object is an instance of a particular class and if false then it is not</p>
+            <pre>
+                <code>
+                    const fruits = ["Apple", "Mango", "Banana"];
+                    const isArray = fruits instanceof Array;
+                    const isObject = fruits instanceof Object;
+                    const isString = fruits instanceof String;
+                    const isBoolean = fruits instanceof Boolean;
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Array.isArray() method and constructor.name</h3>
+            <pre>
+                <code>
+                const fruits = ["Apple", "Mango", "Banana"];
+                if (Array.isArray(fruits)){
+                    //do something on the array
+                }
+                if(ruits.constructor.name === 'Array') {
+                    //do something on the array
+                }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Conversion Methods</h3>
+            <ul>
+                <li>all objects have toLocaleString(), toString(), and valueOf() methods</li>
+                <li>toString() and valueOf() methods are fi rst called explicitly to return the string representation of the array, which combines the strings, separating them by commas</li>
+                <li>alert() expects a string, it calls toString() behind the scenes to get the same result as when toString() is called directly</li>
+            </ul>
+            <pre>
+                <code>
+            var colors = [“red”, “blue”, “green”]; //creates an array with three strings
+            alert(colors.toString()); //red,blue,green
+            alert(colors.valueOf()); //red,blue,green
+            alert(colors); //red,blue,green
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Conversion Methods</h3>
+            <p>The join() method accepts one argument, which is the string separator to use,and returns a string containing all items</p>
+            <pre>
+                <code>
+                    const colors = [“red”, “green”, “blue”];
+                    alert(colors.join(“,”)); //red,green,blue
+                    alert(colors.join(“||”)); //red||green||blue
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Stack Methods</h3>
+            <p>A stack is referred to as a last-in-first-out (LIFO) structure</p>
+            <p>The push() method accepts any number of arguments and adds them to the end of the array, returning the array’s new length.</p>
+            <p>The pop() method, on the other hand, removes the last item in the array, decrements the array’s length, and returns that item</p>
+            <pre>
+                <code>
+                const colors = new Array(); //create an array
+                let count = colors.push(“red”, “green”); //push two items
+                alert(count); //2 length of Array
+                const item = colors.pop(); //get the last item
+                alert(item); //”black”
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Queue Methods</h3>
+            <p>ECMAScript also provides an unshift() method for arrays. As the name indicates, unshift() does the opposite of shift()</p>
+            <p>queues restrict access in a fi rst-in-fi rst-out (FIFO) data structure</p>
+            <pre>
+                <code>
+                    const colors = [“red”, “green”, “black”];
+                    const item = colors.shift(); //get the first item
+                    alert(item); //”red” alert(colors.length); //2
+
+                    const colors = new Array(); //create an array
+                    let count = colors.unshift(“red”, “green”); //push two items
+                    alert(count); //2
+                    count = colors.unshift(“black”); //push another item on
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Reordering Methods: reverse</h3>
+            <p>reordering of items already in the array: reverse() and sort()</p>
+            <p>reverse() method simply reverses the order of items in an array. </p>
+            <pre>
+                <code>
+                    var values = [1, 2, 3, 4, 5];
+                    values.reverse();
+                    alert(values); //5,4,3,2,1
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Reordering Methods: sort</h3>
+            <p>By default, the sort() method puts the items in ascending order — with the smallest value fi rst and the largest value last. To do this, the sort() method calls the String() casting function on every item and then compares the strings to determine the correct order. This occurs even if all items in an array are numbers</p>
+            <pre>
+                <code>
+                    const values = [0, 1, 5, 10, 15];
+                    values.sort();
+                    alert(values); //0,1,10,15,5
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Reordering Methods: sort</h3>
+            <p>The sort() method allows you to pass in a comparison function that indicates which value should come before which</p>
+            <pre>
+                <code>
+                function compare(value1, value2) {
+                    if (value1 < value2) {
+                        return -1;
+                    } else if (value1 > value2) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                }
+                const values = [0, 1, 5, 10, 15];
+                values.sort(compare);
+                alert(values); //0,1,5,10,15
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Manipulation Methods</h3>
+            <pre>
+                <code>
+                    const colors = [“red”, “green”, “blue”];
+                    const colors2 = colors.concat(“yellow”, [“black”, “brown”]);
+
+                    let colors = [“red”, “green”, “blue”, “yellow”, “purple”];
+                    let colors2 = colors.slice(1);
+                    let colors3 = colors.slice(1,4);
+
+                    alert(colors2); //green,blue,yellow,purple
+                    alert(colors3); //green,blue,yellow                   
+                </code>
+
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Location Methods</h3>
+            <p>The methods each return the position of the item in the array or –1 if the item isn’t in the array.</p>
+            <pre>
+                <code>
+                const numbers = [1,2,3,4,5,4,3,2,1];
+
+                alert(numbers.indexOf(4)); //3
+                alert(numbers.lastIndexOf(4)); //5
+
+                alert(numbers.indexOf(4, 4)); //5
+                alert(numbers.lastIndexOf(4, 4)); //3
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Iterative Methods</h3>
+            <ul>
+                <li>every() — Runs the given function on every item in the array and returns true if the function returns true for every item.</li>
+                <li>filter() — Runs the given function on every item in the array and returns an array of all items for which the function returns true.</li>
+                <li>forEach() — Runs the given function on every item in the array. This method has no return value.</li>
+                <li>map() — Runs the given function on every item in the array and returns the result of each function call in an array.</li>
+                <li>some() — Runs the given function on every item in the array and returns true if thefunction returns true for any one item</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>Reduction Methods</h3>
+            <p>reduce method iterate over all items in the array and build up a value that is ultimately returned</p>
+            <p>reduceRight() method works in the same way, just in the opposite direction</p>
+            <pre>
+                <code>
+                const values = [1,2,3,4,5];
+                const sum = values.reduce(function(prev, cur, index, array){
+                 return prev + cur;
+                }); //15
+
+                var values = [1,2,3,4,5];
+                var sum = values.reduceRight(function(prev, cur, index, array){
+                 return prev + cur;
+                }); // 15
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Date Type</h3>
+            <p>Date type stores dates as the number of milliseconds that have passed since midnight on January 1, 1970 UTC (Universal Time Code). Using this data storage format, the Date type can accurately represent dates 285,616 years before or after January 1, 1970. </p>
+            <p>To create a date object, use the new operator along with the Date constructor</p>
+            <pre>
+                <code>
+                    const now = new Date();
+                    const date1 = new Date(2007, 0, 1); //”January 1, 2007”
+                    const date2 = new Date(2007, 1, 1); //”February 1, 2007”
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Date Type</h3>
+            <ul>
+                <li>toDateString() — Displays the date’s day of the week, month, day of the month, and year in an implementation-specifi c format</li>
+                <li>toTimeString() — Displays the date’s hours, minutes, seconds, and time zone in an implementation-specifi c format.</li>
+                <li>toLocaleDateString() — Displays the date’s day of the week, month, day of the month, and year in an implementation- and locale-specifi c format</li>
+            </ul>
+            <pre>
+                <code>
+                    const start = Date.now(); // current date in milliseconds
+                    const start = +new Date(); // current date in milliseconds
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Date/Time Component Methods</h3>
+            <br><br>
+            <img src="images/date1.png" class='img w1000' />
+        </div>
+        <div class="step slide">
+            <h3>Date/Time Component Methods</h3>
+            <br><br>
+            <img src="images/date2.png" class='img w1000' />
+        </div>
+        <div class="step slide">
+            <h3>The Function Type</h3>
+            <p>Some of the most interesting parts of ECMAScript are its functions, primarily because functions actually are objects. Each function is an instance of the Function type that has properties and methods just like any other reference type. Because functions are objects, function names are simply pointers to function objects and are not necessarily tied to the function itself</p>
+            <p>defi ne functions is by using the Function constructor, which accepts any number of arguments</p>
+            <pre>
+                <code>
+            const sum = new Function(“num1”, “num2”, “return num1 + num2”); //not recommended
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Functions as Values</h3>
+            <p>Because function names in ECMAScript are nothing more than variables, functions can be used any place any other value can be used. This means it’s possible not only to pass a function into another function as an argument but also to return a function as the result of another function.</p>
+            <pre>
+                <code>
+                function callSomeFunction(someFunction, someArgument){
+                    return someFunction(someArgument);
+                }
+                function add10(num){
+                 return num + 10;
+                }
+                var result1 = callSomeFunction(add10, 10);
+                alert(result1); //20
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Function Properties and Methods</h3>
+            <p>Functions are objects in ECMAScript and, as mentioned previously, therefore have properties and methods. Each function has two properties: length and prototype. The length property indicates the number of named arguments that the function expects</p>
+            <pre>
+                <code>
+                function sayName(name){
+                   alert(name);
+                }
+
+                function sum(num1, num2){
+                   return num1 + num2;
+                }
+                alert(sayName.length); //1
+                alert(sum.length); //2
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Primitive Wrapper Types</h3>
+            <p>Three special reference types are designed to ease interaction with primitive values: the Boolean type, the Number type, and the String type</p>
+            <p> Every time a primitive value is read, an object of the corresponding primitive wrapper type is created behind the scenes, allowing access to any number of methods for manipulating the data</p>
+            <pre>
+                <code>
+                const s1 = “some text”;
+                const s2 = s1.substring(2)
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Primitive Wrapper Types</h3>
+            <p>. Primitive values aren’t objects, so logically
+            they shouldn’t have methods, though this still works as you would expect. In truth, there is a lot going on behind the scenes to allow this seamless operation. When s1 is accessed in the second line, it is being accessed in read mode, which is to say that its value is being read from memory. Any time a string value is accessed in read mode, the following three steps occur</p>
+            <ul>
+                <li>Create an instance of the String type.</li>
+                <li>Call the specifi ed method on the instance.</li>
+                <li> Destroy the instance.</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>Primitive Wrapper Types</h3>
+            <pre>
+                <code>
+                const s1 = “some text”;
+                const s2 = s1.substring(2);
+                // how the js interpreter works
+                const s1 = new String(“some text”);
+                const s2 = s1.substring(2);
+                s1 = null;
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Primitive Wrapper Types</h3>
+            <p>The major difference between reference types and primitive wrapper types is the lifetime of the object. When you instantiate a reference type using the new operator, it stays in memory until it goes out of scope, whereas automatically created primitive wrapper objects exist for only one line of code before they are destroyed</p>
+            <p>This means that properties and methods cannot be added at runtime</p>
+            <pre>
+                <code>
+                const s1 = “some text”;
+                s1.color = “red”;
+                alert(s1.color); //undefined
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Object constructor</h3>
+            <p>The Object constructor also acts as a factory method and is capable of returning an instance of a primitive wrapper based on the type of value passed into the constructor</p>
+            <pre>
+                <code>
+                const objString = new Object(“some text”);// same as new String("some text")
+                alert(objString instanceof String); //true
+
+                const objNumber = new Object(9);// same as new Number(9)
+                alert(objNumber instanceof Number); //true
+
+                const objBoolean = new Object(true);// same as new Boolean(true)
+                alert(objBoolean instanceof Boolean); //true
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>The Boolean Type</h3>
+            <p>The Boolean type is the reference type corresponding to the Boolean values. To create a Boolean object, use the Boolean constructor and pass in either true or false,</p>
+            <pre>
+                <code>
+                const falseObject = new Boolean(false);
+                const result = falseObject && true; alert(result); //true
+
+                const falseValue = false;
+                result = falseValue && true; alert(result); //false
+
+                alert(typeof falseObject); //object
+                alert(typeof falseValue); //boolean
+                alert(falseObject instanceof Boolean); //true
+                alert(falseValue instanceof Boolean); //false
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>The Number Type</h3>
+            <p>The Number type is the reference type for numeric values. To create a Number object, use the Number constructor and pass in any number</p>
+            <pre>
+                <code>
+                    const numberObject = new Number(10);
+                    const num = 10;
+                    alert(num.toString()); //”10”
+                    alert(num.toString(2)); //”1010”
+                    alert(num.toString(8)); //”12”
+                    alert(num.toString(10)); //”10”
+                    alert(num.toString(16)); //”a”
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>The Number Type</h3>
+            <p>The toFixed() method returns a string representation of a number with a specifi ed number of decimal points</p>
+            <pre>
+                <code>
+                const num = 10; alert(num.toFixed(2)); //”10.00”
+                const num = 10.005; alert(num.toFixed(2)); //”10.01”
+                const num = 10; alert(num.toExponential(1)); //”1.0e+1”
+                const numberObject = new Number(10);
+                const numberValue = 10;
+                alert(typeof numberObject); //”object”
+                alert(typeof numberValue); //”number”
+                alert(numberObject instanceof Number); //true
+                alert(numberValue instanceof Number); //false
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>The String Type</h3>
+            <p>The String type is the object representation for strings and is created using the String constructor</p>
+            <pre>
+                <code>
+                    const stringObject = new String(“hello world”);
+
+                    const stringValue = “hello world”;
+                    alert(stringValue.length); //”11”
+                    const stringValue = “hello world”;
+                    alert(stringValue.charAt(1)); //”e”
+                    const stringValue = “hello world”;
+                    alert(stringValue.charCodeAt(1)); //outputs “101”
+                    const stringValue = “hello world”;
+                    alert(stringValue[1]); //”e”
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>String-Manipulation Methods</h3>
+            <pre>
+                <code>
+                    const stringValue = “hello “;
+                    const result = stringValue.concat(“world”); // or stringValue + “world”
+                    alert(result); //”hello world”
+
+                    const stringValue = “hello world”;
+                    alert(stringValue.slice(3)); //”lo world”
+                    alert(stringValue.substring(3)); //”lo world”
+                    alert(stringValue.substr(3)); //”lo world”
+                    alert(stringValue.slice(3, 7)); //”lo w”
+                    alert(stringValue.substring(3,7)); //”lo w”
+                    alert(stringValue.substr(3, 7)); //”lo worl
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>String-Manipulation Methods</h3>
+            <pre>
+                <code>
+                const stringValue = “ hello world “;
+                const trimmedStringValue = stringValue.trim();“hello world“
+                const stringValue = “hello world”;
+                alert(stringValue.toUpperCase()); //”HELLO WORLD”
+                alert(stringValue.toLowerCase()); //”hello world”
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>HTML Methods</h3>
+            <p>The web browser vendors recognized a need early on to format HTML dynamically using JavaScript.</p>
+            <img src="images/html.png" class='img w1000' />
+        </div>
+        <div class="step slide">
+            <h3>URI-Encoding Methods</h3>
+            <p>The encodeURI() and encodeURIComponent() methods are used to encode URIs (Uniform Resource Identifi ers) to be passed to the browser.</p>
+            <p>The decodeURI() method decodes only characters that would have been replaced by using encodeURI().</p>
+            <pre>
+                <code>
+                const uri = “http://www.wrox.com/illegal value.htm#start”;
+                //”http://www.wrox.com/illegal%20value.htm#start”
+                alert(encodeURI(uri));
+
+                var uri = “http%3A%2F%2Fwww.wrox.com%2Fillegal%20value.htm%23start”;
+                alert(decodeURI(uri)); //http://www.wrox.com/illegal value.htm#start
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>The eval() Method</h3>
+            <p>The fi nal method is perhaps the most powerful in the entire ECMAScript language: the eval() method. This method works like an entire ECMAScript interpreter and accepts one argument, a string of ECMAScript (or JavaScript) to execute.</p>
+            <pre>
+                <code>
+                eval(“alert(‘hi’)”); // This line is functionally equivalent to the following:
+                alert(“hi”);
+                const msg = “hello world”;
+                eval(“alert(msg)”); //”hello world”
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Global Object Properties</h3>
+            <img src="images/property.png" class='img w800' />
+        </div>
+        <div class="step slide">
+            <h3>The Window Object</h3>
+            <p>Though ECMA-262 doesn’t indicate a way to access the Global object directly, web browsers implement it such that the window is the Global object’s delegate. Therefore, all variables and functions declared in the global scope become properties on window</p>
+            <pre>
+                <code>
+                const color = “red”;
+
+                function sayColor(){
+                 alert(window.color);
+                }
+
+                window.sayColor(); //”red”
+                </code>
+            </pre>
+        </div>
+
+        <div id="overview" class="step" data-x="4500" data-y="1500" data-scale="10" style="pointer-events: none;">
+        </div>
+    </div>
+    <div id="impress-toolbar"></div>
+
+    <script type="text/javascript" src="./js/highlight.pack.js"></script>
+    <script type="text/javascript" src="./js/mermaid.min.js"></script>
+    <script type="text/javascript" src="./js/markdown.js"></script>
+    <script type="text/javascript" src="./js/MathJax.js"></script>
+    <script type="text/javascript" src="./js/impress.js"></script>
+    <script>
+        impress().init();
+    </script>
+
+</body>
+
+</html>

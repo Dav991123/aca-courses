@@ -1,0 +1,692 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Classic Slides with impress.js | Simple example impress.js slide show | by Henrik Ingo @henrikingo</title>
+    <meta name="description" content="Simple example impress.js slide show" />
+    <meta name="author" content="Henrik Ingo" />
+    <link rel="stylesheet" href="./css/github.css">
+    <link rel="stylesheet" href="./css/mermaid.forest.css">
+    <link href="./css/impress-common.css" rel="stylesheet" />
+    <link href="./css/classic-slides.css" rel="stylesheet" />
+</head>
+
+<body class="impress-not-supported">
+    <div id="impress" data-transition-duration="1000" data-width="1920" data-height="1080" data-max-scale="3" data-min-scale="0" data-perspective="1000">
+        <div class="step slide title" data-x="-2200" data-y="-3000">
+            <h1>Chapter 7</h1>
+            <br><br>
+            <ul>
+                <li>browser</li>
+                <li>Loops</li>
+                <li>logical operators</li>
+                <li>Math</li>
+                <li>Number, String , Boolean, </li>
+                <li>if else</li>
+                <li>switch case</li>
+            </ul>
+        </div>
+
+        <div class="step slide" data-rel-x="2200" data-rel-y="0">
+            <h1>Web Browser</h1>
+            <p>A web browser (commonly referred to as a browser) is application software for accessing the World Wide Web. When a user requests a web page from a particular website, the web browser retrieves the necessary content from a web server and then displays the page on the user's device.</p>
+            <p>Web browsers are used on a range of devices, including desktops, laptops, tablets, and smartphones. In 2020, an estimated 4.9 billion people used a browser</p>
+        </div>
+
+        <div class="step slide">
+            <h1>Browsers History </h1>
+            <p>The first web browser, called WorldWideWeb, was created in 1990 by Sir Tim Berners-Lee</p>      
+            <p>1993 was a landmark year with the release of Mosaic, credited as "the world's first popular browser"</p>
+            <p>Netscape Navigator released in 1994. Navigator quickly became the most popular browser.</p>
+            <p>Microsoft released Internet Explorer in 1995, leading to a browser war with Netscape.Internet Explorer peaked at over 95% in 2002</p>
+        </div>
+
+        <div class="step slide">
+            <h1>Browsers History </h1>
+            <p>Firefox browser, first released by Mozilla in 2004. Firefox reached a 28% market share in 2011</p>
+            <p>Apple released its Safari browser in 2003</p>
+            <p>Google debuted its Chrome browser in 2008, which steadily took market share from Internet Explorer and became the most popular browser in 2012</p>
+            <p>Microsoft released its Edge browser in 2015 as part of the Windows 10 release.</p>
+        </div>
+
+        <div class="step slide">
+            <h1>Browsers Function</h1>
+            <p>The purpose of a web browser is to fetch content from the Web and display it on a user's device.</p>
+            <p>Once a web page has been retrieved, the browser rendering engine displays it on the user's device. This includes image and video formats supported by the browser.</p>
+            <p>Most browsers use an internal cache of web page resources to improve loading times for subsequent visits to the same page.  </p>
+            <p>The cache can store many items, such as large images, so they do not need to be downloaded from the server again</p>
+        </div>
+
+        <div class="step slide">
+            <h1>Browsers Features</h1>
+            <p>They allow users to set bookmarks and browse in a private mode. They also can be customized with extensions, and some of them provide a sync service</p>
+            <p>users can change their home page and default search engine. They also can change default web page colors and fonts. </p>
+        </div>
+
+        <div class="step slide">
+            <h1>Browsers Features</h1>
+            <ul>
+                <li>Allow the user to open multiple pages at the same time, either in different browser windows or in different tabs of the same window.</li>
+                <li>Back and forward buttons to go back to the previous page visited or forward to the next one.</li>
+                <li>A refresh or reload and a stop button to reload and cancel loading the current page. (In most browsers, the stop button is merged with the reload button.)</li>
+                <li>A home button to return to the user's home page.</li>
+                <li>An address bar to input the URL of a page and display it.</li>
+                <li>A search bar to input terms into a search engine.</li>
+            </ul>
+        </div>
+
+        <div class="step slide">
+            <h1>Usage share of web browsers</h1>
+            <img src="images/browser_usage.png" class='img w800' />
+        </div>
+
+        <div class="step slide">
+            <h1>JavaScript Operator Types</h1>
+            <ul>
+                <li>Assignment Operators</li>
+                <li>Arithmetic Operators</li>
+                <li>Comparison Operators</li>
+                <li>Logical Operators</li>
+                <li>Bitwise Operators</li>
+                <li>String Operators</li>
+                <li>Other Operators</li>
+            </ul>
+        </div>
+
+        <div class="step slide">
+            <h1>JavaScript Assignment Operators</h1>
+            <p>Assignment operators are used to assign values to variables</p>
+            <img src="images/assignment_operator.png" class='img w1000' />
+        </div>
+
+        <div class="step slide">
+            <h3>Increment and Decrement</h3>
+            <ul>
+                <li>Increment — x++ or ++x</li>
+                <li>Decrement — x-- or --x</li>
+            </ul>
+            <pre>
+                <code>
+                    // Increment
+                    let a = 1;
+                    console.log(a++);    // 1
+                    console.log(a);      // 2
+                    // Decrement
+                    let b = 1;
+                    console.log(b--);    // 1
+                    console.log(b);      // 0
+                </code>
+            </pre>
+        </div>
+
+        <div class="step slide">
+            <h1>JavaScript Arithmetic Operators</h1>
+            <p>Arithmetic operators are used to perform arithmetic calculations</p>
+            <img src="images/arithmetic_operators.png" class='img w1000' />
+        </div>
+
+        <div class="step slide">
+            <h3>JavaScript Comparison Operators</h3>
+            <p>Comparison operators compare two values and return a boolean value, either true or false</p>
+            <img src="images/comparation_operators.png" class='img w800' />
+        </div>
+
+        <div class="step slide">
+            <p>JavaScript Comparison Operators</p>
+            <pre>
+                <code>
+                    const a = 5, b = 2, c = 'hello'; // equal to operator
+                    console.log(a == 5);     // true
+                    console.log(b == '2');   // true
+                    console.log(c == 'Hello');  // false
+
+                    const a = 3, b = 'hello'; // not equal operator
+                    console.log(a != 2); // true
+                    console.log(b != 'Hello'); // true
+
+                    const a = 2;  // strict equal operator
+                    console.log(a === 2); // true
+                    console.log(a === '2'); // false
+                </code>
+            </pre>
+        </div>
+
+        <div class="step slide">
+            <h1>JavaScript Logical Operators</h1>
+            <p>Logical operators perform logical operations: AND, OR and NOT.</p>
+            <img src="images/logic_operator.png" class='img w1000' />
+        </div>
+
+        <div class="step slide">
+            <p>JavaScript Logical Operators</p>
+            <pre>
+                <code>
+                    const a = true, b = false; // logical AND
+                    const c = 4; 
+                    console.log(a && a); // true
+                    console.log(a && b);  // false
+                    console.log((c > 2) && (c < 2)); // false
+
+                    const a = true, b = false, c = 4; // logical OR
+                    console.log(a || b); // true
+                    console.log(b || b); // false
+                    console.log(( c > 2 ) || ( c < 2 )); // true
+
+                    const a = true, b = false; // logical NOT
+                    console.log(!a); // false
+                    console.log(!b); // true
+                </code>
+            </pre>
+        </div>
+
+        <div class="step slide">
+            <h1>JavaScript Bitwise Operators</h1>
+            <p>Bitwise operators perform operations on binary representations of numbers.</p>
+            <img src="images/bitwise_operators.png" class='img w1000' />
+        </div>
+
+        <div class="step slide">
+            <h1>JavaScript Bitwise AND</h1>
+            <smal>Bitwise AND & returns 1 if the corresponding bits of both operands are 1 else it returns 0.</smal>
+            <br><br><br>
+            <img src="images/bitwise_and.png" class='img w1000' />
+        </div>
+
+        <div class="step slide">
+            <h1>JavaScript Bitwise AND example</h1>
+            <p>bitwise AND operation of two integers 12 and 25.</p>
+            <pre>
+                <code>
+                    In binary,                             |   // bitwise AND operator example
+                    12 = 01100                             |   let a = 12   
+                    25 = 11001                             |   let b = 25  
+                    // Bitwise AND Operation of 12 and 25  |   console.log(a & b); // 8
+                        00001100                           | 
+                    &   00011001
+                        ---------
+                        00001000  = 8 (In decimal)
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h1>JavaScript Bitwise OR</h1>
+            <p>Bitwise OR | returns 1 if either of the corresponding bits of one operand is 1 else returns 0.</p>
+            <img src="images/bitwise_or.png" class='img w1000' />
+        </div>
+
+        <div class="step slide">
+            <h1>JavaScript Bitwise OR example</h1>
+            <p>bitwise OR operation of two integers 12 and 25.</p>
+            <pre>
+                <code>
+                    In binary,                             |   // bitwise OR operator example
+                    12 = 01100                             |   let a = 12   
+                    25 = 11001                             |   let b = 25  
+                    // Bitwise OR Operation of 12 and 25   |   console.log(a | b); // 29
+                        00001100                           | 
+                    &   00011001
+                        ---------
+                        00011101  = 29 (In decimal)
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h1>JavaScript Bitwise XOR</h1>
+            <p>Bitwise XOR ^ returns 1 if the corresponding bits are different and returns 0 if the corresponding bits are the same</p>
+            <img src="images/xor_operator.png" class='img w1000' />
+        </div>
+
+        <div class="step slide">
+            <h1>JavaScript Bitwise XOR example</h1>
+            <pre>
+                <code>
+                    n binary,
+                    12 = 01100
+                    25 = 11001
+                    // Bitwise XOR Operation of 12 and 25
+                        00001100
+                    ^   00011001
+                        --------
+                        00010101  = 21 (In decimal)
+
+                        console.log(12 ^ 25); // 21
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h1>JavaScript Bitwise NOT</h1>
+            <p>Bitwise NOT ~ inverts the bit( 0 becomes 1, 1 becomes 0).</p>
+            <pre>
+                <code>
+                    In binary,
+                    12 = 00000000000000000000000000001100
+                    // Bitwise Not Operation of 12 
+
+                        ~ 00000000000000000000000000001100
+                          ---------------------------------
+                          11111111111111111111111111110011  = -13(In decimal)
+
+                    console.log(~12); // -13      
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>JavaScript Left shift</h3>
+            <smal>In the left shift operator <<, the left operand specifies the number and the right operand specifies the number to be shifted left. Zero bits are added to the right and excess bits from the left are discarded.</smal>
+            <br><br>
+            <img src="images/left_shift.png" class='img w1000' />
+        </div>
+        <div class="step slide">
+            <h3>JavaScript Sign-propagating right shift</h3>
+            <smal>In the right shift operator >>, the first operand specifies the number and the second operand specifies the number to be shifted right. Excess bits from the right are discarded. The copies of the leftmost bit are shifted in from the left, hence the name sign-propagating.</smal>
+            <br><br>
+            <img src="images/right_shift.png" class='img w1000' />
+        </div>
+        <div class="step slide">
+            <h3>JavaScript Left shift and Right shift example</h3>
+            <pre>
+                <code>
+                    let a = 8;
+                    let  b = 1;
+                    result = a << b; // Left shift
+                    // 1 ( 00000000000000000000000000010000 )
+                    console.log(result);
+
+                    let a = 8;
+                    let b = 1;
+                    result = a >> b;
+                    // 4 (00000000000000000000000000000100)
+                    console.log(result);
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>JavaScript Zero-fill right shift</h3>
+            <smal>Zero-fill right shift >>> shifts the operand to the right by filling the zero bits to the left. Excess bits from the right are discarded</smal>
+            <br><br>
+            <img src="images/zero_right_shift.png" class='img w800' />
+            <pre>
+                <code>
+                    let a = 8, b = 1;
+                    console.log(a >>> b); // 4 // 0100
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>JavaScript String Operators</h3>
+            <p>In JavaScript, you can also use the + operator to concatenate (join) two or more strings.</p>
+            <pre>
+                <code>
+                    // concatenation operator
+                    console.log('hello' + 'world');
+                    let a = 'JavaScript';
+                    a += ' tutorial';  // a = a + ' tutorial';
+                    console.log(a);
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Other JavaScript Operators</h3>
+            <br>
+            <img src="images/other_operators.png" class='img w1000' />
+        </div>
+
+        <div class="step slide">
+            <h3>JavaScript Comments</h3>
+            <p>JavaScript comments are hints that a programmer can add to make their code easier to read and understand. They are completely ignored by JavaScript engines.
+            There are two ways to add comments to code:</p>
+            <ul>
+                <li>// - Single Line Comments</li>
+                <li>/* */ -Multi-line Comments</li>
+            </ul>
+            <pre>
+                <code>
+                    name = "Jack";
+                    console.log("Hello " + name);  // printing name on the console
+                </code>
+            </pre>
+        </div>
+
+        <div class="step slide">
+            <h3>JavaScript Math Object</h3>
+            <p>Math properties</p>
+            <ul>
+                <li>Math.E        // returns Euler's number</li>
+                <li>Math.PI       // returns PI</li>
+                <li>Math.SQRT2    // returns the square root of 2</li>
+                <li>Math.SQRT1_2  // returns the square root of 1/2</li>
+                <li>Math.LN2      // returns the natural logarithm of 2</li>
+                <li>Math.LN10     // returns the natural logarithm of 10</li>
+                <li>Math.LOG2E    // returns base 2 logarithm of E</li>
+                <li>Math.LOG10E   // returns base 10 logarithm of E</li>
+            </ul>
+        </div>
+
+        <div class="step slide">
+            <h3>JavaScript Math Methods</h3>
+            <ul>
+                <li>Math.round(x)   Returns x rounded to its nearest integer</li>
+                <li>Math.ceil(x)    Returns x rounded up to its nearest integer</li>
+                <li>Math.floor(x)   Returns x rounded down to its nearest integer</li>
+                <li>Math.trunc(x)   Returns the integer part of x (new in ES6)</li>
+                <li>Math.sign(x) returns if x is negative, null or positive:</li>
+                <li>Math.pow(x, y) returns the value of x to the power of y:</li>
+                <li>Math.sqrt(x) returns the square root of x:</li>
+                <li>Math.abs(x) returns the absolute (positive) value of x:</li>
+                <li>Math.cos() , Math.sin(), Math.random()</li>
+                <li>Math.min() and Math.max() // Math.min(0, 150, -8, -200);  // returns -200</li>
+            </ul>
+        </div>
+
+        <div class="step slide">
+            <h3>JavaScript Type Conversions</h3>
+            <pre>
+                <code>
+                    // numeric string used with + gives string type
+                    let result;
+                    result = '3' + 2; // "32"
+                    result = '3' + true; // "3true"
+                    result = '3' + undefined; // "3undefined"
+                    result = '3' + null; // "3null"
+
+                    result = '4' - '2'; // 2
+                    result = '4' - 2; // 2
+                    result = '4' * 2; // 8
+                    result = '4' / 2; // 2
+                    result = 'hello' - 'world'; // NaN
+                    result = '4' - 'hello'; // NaN
+                </code>
+            </pre>
+        </div>
+
+        <div class="step slide">
+            <h3>Convert to Number</h3>
+            <pre>
+                <code>
+                    result = Number('324'); // 324
+                    result = Number('324e-1'); // 32.4
+                    result = Number(true); // 1
+                    result = Number(false); // 0
+                    result = Number(null); // 0
+                    result = Number('hello'); // NaN
+                    result = Number(NaN); // NaN
+
+                    result = parseInt('20.01'); // 20
+                    result = parseFloat('20.01'); // 20.01
+                    result = +'20.01'; // 20.01
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Convert to String </h3>
+            <pre>
+                <code>
+                    result = String(324);  // "324"
+                    result = String(2 + 4); // "6"
+                    result = String(null); // "null"
+                    result = String(undefined); // "undefined"
+                    result = String(NaN);  // "NaN"
+                    result = String(true); // "true"
+                    result = String(false); // "false"
+                    result = (324).toString(); // "324"
+                    result = true.toString(); "true"
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>Convert to Boolean</h3>
+            <pre>
+                <code>
+                    let result;
+                    result = Boolean(''); // false
+                    result = Boolean(0); // false
+                    result = Boolean(undefined); // false
+                    result = Boolean(null); // false
+                    result = Boolean(NaN); // false
+
+                    // All other values give true
+                    result = Boolean(324); // true
+                    result = Boolean('hello'); // true
+                    result = Boolean(' '); // true
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>JavaScript if...else Statement</h3>
+            <p>In JavaScript, there are three forms of the if...else statement.</p>
+            <ul>
+                <li>if statement</li>
+                <li>if...else statement</li>
+                <li>if...else if...else statement</li>
+            </ul>
+            <img src="images/if_else.png" class='img w800' />
+        </div>
+        <div class="step slide">
+            <h3>JavaScript if...else Statement</h3>
+            <pre>
+                <code>
+                    if (condition) {
+                        // block of code if condition is true
+                    } else {
+                       // block of code if condition is false
+                    }
+
+                    if (condition1) {
+                        // code block 1
+                    } else if (condition2){
+                        // code block 2
+                    } else {
+                        // code block 3
+                    }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>JavaScript for loop</h3>
+            <p>In programming, loops are used to repeat a block of code.</p>
+            <ul>
+                <li>The initialExpression initializes and/or declares variables and executes only once.</li>
+                <li>The condition is evaluated.</li>
+                <li>If the condition is false, the for loop is terminated.</li>
+                <li>if the condition is true, the block of code inside of the for loop is executed.</li>
+                <li>The updateExpression updates the value of initialExpression when the condition is true.</li>
+                <li>The condition is evaluated again.This process continues until the condition is false.</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>JavaScript for loop</h3>
+            <img src="images/for_loop.png" class='img w800' />
+            <p>
+                for(initialExpression; condition; updateExpression) {
+                    // for loop body
+                }
+            </p>
+        </div>
+        <div class="step slide">
+            <h3>JavaScript for loop example</h3>
+            <pre>
+                <code>
+                    // program to display the sum of natural numbers
+                    let sum = 0;
+                    const n = 100
+
+                    // looping from i = 1 to n
+                    // in each iteration, i is increased by 1
+                    for (let i = 1; i <= n; i++) {
+                        sum += i;  // sum = sum + i
+                    }
+
+                    console.log('sum:', sum); // 5050
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>JavaScript while Loop</h3>
+            <ul>
+                <li>A while loop evaluates the condition inside the parenthesis ().</li>
+                <li>If the condition evaluates to true, the code inside the while loop is executed.</li>
+                <li>The condition is evaluated again.</li>
+                <li>This process continues until the condition is false.</li>
+                <li>When the condition evaluates to false, the loop stop</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>JavaScript while Loop</h3>
+            <img src="images/while_loop.png" class='img w800' />
+        </div>
+        <div class="step slide">
+            <h3>JavaScript for while example</h3>
+            <pre>
+                <code>
+                    let sum = 0;
+                    // take input from the user
+                    let number = parseInt(prompt('Enter a number: '));
+                    while(number >= 0) {
+                        // add all positive numbers
+                        sum += number;
+                        // take input again if the number is positive
+                        number = parseInt(prompt('Enter a number: '));
+                    }
+                    console.log(`The sum is ${sum}.`);
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>JavaScript do...while Loop</h3>
+            <ul>
+                <li>The body of the loop is executed at first. Then the condition is evaluated.</li>
+                <li>If the condition evaluates to true, the body of the loop inside the do statement is executed again.</li>
+                <li>The condition is evaluated once again.</li>
+                <li>If the condition evaluates to true, the body of the loop inside the do statement is executed again.</li>
+                <li>This process continues until the condition evaluates to false. Then the loop stops.</li>
+            </ul>
+            <smal>Note: do...while loop is similar to the while loop. The only difference is that in do…while loop, the body of loop is executed at least once.</smal>
+        </div>
+        <div class="step slide">
+            <p>JavaScript do...while Loop</p>
+            <img src="images/do_while.png" class='img w800' />
+            <pre>
+                let sum = 0, number = 0
+                do {
+                    sum += number;
+                    number = parseInt(prompt('Enter a number: '));
+                } while(number >= 0)
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>JavaScript break Statement</h3>
+            <img src="images/break.png" class='img w800' />
+        </div>
+        <div class="step slide">
+            <h3>Javascript break with Nested Loop</h3>
+            <pre>
+                <code>
+                    let i, j;
+                    loop1:
+                    for (i = 0; i < 3; i++) {      //The first for statement is labeled "loop1"
+                       loop2:
+                       for (j = 0; j < 3; j++) {   //The second for statement is labeled "loop2"
+                          if (i === 1 && j === 1) {
+                             break loop1;
+                          }
+                          console.log('i = ' + i + ', j = ' + j);
+                       }
+                    }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>JavaScript continue Statement</h3>
+            <img src="images/continue.png" class='img w800' />
+        </div>
+        <div class="step slide">
+            <h3>JavaScript continue Statement</h3>
+            <pre>
+                <code>
+                    for (let i = 1; i <= 5; i++) {
+                        if (i == 3) {
+                            continue;
+                        }
+                        console.log(i);
+                    }
+                    let j = 1;
+                    while(j <= 5) {
+                        if (j == 3) 
+                            continue;
+                        console.log(j);
+                        j++;
+                    }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>JavaScript Switch Statement</h3>
+            <p>switch statement evaluates an expression and executes the corresponding body that matches the expression's result.</p>
+            <pre>
+                <code>
+                    switch(variable/expression) {
+                        case value1:  
+                            // body of case 1
+                            break;
+                        case value2:  
+                            // body of case 2
+                            break;
+                        default:
+                            // body of default
+                    }
+                </code>
+            </pre>
+        </div>
+        <div class="step slide">
+            <h3>JavaScript Switch Statement</h3>
+            <p>switch statement evaluates a variable/expression inside parentheses ().</p>
+            <ul>
+                <li>If the result of the expression is equal to value1, its body is executed.</li>
+                <li>If the result of the expression is equal to value2, its body is executed.</li>
+                <li>This process goes on. If there is no matching case, the default body executes.</li>
+                <li>The break statement is optional. If the break statement is encountered, the switch statement ends.</li>
+                <li>If the break statement is not used, the cases after the matching case are also executed.</li>
+                <li>The default clause is also optional</li>
+            </ul>
+        </div>
+        <div class="step slide">
+            <h3>JavaScript Switch Statement</h3>
+            <img src="images/switch.png" class='img w800' />
+        </div>
+        <div class="step slide">
+            <p>JavaScript Switch Statement</p>
+            <ul>
+                <li>In JavaScript, the switch statement checks the value strictly. So the expression's result does not match with case "1".</li>
+                <li>The break statement terminates the block and control flow of the program jumps to outside of the switch block</li>
+            </ul>
+            <pre>
+                <code>
+                    switch (1) {
+                        case "1": a = 1;break;
+                        case 1:   a = 'one';break;
+                        default:  a = 'not found';break;
+                    } 
+                    console.log(a); // 'one'
+                </code>
+            </pre>
+        </div>
+
+
+        <div id="overview" class="step" data-x="4500" data-y="1500" data-scale="10" style="pointer-events: none;">
+        </div>
+    </div>
+    <div id="impress-toolbar"></div>
+
+    <script type="text/javascript" src="./js/highlight.pack.js"></script>
+    <script type="text/javascript" src="./js/mermaid.min.js"></script>
+    <script type="text/javascript" src="./js/markdown.js"></script>
+    <script type="text/javascript" src="./js/MathJax.js"></script>
+    <script type="text/javascript" src="./js/impress.js"></script>
+    <script>
+        impress().init();
+    </script>
+
+</body>
+
+</html>
